@@ -1,0 +1,89 @@
+﻿@model COAT.ViewModel.Shared.DealSearchViewModel
+<div>
+    @using (Html.BeginForm(Model.ActionName, Model.ControllerName, FormMethod.Get))
+    {
+        <div id="search-container">
+            <div id="normal-search-container">
+                <div class="search-field">
+                    Validation Team
+                    @Html.DropDownListFor(model => model.ValidationTeamId, Model.ValidationTeamList)
+                </div>
+                <div class="search-field">
+                    COAT Status
+                    @Html.DropDownListFor(model => model.COATStatusActionName, Model.COATStatusList)
+                </div>
+                <div class="search-field">
+                    Customer
+                    @Html.EditorFor(model => model.CustomerName)
+                </div>
+                <div class="search-field">
+                    Deal Id
+                    @Html.EditorFor(model => model.DealId)
+                </div>
+                <div class="search-field">
+                    Begin Date
+                    @Html.TextBoxFor(model => model.BeginDate, new { @class = "datepicker" })
+                </div>
+                <div class="search-field">
+                    End Date
+                    @Html.TextBoxFor(model => model.EndDate, new { @class = "datepicker" })
+                </div>
+                <div class="search-field">
+                    Begin Action Date
+                    @Html.TextBoxFor(model => model.BeginActDate, new { @class = "datepicker" })
+                </div>
+                <div class="search-field">
+                    End Action Date
+                    @Html.TextBoxFor(model => model.EndActDate, new { @class = "datepicker" })
+                </div>
+                <div class="clear">
+                </div>
+            </div>
+            <div id="assigned-search-containter">
+                <div class="search-field">
+                    China Region
+                    @Html.DropDownListFor(model => model.Region, Model.RegionList)
+                </div>
+                <div class="search-field">
+                    China Province
+                    @Html.DropDownListFor(model => model.ProvinceId, Model.ProvinceList)
+                </div>
+                <div class="search-field">
+                    China Industry
+                    @Html.DropDownListFor(model => model.Industry2Id, Model.IndustryList)
+                </div>
+                <div class="search-field">
+                    Approver Name
+                    @Html.DropDownListFor(model => model.ApproverId, Model.ApproverList)
+                </div>
+                <div class="clear">
+                </div>
+            </div>
+        </div>
+        <div class="clear">
+            <input type="submit" value="Search" />
+        </div>
+    }
+    <div class="clear">
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var assignContainer = $('#assigned-search-containter');
+
+        if ($('#COATStatusActionName option:selected').val() == 'PA') {
+            assignContainer.hide('blind');
+        }
+
+        $('#COATStatusActionName').change(function () {
+            if ($('#COATStatusActionName option:selected').val() == 'PA') {
+                assignContainer.hide('normal');
+                assignContainer = assignContainer.detach();
+            } else {
+                assignContainer.appendTo('#search-container');
+                assignContainer.show('normal');
+            }
+        });
+
+    });
+</script>

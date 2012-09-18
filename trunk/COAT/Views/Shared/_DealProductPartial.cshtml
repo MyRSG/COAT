@@ -1,0 +1,12 @@
+﻿@model COAT.ViewModel.Shared.DealProductViewModel
+<tr>
+    <td>
+        @Model.DealProduct.ProductName
+    </td>
+    <td>
+        @Model.DealProduct.Price
+    </td>
+    <td>
+        @Html.CheckBox(Model.ActionInputName,Model.DealProduct.IsActive)
+    </td>
+</tr>

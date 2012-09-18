@@ -1,0 +1,45 @@
+﻿@model COAT.Models.User
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>User</legend>
+
+    <div class="display-label">Name</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Name)
+    </div>
+
+    <div class="display-label">Email</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Email)
+    </div>
+
+    <div class="display-label">Password</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Password)
+    </div>
+
+    <div class="display-label">BusinessRole</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.BusinessRole.Name)
+    </div>
+
+    <div class="display-label">SystemRole</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.SystemRole.Name)
+    </div>
+
+    <div class="display-label">IsDelete</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.IsDelete)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,18 @@
+﻿<div id="adminNav" style="height: 100%;">
+    <h3>
+        <a href="#">Import Data From Excel</a></h3>
+    <ul>
+        <li>@Html.ActionLink("Import ORP Data", "ImportORPData", "File")</li>
+        <li>@Html.ActionLink("Import User Data", "ImportUsers", "File")</li>
+    </ul>
+      <h3>
+        <a href="#">Settings</a></h3>
+    <ul>
+        <li>@Html.ActionLink("Modify Settings", "Index", "Setting")</li>
+    </ul>
+</div>
+<script type="text/javascript">
+    jQuery(document).ready(function () {
+        $("#adminNav").multiAccordion();
+    });
+</script>

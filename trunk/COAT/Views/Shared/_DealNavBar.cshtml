@@ -1,0 +1,40 @@
+﻿@using COAT.ViewModel.Shared
+@{
+    var vm = new NavBarViewModel(Request);
+}
+<div id="dealNav" style="height: 100%;">
+    <h3>
+        <a href="#">Deal Information</a></h3>
+    <div>@Html.ActionLink("Search", "Index", "Deals")</div>
+    @if (vm.IsShowChannelSection)
+    { 
+        <h3>
+            <a href="#">Enterprise ORP Validation Workflow</a>
+        </h3>
+        <ul>
+            @if (vm.IsShowChannelAssign)
+            {<li>@Html.ActionLink("Deal Assignment", "Index", "ChannelAssigner")</li>}
+            @if (vm.IsShowChannelApprove)
+            {<li>@Html.ActionLink("Deal Validation", "Index", "ChannelApprover")</li>}
+            @if (vm.IsShowChannelDirector)
+            {<li>@Html.ActionLink("Channel Director Validation", "Index", "ChannelDirector")</li>}
+        </ul>
+      
+    }
+    @if (vm.IsShowSalesSection)
+    { 
+        <h3>
+            <a href="#">Volume ORP Validation Workflow</a></h3>
+        <ul>
+            @if (vm.IsShowSalesAssign)
+            {<li>@Html.ActionLink("Deal Assignment", "Index", "SalesAssigner")</li>}
+            @if (vm.IsShowSalesApprove)
+            {<li>@Html.ActionLink("Deal Validation", "Index", "SalesApprover")</li>}
+        </ul>
+    }
+</div>
+<script type="text/javascript">
+    jQuery(document).ready(function () {
+        $("#dealNav").multiAccordion();
+    });
+</script>

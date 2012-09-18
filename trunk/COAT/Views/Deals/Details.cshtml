@@ -1,0 +1,18 @@
+﻿@model COAT.Models.Deal
+@using COAT.ViewModel.Shared;
+@{
+    ViewBag.Title = "View Deal";
+    Layout = "~/Views/Shared/_DealManagementLayout.cshtml";
+}
+<h2>@ViewBag.Title</h2>
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+@Html.ValidationSummary(true)
+@Html.Partial("_DealPartial", new DealViewModel { Deal = Model, IsEditable = false })
+@Html.Partial("_CustomerPartial", new CustomerViewModel { Customer = Model.Customer, isSetRegion = true })
+@Html.Partial("_PartnerPartial", Model.Partner)
+<hr />
+@Html.Partial("_ApproveHistoriesPartial", Model.ApprovalHistories)
+<hr />
+@Html.Partial("_DealProductsPartial", new DealProductsViewModel { DealProducts = Model.DealProducts })

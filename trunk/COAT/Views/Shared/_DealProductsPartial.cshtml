@@ -1,0 +1,25 @@
+﻿@model COAT.ViewModel.Shared.DealProductsViewModel
+<fieldset>
+    <legend>Product</legend>
+    <table>
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Price
+            </th>
+            <th style="width: 5%">
+                   Select
+            </th>
+        </tr>
+        @foreach (var dp in Model.DealProducts)
+        {
+            var dpVM = new COAT.ViewModel.Shared.DealProductViewModel
+            {
+                DealProduct = dp,
+            };
+            @Html.Partial("_DealProductPartial", dpVM)
+        }
+    </table>
+</fieldset>

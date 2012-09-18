@@ -1,0 +1,15 @@
+﻿亲爱的同事: 
+Dear Colleague,
+
+以下合作伙伴ORP业务机会信息已经被赛门铁克渠道经理/Inside Sales拒绝，查看拒绝原因，请点击下面的链接,访问COAT 系统。
+Kindly please be advised an ORP deal has been declined by Symantec Channel Manager/ Inside Sales. Should you need know the rejection reason, please click link below to access COAT system.
+
+客户名称:{0}
+业务机会信息链接:{1}
+
+如有任何问题，请联系渠道经理，渠道经理信息见cc copy 栏。
+Any question, please contact with Symantec Channel Manager, please refer channel manager email in cc copy list.
+
+
+Thanks and regards,
+Symantec Partner Programs & Operation Team

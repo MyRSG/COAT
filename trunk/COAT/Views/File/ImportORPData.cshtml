@@ -1,0 +1,65 @@
+﻿@{
+    ViewBag.Title = "Import Raw Data";
+    Layout = "~/Views/Shared/_AdminManagmentLayout.cshtml";
+}
+<div>
+    @using (Html.BeginForm("ImportORPData", "File", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        foreach (dynamic item in ViewBag.InputNameList)
+        { 
+        <h3>
+            @item.Text</h3>
+        <hr />
+        <span style="margin-right: 10px; font-weight: bold; color: #804000;">File:</span>
+        <input type="file" name="@item.Name" id="@item.Name"  style="width:80%;" onchange="check_file(this)"/>
+        }
+        <br />
+        <br />
+        <input class="submit" type="button" value="Upload"  id="upload"/>
+    }
+</div>
+<div id="hint" title="Please check you data before you upload to COAT">
+        Please make sure all date data in report should be formated like 
+        <span style="color:Blue">'Day/Month/Year'</span>, not <span style="color:Red">"Month/Day/Year".</span>
+</div>
+<script type="text/javascript">
+    function check_file(elm) {
+        str = elm.value.toUpperCase();
+        suffix = ".XLS";
+        suffix2 = ".XLSX";
+        if (!(str.indexOf(suffix, str.length - suffix.length) !== -1 ||
+              str.indexOf(suffix2, str.length - suffix2.length) !== -1)) {
+            alert('File type not allowed,\nAllowed file: *.xls,*.xlsx');
+            elm.value = '';
+        }
+    }
+
+    $(document).ready(function () {
+        var result = false;
+        var form = $('form');
+        var option = {
+            width:600,
+            autoOpen: false,
+            modal: true,
+            buttons: [
+                {
+                    text: "I'm sure'",
+                    click: function () {
+                        form.submit();
+                    }
+                }, {
+                    text: 'Wait, I will check it first',
+                    click: function () {
+                        $(this).dialog("close");
+                    }
+                }]
+        };
+        var dialog = $('#hint').dialog(option);
+
+
+        $('#upload').click(function () {
+            dialog.dialog('open');
+        });
+    });
+
+</script>

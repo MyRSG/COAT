@@ -1,0 +1,53 @@
+﻿@model COAT.Models.LogOnModel
+@{
+    ViewBag.Title = "Home Page";
+}
+@section Style{
+    <link href="@Url.Content("~/Content/homelogin.css")"  rel="Stylesheet" type="text/css" />
+}
+@if (!Request.IsAuthenticated)
+{ 
+    <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+    @Html.ValidationSummary(true, "Login was unsuccessful. Please correct the errors and try again.")
+    using (Html.BeginForm("Logon", "Account"))
+    {
+    <div class="login">
+        <div class="login_head">
+            <h2>
+                Welcome to COAT, please type your name and password.</h2>
+        </div>
+        <div class="login_body">
+            <div class="login_body_input">
+                <div class="login_row">
+                    @Html.LabelFor(m => m.UserName, "User Name :")
+                    @Html.TextBoxFor(m => m.UserName)
+                </div>
+                <div class="login_row">
+                    @Html.LabelFor(m => m.Password, " Password :")
+                    @Html.PasswordFor(m => m.Password)
+                </div>
+            </div>
+            <div class="login_body_button">
+                <input type="submit" value="Log On" />
+            </div>
+            <div class="clear">
+            </div>
+        </div>
+    </div> 
+    }
+}
+
+    <div>
+       <div class="width50 floatLeft margin10">
+        <h2>
+            COAT – China ORP Approval Tracking Portal</h2><h2> (中国合作伙伴业务机会注册计划审批跟踪系统)</h2>
+        <p>
+            COAT 系统可以帮助渠道部门加速对合作伙伴报备的业务机会的审核， 并方便亚太合作伙伴计划部门的ORP 管理员快速收集业务机会审批回馈意见，及时在SFDC 的业务机会注册系统中进行相应操作，使我们的合作伙伴及时得到赛门铁克的回复，加速业务的达成提到合作伙伴的满意度。同时，所有的业务机会审批将由COAT
+            系统进行记录和跟踪，便于渠道和销售部门的查询和及时跟进合作伙伴业务机会进展。</p>
+        <p>关于COAT系统有任何意见和建议，请发送邮件到<a href="mailto:partnergcr@symantec.com">partnergcr@symantec.com</a></p>
+     </div>
+     <img class="width30 margin20" src="@Url.Content("~/Content/image/homePic.jpg")"  alt=""/>
+    </div>
+

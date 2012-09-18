@@ -1,0 +1,32 @@
+﻿@{
+    ViewBag.Title = "Import User Data";
+    Layout = "~/Views/Shared/_AdminManagmentLayout.cshtml";
+}
+<div>
+    @using (Html.BeginForm("ImportUsers", "File", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        foreach (dynamic item in ViewBag.InputNameList)
+        { 
+        <h3>
+            @item.Text</h3>
+        <hr />
+        <span style="margin-right: 10px; font-weight: bold; color: #804000;">File:</span>
+        <input type="file" name="@item.Name" id="@item.Name"  style="width:80%;" onchange="check_file(this)"/>
+        }
+        <br />
+        <br />
+        <input type="submit" value="Upload" />
+    }
+</div>
+<script type="text/javascript">
+    function check_file(elm) {
+        str = elm.value.toUpperCase();
+        suffix = ".XLS";
+        suffix2 = ".XLSX";
+        if (!(str.indexOf(suffix, str.length - suffix.length) !== -1 ||
+              str.indexOf(suffix2, str.length - suffix2.length) !== -1)) {
+            alert('File type not allowed,\nAllowed file: *.xls,*.xlsx');
+            elm.value = '';
+        }
+    }
+</script>

@@ -1,0 +1,26 @@
+﻿@model COAT.ViewModel.Shared.DealListViewModel
+@using MvcContrib.UI.Grid
+@using MvcContrib.UI.Pager
+@using MvcContrib.Pagination
+@Html.Pager((IPagination)Model.Deals)
+@Html.Grid(Model.Deals).Sort((GridSortOptions)ViewBag.Sort).Columns(column =>
+            {
+                if (!Model.HideEditLink)
+                {
+                    column.For(d => Html.ActionLink(Model.LinkText, Model.ActionName, new { id = d.Id })).Encode(false).Sortable(false);
+                }
+                column.For(d => d.Id).Named("Deal Id").Sortable(false);
+                column.For(d => d.Name).Named("Name").SortColumnName("Name");
+                column.For(d => d.Customer.Name).Named("Customer").SortColumnName("Customer");
+                //column.For(d => d.Industry.Name).Named("Industry").SortColumnName("Industry");
+                column.For(d => d.Industry2Name).Named("Industry2").SortColumnName("Industry2");
+                column.For(d => d.Customer.City).Named("City").SortColumnName("City");
+                column.For(d => d.ProvinceName).Named("Province").SortColumnName("Province");
+                column.For(d => d.Partner.Name).Named("Partner").SortColumnName("Partner");
+                column.For(d => d.Owner).Named("Owner").SortColumnName("Owner");
+                column.For(d => d.DealSize).Named("Deal$").SortColumnName("Deal$");
+                //column.For(d => d.District).Named("District").SortColumnName("District");
+                column.For(d => d.Status.Name).Named("Status").SortColumnName("Status");
+                column.For(d => d.CreateDate).Named("Create Date").SortColumnName("CreateDate");
+            }).RowAttributes(a => new Dictionary<string, object> { { "class", a.Item.ApproveDate == null ? "grid" : "grid_hightlight" } })
+@Html.Pager((IPagination)Model.Deals)

@@ -1,0 +1,26 @@
+1. 提供相关的数据表格
+	ORP Eligible Product & Specialization Matrix		
+	Name Account Sales List				
+	Volume Sales List Name & Email			
+	Inside Sales Name & Email				
+	Enterprise Channel Manager Name& Email		
+	Standard Industry List				重要
+	China Region List					重要
+	Territory Name Account Sales & Volume Sales Name & Email List (Pending) 确认是否需要
+	Territory Code & Name Account Sales/Channel Sales Mapping (Pending)		确认是否需要
+
+2. 转个销售的规则
+	2.1.什么时候确认，是数据导入的时候，还是销售查询的时候
+	2.2.如果发生部分审批未通过，导致金额过少，如何处理
+	2.3.如果导入的时候由更新，产品数量金额更改，而且该单已经处理中，是否要更改类型。
+
+3. Director Approve
+	3.1 同ORP Type，如果审批过程中金额发生了变化怎么办（Rejected和ORP导入数据更新了）
+	
+4. 如果审批过程中，该产品已经Reject了，不过表里还有，怎么办
+
+5.审核记录中是按照单子来记录，还是按照产品来记录
+	审批过单子
+	审批过产品
+	拒绝产品
+

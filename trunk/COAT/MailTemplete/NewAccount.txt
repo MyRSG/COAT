@@ -1,0 +1,12 @@
+﻿亲爱的同事: 
+Dear Colleague,
+关于您访问赛门铁克中国合作伙伴业务机会报备审批跟踪平台(COAT)的权限已经开通，请您根据下面提供的帐号和密码登陆COAT 平台！
+Kindly please be advised the login ID and password for your access China ORP Approval Tracking Portal have been created, please find the details below to access COAT portal!
+用户名 User Name：{0}
+密码 Password:{1}
+
+Any question, please feel free contact with partnergcr@symantec.com
+如您有任何问题,请发送邮件到partnergcr@symantec.com
+
+Thanks and regards,
+Symantec Partner Programs & Operation Team

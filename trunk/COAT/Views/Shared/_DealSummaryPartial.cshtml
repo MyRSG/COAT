@@ -1,0 +1,51 @@
+﻿@model COAT.ViewModel.Shared.DealSummaryViewModel
+@{
+    Layout = null;
+}
+
+<table>
+    <tr>
+        <th>COAT Status</th>
+        <th>Enterprise ORP</th>
+        <th>Volume ORP</th>
+        <th>Total</th>
+    </tr>
+    <tr>
+        <td>To be Assigned</td>
+        <td>@Model.Enterprise.ToBeAssigned</td>
+        <td>@Model.Volume.ToBeAssigned</td>
+        <td>@Model.ToBeAssigned</td>
+    </tr>
+    <tr>
+        <td>To be Validated</td>
+        <td>@Model.Enterprise.ToBeValidated</td>
+        <td>@Model.Volume.ToBeValidated</td>
+        <td>@Model.ToBeValidated</td>
+    </tr>
+    <tr>
+        <td>Approved </td>
+        <td>@Model.Enterprise.Approved</td>
+        <td>@Model.Volume.Approved</td>
+        <td>@Model.Approved</td>
+    </tr>
+    <tr>
+        <td>Declined</td>
+        <td>@Model.Enterprise.Declined</td>
+        <td>@Model.Volume.Declined</td>
+        <td>@Model.Declined</td>
+    </tr>
+    <tr>
+        <td>On Hold</td>
+        <td>@Model.Enterprise.OnHold</td>
+        <td>@Model.Volume.OnHold</td>
+        <td>@Model.OnHold</td>
+    </tr>
+    <tr>
+        <td>Total</td>
+        <td>@Model.Enterprise.Total</td>
+        <td>@Model.Volume.Total</td>
+        <td>@Model.Total</td>
+    </tr>
+</table>
+
+

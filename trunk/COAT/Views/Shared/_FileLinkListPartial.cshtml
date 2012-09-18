@@ -1,0 +1,12 @@
+﻿@model IEnumerable<COAT.Models.FileStore>
+<div>
+    <ul style="list-style-position: inside; list-style: none none inside;">
+        @foreach (var f in Model)
+        { 
+            <li style="float: left;">
+                @Html.ActionLink(f.OriginalName, "Download", "Deals", new { id = f.Id }, new { @class = "filelink" })
+            </li>
+        }
+        <li style="clear:both"></li>
+    </ul>
+</div>

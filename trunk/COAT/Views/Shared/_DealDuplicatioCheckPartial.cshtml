@@ -1,0 +1,9 @@
+﻿<fieldset style="margin-top: 10px">
+    <legend>Required Validation Action</legend>
+        @Html.ActionLink("Deal Duplication Check", "DuplicateDealCheck", "Deals", new { id = this.Url.RequestContext.RouteData.Values["Id"] }, new { @class = "checkDuplicate" })
+</fieldset>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".checkDuplicate").popWindow();
+    });
+</script>

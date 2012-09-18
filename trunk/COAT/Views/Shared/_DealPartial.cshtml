@@ -1,0 +1,132 @@
+﻿@model COAT.ViewModel.Shared.DealViewModel
+@{
+    var db = new COAT.Models.COATEntities();
+}
+<fieldset style="margin-top: 15px;">
+    <legend>Common</legend>
+    @Html.HiddenFor(model => model.Deal.Id)
+    <dl>
+        <dt class="display-label">OPR Id </dt>
+        <dd class="display-field">
+            @Html.DisplayFor(model => model.Deal.Id)
+        </dd>
+        <dt class="display-label">OPR Name </dt>
+        <dd class="display-field">
+            @Html.DisplayFor(model => model.Deal.Name)
+        </dd>
+        <dd class="clear_dd">
+        </dd>
+        <dt class="display-label">Deal Size </dt>
+        <dd class="display-field">
+            @Html.DisplayFor(model => model.Deal.DealSize)
+        </dd>
+        <dd class="clear_dd">
+        </dd>
+        <dt class="display-label">Industry </dt>
+        <dd class="display-field">
+            @Html.DisplayFor(model => model.Deal.Industry.Name)
+        </dd>
+        <dd class="clear_dd">
+        </dd>
+        <dt class="display-label">Industry2 </dt>
+        @if (Model.IsEditable)
+        {
+            <dd class="display-field">
+                @Html.DropDownListFor(model => model.Deal.Industry2Id, new SelectList(db.Industry2, "Id", "Name"))
+            </dd>
+        }
+        else if (Model.Deal.Industry2 != null)
+        { 
+            <dd class="display-field">
+                @Html.DisplayFor(model => model.Deal.Industry2.Name)
+            </dd>
+        }
+        else
+        { 
+            <dd class="display-field">
+                &nbsp
+            </dd>
+        }
+        <dd class="clear_dd">
+        </dd>
+        <dt class="display-label">Owner </dt>
+        <dd class="display-field">
+            @Html.DisplayFor(model => model.Deal.Owner)
+        </dd>
+        <dd class="clear_dd">
+        </dd>
+        <dt class="display-label">Region </dt>
+        @if (Model.IsEditable)
+        {
+            <dd class="display-field">
+                @Html.DropDownListFor(model => model.Deal.ChinaRegion, new SelectList(db.Regions, "Name", "Name"))
+            </dd>
+        }
+        else
+        { 
+            <dd class="display-field">
+                @Html.DisplayFor(model => model.Deal.ChinaRegion)
+            </dd>
+        }
+        <dt class="display-label">Province </dt>
+        @if (Model.IsEditable)
+        {
+            <dd class="display-field">
+                @Html.DropDownListFor(model => model.Deal.ProvinceId, new SelectList(db.Provinces.OrderBy(a => a.Name), "Id", "Name"))
+            </dd>
+        }
+        else if (Model.Deal.Province != null)
+        { 
+            <dd class="display-field">
+                @Html.DisplayFor(model => model.Deal.Province.Name)
+            </dd>
+        }
+        else
+        { 
+            <dd class="display-field">
+                &nbsp
+            </dd>
+        }
+        @*       <dt class="display-label">District </dt>
+        <dd class="display-field">
+            @Html.DisplayFor(model => model.Deal.District)
+        </dd>
+        <dd class="clear_dd">
+        </dd>
+        <dt class="display-label">Reg Promotion </dt>
+        <dd class="display-field">
+            @Html.DisplayFor(model => model.Deal.RegPromotion)
+        </dd>
+        <dd class="clear_dd">
+        </dd>
+        <dt class="display-label">Reg Promotion Order ID </dt>
+        <dd class="display-field">
+            @Html.DisplayFor(model => model.Deal.RegPromotionOrderId)
+        </dd>
+        <dd class="clear_dd">
+        </dd>*@
+        <dt class="display-label">Specification </dt>
+        @if (Model.Deal.Specialization != null)
+        {  <dd class="display-field">@string.Format("{0} {1}", Model.Deal.Specialization.FullName, Model.Deal.Specialization.ShortName)</dd>}
+        else
+        {<dd class="display-field">&nbsp</dd> }
+        <dd class="clear_dd">
+        </dd>
+        <dt class="display-label">PAM </dt>
+        <dd class="display-field">
+            @Html.DisplayFor(model => model.Deal.PAM)
+        </dd>
+        <dd class="clear_dd">
+        </dd>
+        <dt class="display-label">Create Date </dt>
+        <dd class="display-field">
+            @Html.DisplayFor(model => model.Deal.CreateDate)
+        </dd>
+        <dt class="display-label">Status </dt>
+        <dd class="display-field">
+            @Html.DisplayFor(model => model.Deal.Status.Name)
+        </dd>
+        <dd class="clear_dd">
+        </dd>
+    </dl>
+</fieldset>

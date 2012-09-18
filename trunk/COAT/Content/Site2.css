@@ -1,0 +1,681 @@
+﻿/*----------------------------------------------------------
+The base color for this template is #5c87b2. If you'd like
+to use a different color start by replacing all instances of
+#5c87b2 with your new color.
+----------------------------------------------------------*/
+body
+{
+	background-color: #989898;
+	font-size: .75em;
+	font-family: Verdana,Tahoma,Arial,Helvetica, Sans-Serif;
+	margin: 0;
+	padding: 0;
+	color: #696969;
+}
+
+a:link
+{
+	color: #212121;
+	font-weight:bold;
+	text-decoration: underline;
+}
+a:visited
+{
+	color: #747275;
+	font-weight:bold;
+}
+a:hover
+{
+	color: #343399;
+	text-decoration: none;
+}
+a:active
+{
+	color: #12eb87;
+}
+
+a:link .rss,
+a:visited .rss,
+a:hover .rss,
+a:active .rss 
+{
+	
+}
+
+p, ul
+{
+	margin-bottom: 20px;
+	line-height: 1.6em;
+}
+
+/* HEADINGS   
+----------------------------------------------------------*/
+h1, h2, h3, h4, h5, h6
+{
+	font-size: 1.5em;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+h1
+{
+	font-size: 2em;
+	padding-bottom: 0;
+	margin-bottom: 0;
+}
+h2
+{
+	font-size: 1.7em;
+	padding: 0 0 10px 0;
+}
+h3
+{
+	font-size: 1.2em;
+}
+h4
+{
+	font-size: 1.1em;
+}
+h5, h6
+{
+	font-size: 1em;
+}
+
+/* this rule styles <h2> tags that are the 
+first child of the left and right table columns */
+.rightColumn > h1, .rightColumn > h2, .leftColumn > h1, .leftColumn > h2
+{
+	margin-top: 0;
+}
+
+/* PRIMARY LAYOUT ELEMENTS   
+----------------------------------------------------------*/
+
+/* you can specify a greater or lesser percentage for the 
+page width. Or, you can specify an exact pixel width. */
+.page
+{
+	width: 90%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#header
+{
+	position: relative;
+	margin-bottom: 0px;
+	color: #000;
+	padding: 0;
+}
+
+#header h1
+{
+	font-weight: bold;
+	margin:25px 0 10px 0;
+	color: #FED32E;
+	border: none;
+	line-height: 2em;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 26px !important;
+}
+
+#main
+{
+	padding: 30px 30px 15px 30px;
+	background-color: #fff;
+	margin-bottom: 30px;
+	_height: 1px; /* only IE6 applies CSS properties starting with an underscore */
+}
+
+#sidebar
+{
+	margin-left:76%;
+	padding:0;
+	height:100%;
+	margin-bottom:10px;
+	position:relative;
+	min-width:140px;
+}
+
+#content
+{	
+	float:left;
+	width:72%;
+	min-height:580px;
+	margin-bottom:10px;
+	padding:5px;
+	position:relative;
+}
+
+#footer
+{
+	clear:both;
+	color: #5F5E59;
+	padding: 10px 0;
+	text-align: center;
+	line-height: normal;
+	margin: 0;
+	font-size: .9em;
+	background:#FFD231;
+}
+
+/* TAB MENU   
+----------------------------------------------------------*/
+ul#menu
+{
+	padding: 0 0 2px;
+	position: relative;
+	margin: 0;
+}
+
+ul#menu li
+{
+	margin:2px;
+	margin-bottom:10px;
+	list-style:none;
+	background-color: #e8eef4;
+	overflow:hidden;
+	border:1px solid #DEA300;
+}
+
+ul#menu li#greeting
+{
+	padding: 10px 20px;
+	font-weight: bold;
+	text-decoration: none;
+	line-height: 2.8em;
+	color: #fff;
+}
+
+ul#menu li a
+{
+	height:36px;
+	line-height:36px;
+	text-align:center;
+	display:inline-block;
+	width:100%;
+	font-weight: bold;
+	text-decoration: none;
+	color: #4B4D42;
+	background-image:url(image/menu_button.png);
+	background-repeat:repeat-x;
+	
+}
+
+ul#menu li a:hover
+{
+	color:#4B4D42;
+	background-color: #DDD;
+	text-decoration: none;
+	background-image:url(image/menu_button_hover.png);
+	background-repeat:repeat-x;
+}
+
+
+ul#menu li.selected a
+{
+	background-color: #fff;
+	color: #000;
+}
+
+/* FORM LAYOUT ELEMENTS   
+----------------------------------------------------------*/
+
+fieldset 
+{
+	margin: 1em 0;
+	padding: 1em;
+	border: 1px solid #CCC;
+}
+
+fieldset p 
+{
+	margin: 2px 12px 10px 10px;
+}
+
+legend 
+{
+	font-size: 1em;
+	font-weight: 600;
+	padding: 2px 4px 8px 4px;
+}
+
+input,select
+{
+	border:1px solid #789FBE;	
+	margin:2px;
+}
+
+input[type="radio"],
+input[type="checkbox"]
+{
+	border:0;	
+}
+
+input[type="text"] 
+{
+	width: 200px;
+	/*border: 1px solid #CCC;*/
+}
+
+input[type="password"] 
+{
+	width: 200px;
+	/*border: 1px solid #CCC;*/
+}
+
+input[type="submit"], input[type="button"].submit
+{
+	color:#FFF;
+	min-width:115px;
+	height:26px;
+	padding:3px;
+	margin:3px;
+	font-weight:bold;
+	border:1px solid #000;
+	background-image:url(image/submit_button.png);
+	background-repeat:repeat-x;
+}
+
+textarea {
+	width: 600px;
+	height: 120px;
+	border: 3px solid #789FBE;
+	padding: 5px;
+}
+
+/* TABLE
+----------------------------------------------------------*/
+
+table 
+{
+  width:100%;
+  border: solid 1px #5E5E5E;
+  border-collapse: collapse;
+}
+
+table td 
+{
+  padding: 5px;   
+  border: solid 1px #5E5E5E;
+}
+
+
+table th
+{
+  padding: 6px 5px;
+  text-align: left;
+  background-color: #FFBB00; 
+  border: solid 1px #5E5E5E;   
+}
+
+table th a:link,
+table th a:visited
+{
+	font-weight:bold;
+}
+
+tr.alert td 
+{
+    background-color: red;
+}
+
+.grid_hightlight
+{
+    background-color:#FFCEC6;
+ }
+
+
+/* MISC  
+----------------------------------------------------------*/
+.clear
+{
+	clear: both;
+}
+
+.error
+{
+	color:Red;
+}
+
+#menucontainer
+{
+	margin-top:40px;
+}
+
+div#title
+{
+	display:block;
+	text-align:left;
+	
+}
+
+div#news
+{
+	display:block;
+	text-align:left;
+	margin:10px 5px 5px 5px;
+	padding:0;
+	height:400px;
+	border:0px solid #FFF;
+	background-color:#EFEDF0;
+}
+
+div#logo
+{
+	display:block;
+	background:#000 url(image/SESlogo_Reverse_150.jpg) no-repeat;
+	background-position:right bottom;
+	min-height:74px;	
+}
+
+#logindisplay
+{
+	font-size:1.1em;
+	display:block;
+	margin:5px;
+	line-height:2em;
+	
+}
+
+#logindisplay a:link
+{
+	
+	text-decoration: underline;
+}
+
+#logindisplay a:visited
+{
+	
+	text-decoration: underline;
+}
+
+#logindisplay a:hover
+{
+	
+	text-decoration: none;
+}
+
+/* Styles for validation helpers
+-----------------------------------------------------------*/
+.field-validation-error
+{
+	color: #ff0000;
+}
+
+.field-validation-valid
+{
+	display: none;
+}
+
+.input-validation-error
+{
+	border: 1px solid #ff0000;
+	background-color: #ffeeee;
+}
+
+.validation-summary-errors
+{
+	font-weight: bold;
+	color: #ff0000;
+}
+
+.validation-summary-valid
+{
+	display: none;
+}
+
+/* Styles for editor and display helpers
+----------------------------------------------------------*/
+.display-label,
+.editor-label,
+.display-field,
+.editor-field
+{
+	margin: 0.2em 0.5em 0.2em 0;
+}
+
+.text-box
+{
+	width: 30em;
+}
+
+.text-box.multi-line
+{
+	height: 6.5em;
+}
+
+.tri-state
+{
+	width: 6em;
+}
+
+.readonly-textarea
+{
+	background-color:#F7F7F7;
+}
+
+/*DL DT DD*/
+fieldset dl
+{
+	padding: 0 0 0 15px;
+	background:#F7F7F7;
+	color:#606060;
+	border:6px solid #FFBB00;
+	
+	}
+	
+fieldset dt
+{
+	clear:both;
+	width:13%;
+	padding:15px 0;
+	font-weight:bold;
+	float:left;
+	background:#F7F7F7;
+}
+	
+fieldset dd
+{
+	background:#FFF;
+	width:83%;
+	margin:0;
+	padding:15px 0 15px 15px;
+	float:left;
+	position:relative;
+	min-height:1.5em;
+}
+
+fieldset
+{
+	margin:0 0 10px 0;
+	padding:10px;
+	border:0px solid #333;
+	}	
+
+legend
+{
+	background:#FFF;
+	margin:0;
+	padding:0 0 2px 5px;
+	border-style:solid;
+	border-width: 0 0 0 0;
+	border-color:#FFF #FFF #FFF #5E5E5E;
+	font-weight:bold;
+	margin-bottom:10px;
+	color:#5A5A5A;
+	font-size:1.5em;
+	line-height:1em;
+}	
+
+#qarea
+{
+	margin:0;
+	padding:0;
+}
+
+#qarea dl
+{
+	padding: 0;
+	border-width:0;
+	border-top:0 solid #FFD131;
+    border-right:1px solid #FFD131;
+    border-bottom:1px solid #FFD131;
+    border-left:1px solid #FFD131; 
+}
+
+#qarea dt
+{	
+	float:none;	
+	padding: 5px 0;
+	width:100%;	
+	height:24px;
+	line-height:24px;	
+	background-image:url(image/qarea_dt.png);
+	background-repeat:repeat-x;	
+	border-top:1px solid #FFD131;
+    border-right:0 solid #FFD131;
+    border-bottom:1px solid #FFD131;
+    border-left:0 solid #FFD131; 
+}
+
+#qarea dd
+{
+	margin-left:0;
+	float:none;	
+	width:100%;
+	padding:5px 0;
+    border-top:0 solid #FCD230;
+    border-right:0 solid #FCD230;
+    border-bottom:0 solid #FCD230;
+    border-left:0 solid #FCD230; 
+}
+
+div#news d
+{
+	margin: 0; 
+	padding:0;
+}
+
+div#news dt
+{
+	color: #FFF; 
+	margin: 0; 
+	height:35px; 
+	line-height: 35px;
+    background-image:url(image/new_title_bg.png);
+	background-repeat:repeat-x;	
+}
+
+div#news dd
+{
+	margin: 0;
+	padding: 3px; 
+}
+
+div#news dd ul
+{
+	color:#B3AEB2;
+	text-align: left; 
+	margin-top:10px;
+	margin-left: 40px; 
+	padding: 0; 
+	line-height: 2em;
+	list-style-type:square;
+}
+
+div#news dd ul li a
+{
+	color:#747275;
+}
+
+div#news dd ul li
+{
+	margin-top:5px;
+}
+
+.clear_dd
+{
+	clear:both;
+	height:0;
+	margin:0;
+	padding:0;	
+	float:none;		
+	min-height:0;
+}
+
+/*
+** Search Bar
+*/
+
+.search-field
+{
+	float:left;
+	margin: 5px;
+	min-width:300px;
+}
+
+
+/*Deal Check*/
+.checkDuplicate:link,
+.checkDuplicate:visited,
+.checkDuplicate:hover,
+.checkDuplicate:active,
+.checkNameAccount:link,
+.checkNameAccount:visited,
+.checkNameAccount:hover,
+.checkNameAccount:active
+{
+    color:#FFF;
+	width:115px;
+	height:26px;
+	padding:8px;
+	margin:3px;
+	font-weight:bold;
+	border:1.5px solid #000;
+	background-color:#FF6A2B;
+	text-decoration: none;
+ }
+ 
+ 
+.exportExcel:link,
+.exportExcel:visited,
+.exportExcel:hover,
+.exportExcel:active
+{
+    color:#FFF;
+	padding:8px;
+	margin:3px;
+	font-weight:bold;
+	border:1.5px solid #000;
+	background-color:#FF6A2B;
+	text-decoration: none;
+	display:inline-block;
+ }
+ 
+ 
+ /*Contract*/
+ .filelink:link, .filelink:visited
+ {
+     display:block;
+     padding:5px;
+     margin:3px;
+     color:#0F0F5C;
+     text-decoration:none;
+     background-color:#B7E8FF; 
+ }
+ 
+ .filelink:hover
+ {
+     color:#990000;
+     background-color:#FFEBAE;
+ }
+ 
+#contractUploadList 
+{
+   padding:0; 
+}
+
+input[name="contract"]
+{
+   width:300px;   
+ }

@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B9A44395-4130-4C47-8190-CE72F78F6F6E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>COAT.Data</RootNamespace>
+    <AssemblyName>COAT.Data</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Export\ColunmPropertyPair.cs" />
+    <Compile Include="Export\ExportAttribute.cs" />
+    <Compile Include="Export\ExportGenerator.cs" />
+    <Compile Include="Export\ExportObject.cs" />
+    <Compile Include="Export\TableFormatHelper.cs" />
+    <Compile Include="Generate\BaseGenerator.cs" />
+    <Compile Include="Generate\CustomerGenerator.cs" />
+    <Compile Include="Generate\DealGenerator.cs" />
+    <Compile Include="Generate\DealProductGenerator.cs" />
+    <Compile Include="Generate\ExcutivedDealGenerator.cs" />
+    <Compile Include="Generate\IndustryGenerator.cs" />
+    <Compile Include="Generate\NameAccountGenerator.cs" />
+    <Compile Include="Generate\PartnerGenerator.cs" />
+    <Compile Include="Generate\SFDCStatusGenerator.cs" />
+    <Compile Include="Generate\SpecializationGenerator.cs" />
+    <Compile Include="Generate\StatusGenerator.cs" />
+    <Compile Include="Generate\UserGenertator.cs" />
+    <Compile Include="Import\DealImportHelper.cs" />
+    <Compile Include="Import\ExcelImportHelper.cs" />
+    <Compile Include="Import\ExcutivedDealImportHelper.cs" />
+    <Compile Include="Import\NameAccountImporttHelper.cs" />
+    <Compile Include="Import\UserImportHelper.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\COAT.Models\COAT.Models.csproj">
+      <Project>{A5E7AF01-F09D-4335-A049-50B80BB4298B}</Project>
+      <Name>COAT.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\COAT.Util\COAT.Util.csproj">
+      <Project>{12A6CB19-EBE7-485E-B2CD-AA8AC195E732}</Project>
+      <Name>COAT.Util</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

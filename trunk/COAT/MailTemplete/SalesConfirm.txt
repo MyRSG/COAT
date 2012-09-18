@@ -1,0 +1,22 @@
+﻿亲爱的同事: 
+Dear Colleague,
+
+以上合作伙伴ORP业务机会信息转发给您，经赛门铁克渠道经理核查，可能会与您负责的销售区域/行业/客户相关，烦请确认是否涉及到如下情况：
+We aware that the ORP deal registered by partner below may relevant with your covered territory/industry/account, your answer on the following questions will be helpful for us to make further validation on this ORP deal!
+
+Name:{0}
+URL:{1}
+
+是否是我们的Install base? /If it is  Existing Install Base?
+是合作伙伴带给我们的新机会吗？ / If it is new opportunity developed by partner?
+在SFDC系统中您是否已经建立此项目信息？ / Have you input this count information in SFDC?
+此项目是否由该合作伙伴与最终用户签订合同？ / Will this partner sign purchase agreement with end user?
+其他意见 /Other  Comment
+
+请您回复您的意见给渠道经理，渠道经理信息见cc copy 栏。
+Please give feedback to channel manager which showing in cc copy list.
+
+
+Thanks and regards,
+Symantec Partner Programs & Operation Team
+

@@ -1,0 +1,8 @@
+﻿@model IEnumerable<SelectListItem>
+<div id="reAssign" title="Choose a Re-Assign User">
+    <div>
+        Should be Assigned To: @Html.DropDownList("reAssignUser", Model, new { id = "reAssignUser" })</div>
+    <div>
+        <textarea id="reAssignComment" cols="20" rows="5"></textarea>
+    </div>
+</div>

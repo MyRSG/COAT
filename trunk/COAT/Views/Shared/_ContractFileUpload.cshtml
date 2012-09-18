@@ -1,0 +1,16 @@
+﻿<div id="contract_upload" title="Upload Contracts">
+    @{
+        var id = Request.RequestContext.RouteData.Values.ContainsKey("id") ? Request.RequestContext.RouteData.Values["id"].ToString() : "";
+    }
+    @using (Html.BeginForm("Upload", "Contract", new { id = id }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <ul id="contractUploadList" style="list-style-type: none;">
+            <li>
+                <input type="file" name="contract" /></li>
+            <li>
+                <input type="button" id="btnAdd" value="Add another" /></li>
+        </ul>
+        <input type="submit" value="Upload" />
+    }
+</div>
+<script src="@Url.Content("~/Scripts/coat-contractupload.js")"  type="text/javascript" ></script>

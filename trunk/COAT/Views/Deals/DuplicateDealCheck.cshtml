@@ -1,0 +1,66 @@
+﻿@model IEnumerable<COAT.Models.ExcutivedDeal>
+@using MvcContrib.UI.Grid
+@using MvcContrib.UI.Pager
+@using COAT.Models
+@using COAT.ViewModel.Deals
+@{
+    ViewBag.Title = "Duplicate Deal Check";
+    Layout = "~/Views/Shared/_SimpleLayout.cshtml";
+}
+<div>
+    @using (Html.BeginForm("DuplicateDealCheck", "Deals", FormMethod.Get))
+    {
+        <div class="search-field">
+            End User Name:
+            <input type="text" id="EndUserName" name="EndUserName" value="@ViewBag.Search.EndUserName" />
+        </div>
+        <div class="search-field">
+            Opportunity Name:
+            <input type="text" id="OppName" name="OppName" value="@ViewBag.Search.OppName" />
+        </div>
+@*      <div class="search-field">
+            Product Name:
+            <input type="text" id="ProductName" name="ProductName" value="@ViewBag.Search.ProductName" />
+        </div>*@
+        <input type="submit" value="Search" />
+    }
+    <div class="clear">
+    </div>
+    <span style="color: Red;">*Note: Please use English and Chinese name to search (search
+        twice) !</span>
+</div>
+<hr />
+<h3>
+    IN COAT</h3>
+<hr />
+@Html.Grid((IEnumerable<Deal>)ViewBag.Deals).Columns(column =>
+{
+    column.For(d => Html.ActionLink("View", "Details", "Deals", new { id = d.Id }, new { })).Encode(false);
+    column.For(d => d.Id).Named("Deal Id");
+    column.For(d => d.Name).Named("Name");
+    column.For(d => d.Customer.Name).Named("Customer");
+    column.For(d => d.Industry.Name).Named("Industry");
+    column.For(d => d.Industry2Name).Named("Industry2");
+    column.For(d => d.ProvinceName).Named("Province");
+    column.For(d => d.Partner.Name).Named("Partner");
+    column.For(d => d.Owner).Named("Owner");
+    column.For(d => d.DealSize).Named("Deal$");
+    column.For(d => d.Status.Name).Named("Status");
+    column.For(d => d.CreateDate).Named("Create Date");
+})
+<h3>
+    IN SFDC</h3>
+<hr />
+@Html.Grid(Model).Columns(column =>
+            {
+                column.For(a => a.DealId).Named("Deal Id");
+                column.For(a => a.EndUserName).Named("End User Name");
+                column.For(a => a.EndUserName2).Named("End User Name2");
+                column.For(a => a.OppName).Named("Opportunity Name");
+                column.For(a => a.PAMName).Named("PAM Name");
+                column.For(a => a.CreateDateAndQuater).Named("Effective Create Date Year and Qtr - Fiscal");
+                column.For(a => a.PartnerOwner).Named("Partner Owner");
+                column.For(a => a.Status).Named("Status");
+                column.For(a => a.ProductName).Named("Product Name");
+                //column.For(a => a.PartnerEmail).Named("Partner Email");
+            })

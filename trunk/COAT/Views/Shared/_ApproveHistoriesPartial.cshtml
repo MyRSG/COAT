@@ -1,0 +1,33 @@
+﻿@model IEnumerable<COAT.Models.ApprovalHistory>
+<fieldset>
+    <legend>Approve History</legend>
+    <table>
+        <tr>
+            <th>
+                Action
+            </th>
+            <th>
+                User
+            </th>
+            <th>
+                DateTime
+            </th>
+            <th>
+                Comment
+            </th>
+        </tr>
+        @foreach (var ah in Model)
+        { 
+            <tr>
+                <td>@ah.Type
+                </td>
+                <td>@ah.User.Name
+                </td>
+                <td>@ah.DateTime
+                </td>
+                <td>@ah.Comment
+                </td>
+            </tr>
+        }
+    </table>
+</fieldset>

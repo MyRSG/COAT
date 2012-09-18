@@ -1,0 +1,50 @@
+﻿@model COAT.ViewModel.Shared.CustomerViewModel
+<fieldset class="fieldset-customer">
+    <legend>Customer</legend>
+    <dl>
+        <dt class="display-label">Name ENG </dt>
+        <dd class="display-field">
+            @Html.DisplayFor(model => model.Customer.NameENG)
+        </dd>
+        <dd class="clear_dd">
+        </dd>
+        <dt class="display-label">Name CHS </dt>
+        <dd class="display-field">
+            @Html.DisplayFor(model => model.Customer.NameCHS)
+        </dd>
+        <dd class="clear_dd">
+        </dd>
+        @*    <dt class="display-label">Region </dt>
+       @if (Model.isSetRegion)
+        { 
+            <dd class="display-field">
+                @Html.DropDownList(Model.RegionDropdownListName, Model.RegionSelectList)
+            </dd>
+        }
+        else
+        { 
+            <dd class="editor-field">
+                @Html.DisplayFor(model => model.Customer.Region)
+            </dd>
+        }
+        <dd class="clear_dd"> </dd>*@
+        <dt class="display-label">Province </dt>
+        <dd class="display-field">
+            @Html.DisplayFor(model => model.Customer.Province)
+        </dd>
+        <dd class="clear_dd">
+        </dd>
+        <dt class="display-label">City </dt>
+        <dd class="display-field">
+            @Html.DisplayFor(model => model.Customer.City)
+        </dd>
+        <dd class="clear_dd">
+        </dd>
+        <dt class="display-label">Street </dt>
+        <dd class="display-field">
+            @Html.DisplayFor(model => model.Customer.Street)
+        </dd>
+        <dd class="clear_dd">
+        </dd>
+    </dl>
+</fieldset>

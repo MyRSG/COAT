@@ -1,0 +1,29 @@
+﻿@model IEnumerable<COAT.Models.NameAccount>
+@using MvcContrib.UI.Grid
+@using MvcContrib.UI.Pager
+@using COAT.ViewModel.Deals
+@{
+    ViewBag.Title = "Name Account Check";
+    Layout = "~/Views/Shared/_SimpleLayout.cshtml";
+}
+<div>
+    @using (Html.BeginForm("NameAccountCheck", "Deals", FormMethod.Get))
+    {
+        <div class="search-field">
+            Account Name:
+            <input type="text" id="AccountName" name="AccountName" value="@ViewBag.Search.AccountName" />
+        </div>
+        <input type="submit" value="Search" />
+    }
+    <div class="clear">
+    </div>
+</div>
+<hr />
+@Html.Grid(Model).Columns(column =>
+            {
+                column.For(a => a.FullAccountName).Named("Full Account Name");
+                column.For(a => a.FullAccountNameLocal).Named("Full Account Name - Local");
+                column.For(a => a.ParentAccountName).Named("Parent Account Name");
+                column.For(a => a.ParentAccountNameLocal).Named("Parent Account Name - Local");
+                column.For(a => a.PrimaryRep).Named("Primary Rep");
+            })

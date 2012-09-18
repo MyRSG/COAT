@@ -1,0 +1,52 @@
+﻿@model COAT.ViewModel.Shared.DealListViewModel
+@using COAT.ViewModel
+@using MvcContrib.UI.Grid
+@using MvcContrib.UI.Pager
+@using MvcContrib.Pagination
+@using COAT.COATExtension
+@Html.Pager((IPagination)Model.Deals)
+@{
+    var db = new COAT.Models.COATEntities();
+    var industry2List = new SelectList(db.Industry2, "Id", "Name");
+    var provinceList = new SelectList(db.Provinces.OrderBy(a=>a.Name), "Id", "Name");
+    var regionList = new SelectList(db.Regions, "Name", "Name");
+    var assignToList =  (IEnumerable<SelectListItem>)ViewBag.AssignToList;
+    var counter = new Counter { Time = 6 };
+    
+}
+@Html.Grid(Model.Deals).Sort((GridSortOptions)ViewBag.Sort).Columns(column =>
+            {            
+                column.For(d => Html.CheckBox(string.Format("deals[{0}].Selected", counter.Count))).Named("<input type=\"checkbox\" id=\"chk_all\"/>").Sortable(false);
+                if (!Model.HideEditLink)
+                {
+                    column.For(d => Html.ActionLink(Model.LinkText, Model.ActionName, new { id = d.Id })).Encode(false).Sortable(false);
+                }
+                column.For(d => d.Id).Named("Deal Id").Sortable(false);
+                column.For(d => d.Name).Named("Name").SortColumnName("Name");
+                column.For(d => d.Customer.Name).Named("Customer").SortColumnName("Customer");
+                column.For(d => d.Industry.Name).Named("Industry").SortColumnName("Industry");
+                column.For(d => Html.DropDownList(string.Format("deals[{0}].Industry2Id", counter.Count), industry2List.Select(d.Industry2Id.ToString()))).Named("Industry2").Sortable(false);
+                column.For(d => d.Customer.City).Named("City").SortColumnName("City");
+                column.For(d => Html.DropDownList(string.Format("deals[{0}].ProvinceId", counter.Count), provinceList.Select(d.ProvinceId.ToString()))).Named("Province").Sortable(false);
+                column.For(d => Html.DropDownList(string.Format("deals[{0}].Region", counter.Count), regionList.Select(d.ChinaRegion))).Named("Region").Sortable(false);
+                column.For(d => Html.DropDownList(string.Format("deals[{0}].ApproverId", counter.Count), assignToList)).Named("AssignTo").Sortable(false);
+                column.For(d => d.Partner.Name).Named("Partner").SortColumnName("Partner");
+                column.For(d => d.Owner).Named("Owner").SortColumnName("Owner");
+                column.For(d => d.DealSize).Named("Deal$").SortColumnName("Deal$");
+                column.For(d => d.Status.Name).Named("Status").SortColumnName("Status");
+                column.For(d => d.CreateDate).Named("Create Date").SortColumnName("CreateDate");
+                column.For(d => Html.Hidden(string.Format("deals[{0}].Id", counter.Count), d.Id));
+            }).RowAttributes(a=>new Dictionary<string, object>{{"class", a.Item.ApproverId == null?"grid":"grid_hightlight"}})
+@Html.Pager((IPagination)Model.Deals)
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#chk_all').change(function () {
+            var checked = $(this).attr('checked');
+            $('input[type="checkbox"]').each(function () {
+                if ($(this).attr('checked') != checked) {
+                    $(this).attr('checked', checked);
+                }
+            });
+        });
+    });
+</script>

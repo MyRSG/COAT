@@ -1,0 +1,19 @@
+﻿@model IEnumerable<COAT.Models.Deal>
+@using COAT.ViewModel.Shared
+@{
+    ViewBag.Title = "Attach Contract";
+    Layout = "~/Views/Shared/_OtherManagementLayout.cshtml";
+}
+<h2>@ViewBag.Title</h2>
+<br />
+<h3>Search</h3>
+<hr />
+@Html.Partial("_SearchBarPartial", (DealSearchViewModel)ViewBag.SearchModel)
+<br />
+<h3>List</h3>
+<hr />
+@Html.Partial("_DealListPartial", new COAT.ViewModel.Shared.DealListViewModel { Deals = Model, ActionName = "Details", LinkText = "Attach" })
+
+<script type="text/javascript">
+
+</script>

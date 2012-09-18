@@ -1,0 +1,25 @@
+﻿@model IEnumerable<COAT.Models.Deal>
+@using COAT.ViewModel.Shared
+@{
+    ViewBag.Title = "To be Assigned List";
+    Layout = "~/Views/Shared/_DealManagementLayout.cshtml";
+}
+<h2>@ViewBag.Title</h2>
+<br />
+<h3>
+    Search</h3>
+<hr />
+@Html.Partial("_SearchBarPartial", (DealSearchViewModel)ViewBag.SearchModel)
+<br />
+<h3>
+    List</h3>
+<hr />
+<br />
+@using (Html.BeginForm("MuitiAssign", "SalesAssigner", FormMethod.Post))
+{
+
+    @Html.Partial("_DealCheckListPartial", new COAT.ViewModel.Shared.DealListViewModel { Deals = Model, ActionName = "Views", LinkText = "View" })
+    <div>
+        <input id="btnApprove" class="submit" type="submit" value="Assign Selected" />
+    </div>
+}

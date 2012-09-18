@@ -1,0 +1,31 @@
+﻿@model COAT.Models.Deal
+@using COAT.ViewModel.Shared;
+@{
+    ViewBag.Title = "Attach";
+    Layout = "~/Views/Shared/_OtherManagementLayout.cshtml";
+}
+<h2>@ViewBag.Title</h2>
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+@Html.ValidationSummary(true)
+@Html.Partial("_DealPartial", new DealViewModel { Deal = Model, IsEditable = false })
+@Html.Partial("_CustomerPartial", new CustomerViewModel { Customer = Model.Customer, isSetRegion = true })
+@Html.Partial("_PartnerPartial", Model.Partner)
+<hr />
+@Html.Partial("_ApproveHistoriesPartial", Model.ApprovalHistories)
+<hr />
+@Html.Partial("_DealProductsPartial", new DealProductsViewModel { DealProducts = Model.DealProducts })
+<fieldset>
+    <legend>Contracts</legend>
+    <div style="margin-left:10px;">
+        <h3>
+            Uploaded</h3>
+        <hr />
+        @Html.Partial("_FileLinkListPartial", (IEnumerable<COAT.Models.FileStore>)ViewBag.Contract)
+        <h3>
+            To Upload</h3>
+        <hr />
+        @Html.Partial("_ContractFileUpload")
+    </div>
+</fieldset>

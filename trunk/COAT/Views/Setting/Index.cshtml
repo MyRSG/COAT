@@ -1,0 +1,21 @@
+﻿@model IEnumerable<COAT.Models.Setting>
+@{
+    ViewBag.Title = "Settings";
+    Layout = "~/Views/Shared/_AdminManagmentLayout.cshtml";
+
+    var settings = Model.ToList();
+}
+<h2>@ViewBag.Title</h2>
+@using (Html.BeginForm())
+{
+    for (var i = 0; i < settings.Count; i++)
+    {   <hr />
+    <h3>@settings[i].Name</h3>
+    <input type="text" id="@string.Format("settings[{0}].Value", i)" name = "@string.Format("settings[{0}].Value", i)" value = "@settings[i].Value" />
+    <input type="hidden" id="@string.Format("settings[{0}].Name", i)" name = "@string.Format("settings[{0}].Name", i)" value = "@settings[i].Name" />
+  
+    }
+    <p />
+    <p />
+    <input type="submit" value="Save" />
+}

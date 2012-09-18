@@ -1,0 +1,385 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="COAT.Controllers.ChannelApproverController" Collapsed="true">
+    <Position X="12.75" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAACBAAAAACAAAAAAAAQAgAAEAAQAAAAEGAAAgIAA=</HashCode>
+      <FileName>Controllers\ChannelApproverController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="COAT.COATExtension.ExcelResult&lt;T&gt;" Collapsed="true">
+    <Position X="25.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAFAAABAAAAAABgAAAAAAAAFAAAAACAAAAAAAgBQAEA=</HashCode>
+      <FileName>COATExtension\ExcelResult.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="COAT.COATExtension.IQueryableDealExtension" Collapsed="true">
+    <Position X="23.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAQAABAAAAAlAAAAQAAAAAAUAAAAAAAIAAAAgABA=</HashCode>
+      <FileName>COATExtension\IQueryableDealExtension.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="COAT.Controllers.AccountController" Collapsed="true">
+    <Position X="16.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAQAgAAAAAAAAAAAAAABAAAGAAAAAAQAIAA=</HashCode>
+      <FileName>Controllers\AccountController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="COAT.Controllers.BaseController" Collapsed="true">
+    <Position X="4" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAABAAACAAQAAAACAAAgAAAAAAAAAAAAAAEAgAAAAA=</HashCode>
+      <FileName>Controllers\BaseController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="COAT.Controllers.ChannelAssignerController" Collapsed="true">
+    <Position X="8.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAABQABAAAAAAAAAAAAAgAAAAAAAAAAECAAIgAAA=</HashCode>
+      <FileName>Controllers\ChannelAssignerController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="COAT.Controllers.ChannelDirectorController" Collapsed="true">
+    <Position X="4.75" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABAAAAAAAAAAAAAAAAgAAAAAAAAAAECAAAgAAA=</HashCode>
+      <FileName>Controllers\ChannelDirectorController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="COAT.Controllers.COATApproverController" Collapsed="true">
+    <Position X="11.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABAAAAAAAAAAAAQAAAAAAAAAAAAAAAIAA=</HashCode>
+      <FileName>Controllers\COATApproverController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="COAT.Controllers.COATController" Collapsed="true">
+    <Position X="4" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgABABAAQADAAAAABIAAAAgQQAAAAAAAAAGCAAgAIE=</HashCode>
+      <FileName>Controllers\COATController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="COAT.Controllers.ContractController" Collapsed="true">
+    <Position X="0.75" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABAAAABAAAAABAAAAggAAAAAAAAAAEGAAAAAAA=</HashCode>
+      <FileName>Controllers\ContractController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="COAT.Controllers.DealsController" Collapsed="true">
+    <Position X="2.75" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABAAAAAAAAAAAAABAAggAAAAAAAAAECAgAAAAA=</HashCode>
+      <FileName>Controllers\DealsController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="COAT.Controllers.FileController" Collapsed="true">
+    <Position X="16.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAQAAAAAAAAAEAAgAAAAAACAIFEAAAAAAA=</HashCode>
+      <FileName>Controllers\FileController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="COAT.Controllers.HomeController" Collapsed="true">
+    <Position X="22" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>Controllers\HomeController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="COAT.Controllers.SalesApproverController" Collapsed="true">
+    <Position X="10.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABAAAAAAAAAAAAAAQAgAAAAAAAAAAEGAAAgIAA=</HashCode>
+      <FileName>Controllers\SalesApproverController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="COAT.Controllers.SalesAssignerController" Collapsed="true">
+    <Position X="6.75" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAABQABAAAAAAAAAAAAAgAAAAAAAAAAECAAIgAAA=</HashCode>
+      <FileName>Controllers\SalesAssignerController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="COAT.Controllers.SettingController" Collapsed="true">
+    <Position X="18.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>Controllers\SettingController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="COAT.Database.BaseEntityManager" Collapsed="true">
+    <Position X="4" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAIAEIAIAACAA=</HashCode>
+      <FileName>Database\BaseEntityManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="COAT.Database.BaseEntityManager&lt;TModel&gt;" Collapsed="true">
+    <Position X="4" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAAAAAAAABAAAAAAAAAAACAAAAAAAAA=</HashCode>
+      <FileName>Database\BaseEntityManagerT.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="COAT.Database.DealEntityManager" Collapsed="true">
+    <Position X="1.75" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQBAACAAAAAAAIAAAAAAAAAAAAAAgAAAA=</HashCode>
+      <FileName>Database\DealEntityManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="COAT.Database.RoleEntityManager" Collapsed="true">
+    <Position X="4" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Database\RoleEntityManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="COAT.Database.UserEntityManager" Collapsed="true">
+    <Position X="6.25" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAABAAEAAAAAAAAAQAAAAAAAAAAIAEAAAA=</HashCode>
+      <FileName>Database\UserEntityManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="COAT.MvcApplication" Collapsed="true">
+    <Position X="16.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAABAIQAAAAAAAAAA=</HashCode>
+      <FileName>Global.asax.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="COAT.Helper.FileHelper" Collapsed="true">
+    <Position X="18.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIIgAEAAAAAAAAAAAIAAAAAAAAAAACAFAAAAQAAAAA=</HashCode>
+      <FileName>Helper\FileHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="COAT.Helper.SettingHelper" Collapsed="true">
+    <Position X="20.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAAAACAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Helper\SettingHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="COAT.Models.ChangePasswordModel" Collapsed="true">
+    <Position X="20.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAABAAAAAAAEAAAAAAAAAAAAAAIAA=</HashCode>
+      <FileName>Models\AccountModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="COAT.Models.LogOnModel" Collapsed="true">
+    <Position X="25.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAQAAAAAgAAA=</HashCode>
+      <FileName>Models\AccountModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="COAT.Models.RegisterModel" Collapsed="true">
+    <Position X="22" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAACAQAAAAAAIAA=</HashCode>
+      <FileName>Models\AccountModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="COAT.Models.COATImportTask" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="22" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQACAAAAAAAAAQAgAAAAAAYAAgEAAAAAAQBAAAAAAAI=</HashCode>
+      <FileName>Models\COATImportTask.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="COAT.Models.ForgetPasswordModel" Collapsed="true">
+    <Position X="20.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>Models\ForgetPasswordModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="COAT.Schedule.ScheduleTaskRunner" Collapsed="true">
+    <Position X="25.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAgCAAQAAYIAAgAAAAAAAAAAAAAEgAAAIAAAAAAAQ=</HashCode>
+      <FileName>Schedule\ScheduleTaskRunner.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="COAT.Schedule.ScheduleThreadPool" Collapsed="true">
+    <Position X="16.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAAQAAAAAAQAAAAAAQAAEAAAAAAIAAAAAAQA=</HashCode>
+      <FileName>Schedule\ScheduleThreadPool.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="COAT.Security.COATMemberShipProvider" Collapsed="true">
+    <Position X="23.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AUQAAAAgAQAkhQiNE4AEAACQAUIAIAaCHAkAAAtAAAQ=</HashCode>
+      <FileName>Security\COATMemberShipProvider.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="COAT.Security.COATMemebershipUser" Collapsed="true">
+    <Position X="25.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAICAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAABAAA=</HashCode>
+      <FileName>Security\COATMemebershipUser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="COAT.Security.COATRoleProvider" Collapsed="true">
+    <Position X="16.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QEAEEAAwAAAkAQAAAAAABAAAAAAAAAYAAAAEAAEQAAA=</HashCode>
+      <FileName>Security\COATRoleProvider.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="COAT.Security.RoleRepository" Collapsed="true">
+    <Position X="23.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEEAAQAAAAAAAAAAAABAAAACAAAAIAAAAAAAEAgAA=</HashCode>
+      <FileName>Security\RoleRepository.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="COAT.Security.UserRepository" Collapsed="true">
+    <Position X="23.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAAgAgAAAAAAAAQAAAAAAAAGAEAAAEAgAA=</HashCode>
+      <FileName>Security\UserRepository.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="COAT.ViewModel.AssignedDeal" Collapsed="true">
+    <Position X="18.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAgAAACAAAAAAAACAAAAAAAAAAAgAAAAAAAAI=</HashCode>
+      <FileName>ViewModel\AssignedDeal.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="COAT.ViewModel.Counter" Collapsed="true">
+    <Position X="20.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAIAAAAAAQA=</HashCode>
+      <FileName>ViewModel\Counter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="COAT.ViewModel.Deals.ContractFileUploadViewModel" Collapsed="true">
+    <Position X="18.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAABAgAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModel\Deals\ContractFileUploadViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="COAT.ViewModel.Deals.DuplicateDealSearchModel" Collapsed="true">
+    <Position X="23.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIgAA=</HashCode>
+      <FileName>ViewModel\Deals\DuplicateDealSearchModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="COAT.ViewModel.Deals.NameAccountSearchModel" Collapsed="true">
+    <Position X="18.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAA=</HashCode>
+      <FileName>ViewModel\Deals\NameAccountSearchModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="COAT.ViewModel.Shared.CustomerViewModel" Collapsed="true">
+    <Position X="22" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAABAAAAAAEAAAAAAAQAEAAAAAAAAAAAAQA=</HashCode>
+      <FileName>ViewModel\Shared\CustomerViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="COAT.ViewModel.Shared.DealListViewModel" Collapsed="true">
+    <Position X="23.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAgAAEAAAAAAA=</HashCode>
+      <FileName>ViewModel\Shared\DealListViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="COAT.ViewModel.Shared.DealProductsViewModel" Collapsed="true">
+    <Position X="25.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAIAAAAAQAAAAAAAAAAAAAAAAgAAAAAgCAA=</HashCode>
+      <FileName>ViewModel\Shared\DealProductsViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="COAT.ViewModel.Shared.DealProductViewModel" Collapsed="true">
+    <Position X="16.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAkAAAAAAAAA=</HashCode>
+      <FileName>ViewModel\Shared\DealProductViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="COAT.ViewModel.Shared.DealSearchViewModel" Collapsed="true">
+    <Position X="18.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAgAAQCQIAAgDAFCAgQAABAABQEgAEAAAAICA=</HashCode>
+      <FileName>ViewModel\Shared\DealSearchViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="COAT.ViewModel.Shared.DealSummaryViewModel" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="20.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAAAAAIAAAAAAAAQAAAAEUAABAAIAAAAAAAA=</HashCode>
+      <FileName>ViewModel\Shared\DealSummaryViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="COAT.ViewModel.Shared.DealViewModel" Collapsed="true">
+    <Position X="22" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAIAAAAAAA=</HashCode>
+      <FileName>ViewModel\Shared\DealViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="COAT.ViewModel.Shared.NavBarViewModel" Collapsed="true">
+    <Position X="20.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACIAAAIAAAAAIAIAAAAAAAQCAEAAAAAAACBAAJAAAU=</HashCode>
+      <FileName>ViewModel\Shared\NavBarViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="COAT.ViewModel.Shared.SimpleDealSummary" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="22" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAACAAAAAIAAAAAAAAQAAAAAUAABAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModel\Shared\SimpleDealSummary.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Interface Name="COAT.COATExtension.Search.IDealSearch" Collapsed="true">
+    <Position X="16.75" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAA=</HashCode>
+      <FileName>COATExtension\Search\IDealSearch.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="COAT.Schedule.IScheduleTask" Collapsed="true">
+    <Position X="20.25" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQACAAAAAAAAAQAAAAAAAAQAAgEAAAAAAQAAAAAAAAI=</HashCode>
+      <FileName>Schedule\IScheduleTask.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="COAT.ViewModel.Shared.IDealSummary" Collapsed="true">
+    <Position X="18.5" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAAAAAIAAAAAAAAQAAAAAUAABAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModel\Shared\IDealSummary.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="COAT.ViewModel.Shared.ApproveHeaderType" Collapsed="true">
+    <Position X="16.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModel\Shared\DealProductsViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Microsoft YaHei" Size="9" />
+</ClassDiagram>
