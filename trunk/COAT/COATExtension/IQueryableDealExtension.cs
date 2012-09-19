@@ -12,20 +12,20 @@ namespace COAT.COATExtension
         public static IQueryable<Deal> Search(this IQueryable<Deal> deals, DealSearchViewModel model)
         {
             return deals
-                .SearchDealId(model);
-                //.SearchValidationTeam(model)
-                //.SearchORPType(model)
-                //.SearchRegion(model)
-                //.SearchProvince(model)
-                //.SearchIndustry2(model)
-                //.SearchCOATStatus(model)
-                //.SearchSFDCStatus(model)
-                //.SearchCustomer(model)
-                //.SearchApprover(model)
-                //.SearchBeginDate(model)
-                //.SearchEndDate(model)
-                //.SearchBeginActDate(model)
-                //.SearchEndActDate(model);
+                .SearchDealId(model)
+                .SearchValidationTeam(model)
+                .SearchORPType(model)
+                .SearchRegion(model)
+                .SearchProvince(model)
+                .SearchIndustry2(model)
+                .SearchCOATStatus(model)
+                .SearchSFDCStatus(model)
+                .SearchCustomer(model)
+                .SearchApprover(model)
+                .SearchBeginDate(model)
+                .SearchEndDate(model)
+                .SearchBeginActDate(model)
+                .SearchEndActDate(model);
         }
 
         public static IQueryable<Deal> SearchBeginActDate(this IQueryable<Deal> deals, DealSearchViewModel model)
