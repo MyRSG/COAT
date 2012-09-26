@@ -6651,13 +6651,11 @@ namespace COAT.Models
         /// </summary>
         /// <param name="id">Initial value of the Id property.</param>
         /// <param name="name">Initial value of the Name property.</param>
-        /// <param name="qualification">Initial value of the Qualification property.</param>
-        public static Partner CreatePartner(global::System.Int32 id, global::System.String name, global::System.String qualification)
+        public static Partner CreatePartner(global::System.Int32 id, global::System.String name)
         {
             Partner partner = new Partner();
             partner.Id = id;
             partner.Name = name;
-            partner.Qualification = qualification;
             return partner;
         }
 
@@ -6718,7 +6716,7 @@ namespace COAT.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String Qualification
         {
@@ -6730,7 +6728,7 @@ namespace COAT.Models
             {
                 OnQualificationChanging(value);
                 ReportPropertyChanging("Qualification");
-                _Qualification = StructuralObject.SetValidValue(value, false);
+                _Qualification = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("Qualification");
                 OnQualificationChanged();
             }

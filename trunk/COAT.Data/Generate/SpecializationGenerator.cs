@@ -24,11 +24,20 @@ namespace COAT.Data.Generate
 
         protected override Specialization GetInstance(System.Data.DataRow row)
         {
-            string partnerTypeString = row["Partner Type"].ToString() + ",";
-            string text = row["Partner Qualification"].ToString();
-            string specializationString = text.Split(',')[0];
+            //string partnerTypeString = row["Partner Type"].ToString() + ",";
+
+            string specializationString = string.Empty;
+            if (IsNotEmpty(row))
+            {
+                specializationString = row["Partner Qualification"].ToString().Split(',')[0];
+            }
 
             return Entity.Specializations.FirstOrDefault(a => a.ORPName == specializationString);
+        }
+
+        private static bool IsNotEmpty(System.Data.DataRow row)
+        {
+            return !(row["Partner Qualification"] is DBNull) || row["Partner Qualification"] != null;
         }
 
         protected override bool Validate(Specialization obj)
@@ -40,5 +49,7 @@ namespace COAT.Data.Generate
         {
             return obj;
         }
+
+
     }
 }

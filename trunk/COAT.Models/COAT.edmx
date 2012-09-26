@@ -435,7 +435,7 @@
           </Key>
           <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="varchar" Nullable="false" MaxLength="200" />
-          <Property Name="Qualification" Type="varchar" Nullable="false" MaxLength="5000" />
+          <Property Name="Qualification" Type="varchar" MaxLength="5000" />
         </EntityType>
         <EntityType Name="Province">
           <Key>
@@ -926,6 +926,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="ResetAllDeal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -1115,7 +1116,7 @@
           </Key>
           <Property Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
           <Property Name="Name" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" Type="String" />
-          <Property Name="Qualification" Nullable="false" MaxLength="5000" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="Qualification" Nullable="true" MaxLength="5000" FixedLength="false" Unicode="false" Type="String" />
           <NavigationProperty Name="Deals" Relationship="COATModel.FK_Deal_Partner" FromRole="Partner" ToRole="Deal" />
         </EntityType>
         <EntityType Name="Status">
