@@ -1,20 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Net.Mail;
+﻿using System.Net.Mail;
 
-namespace COAT.Mail
+namespace COAT.Util.Mail
 {
     public class COATMailHelper
     {
         public void SendMail(string[] to, string[] cc, string[] replyTo, string subject, string body)
         {
-            var builder = new COATMailMessageBuilder();
-            builder.Subject = subject;
-            builder.Body = body;
-            builder.To = to;
-            builder.CC = cc;
+            var builder = new COATMailMessageBuilder {Subject = subject, Body = body, To = to, CC = cc};
             if (replyTo != null)
             {
                 builder.ReplyTo = replyTo;
@@ -33,6 +25,5 @@ namespace COAT.Mail
             var client = new COATSmtpClient();
             client.Send(msg);
         }
-
     }
 }
