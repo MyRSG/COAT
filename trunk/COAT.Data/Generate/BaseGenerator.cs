@@ -1,28 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Data;
-using COAT.Extension;
+﻿using System.Data;
 using COAT.Models;
+using COAT.Util.Extension;
 
 namespace COAT.Data.Generate
 {
     public abstract class BaseGenerator<T>
     {
-
-        protected abstract ColunmPropertyPair[] ColunmPropertyPairs { get; }
-        protected abstract T GetInstance(DataRow row);
-        protected abstract bool Validate(T obj);
-        protected abstract T SychronizeDB(T obj);
-
-        protected DataRow Row { get; set; }
-        protected COATEntities Entity { get; set; }
-        public BaseGenerator(DataRow row)
+        protected BaseGenerator(DataRow row)
         {
             Row = row;
             Entity = new COATEntities();
         }
+
+        protected abstract ColunmPropertyPair[] ColunmPropertyPairs { get; }
+        protected DataRow Row { get; set; }
+        protected COATEntities Entity { get; set; }
+        protected abstract T GetInstance(DataRow row);
+        protected abstract bool Validate(T obj);
+        protected abstract T SychronizeDB(T obj);
 
         public virtual T Generate()
         {
@@ -31,7 +26,7 @@ namespace COAT.Data.Generate
 
         protected T Generate(DataRow row)
         {
-            var rslt = GetInstance(Row);
+            T rslt = GetInstance(Row);
             row.FillObject(rslt, ColunmPropertyPairs);
 
             if (!Validate(rslt))

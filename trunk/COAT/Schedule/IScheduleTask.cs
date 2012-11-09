@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace COAT.Schedule
+﻿namespace COAT.Schedule
 {
     public interface IScheduleTask
     {
-
         int RunTimes { get; set; }
         int Id { get; set; }
         string Name { get; set; }

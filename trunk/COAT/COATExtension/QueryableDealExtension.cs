@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Linq;
 using COAT.Models;
 using COAT.ViewModel.Shared;
 
 namespace COAT.COATExtension
 {
-    public static class IQueryableDealExtension
+    public static class QueryableDealExtension
     {
         public static IQueryable<Deal> Search(this IQueryable<Deal> deals, DealSearchViewModel model)
         {
@@ -35,8 +32,12 @@ namespace COAT.COATExtension
 
             return deals
                 .Where(a => a.Status.ActionName == "A" || a.Status.ActionName == "R")
-                .Where(a => (a.ApproveDate >= model.BeginActDate && a.DirectorDate == null) || a.DirectorDate >= model.BeginActDate);
+                .Where(
+                    a =>
+                    (a.ApproveDate >= model.BeginActDate && a.DirectorDate == null) ||
+                    a.DirectorDate >= model.BeginActDate);
         }
+
         public static IQueryable<Deal> SearchEndActDate(this IQueryable<Deal> deals, DealSearchViewModel model)
         {
             if (model.EndActDate == null)
@@ -44,7 +45,9 @@ namespace COAT.COATExtension
 
             return deals
                 .Where(a => a.Status.ActionName == "A" || a.Status.ActionName == "R")
-                .Where(a => (a.ApproveDate <= model.EndActDate && a.DirectorDate == null) || a.DirectorDate <= model.EndActDate);
+                .Where(
+                    a =>
+                    (a.ApproveDate <= model.EndActDate && a.DirectorDate == null) || a.DirectorDate <= model.EndActDate);
         }
 
         public static IQueryable<Deal> SearchDealId(this IQueryable<Deal> deals, DealSearchViewModel model)
@@ -60,7 +63,7 @@ namespace COAT.COATExtension
             if (model.ValidationTeamId == 0)
                 return deals;
 
-            var ids = new COATEntities().SalesDealsViews.Select(a => a.Id).ToArray();
+            string[] ids = new COATEntities().SalesDealsViews.Select(a => a.Id).ToArray();
             if (model.ValidationTeamId == 1)
             {
                 return deals.Where(a => ids.Contains(a.Id));
@@ -128,7 +131,10 @@ namespace COAT.COATExtension
         {
             if (string.IsNullOrEmpty(model.CustomerName))
                 return deals;
-            return deals.Where(d => d.Customer.NameENG.Contains(model.CustomerName) || d.Customer.NameCHS.Contains(model.CustomerName));
+            return
+                deals.Where(
+                    d =>
+                    d.Customer.NameENG.Contains(model.CustomerName) || d.Customer.NameCHS.Contains(model.CustomerName));
         }
 
         public static IQueryable<Deal> SearchBeginDate(this IQueryable<Deal> deals, DealSearchViewModel model)

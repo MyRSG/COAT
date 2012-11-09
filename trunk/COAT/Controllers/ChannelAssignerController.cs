@@ -1,13 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using COAT.COATExtension;
 using COAT.Models;
+using COAT.Util.IDS;
+using COAT.ViewModel;
 using COAT.ViewModel.Shared;
 using MvcContrib.UI.Grid;
-using COAT.IDS;
-using COAT.ViewModel;
-using COAT.COATExtension;
 
 namespace COAT.Controllers
 {
@@ -16,10 +18,42 @@ namespace COAT.Controllers
     {
         //string currentStatus = "PA";
 
+        private int _nextStatusId;
+
         public ChannelAssignerController()
         {
-            _ApproveActionName = "Assign";
-            _NextStatusId = db.Status.FirstOrDefault(a => a.ActionName == "PSA").Id;
+            ApproveActionName = "Assign";
+            Status firstOrDefault = Db.Status.FirstOrDefault(a => a.ActionName == "PSA");
+            if (firstOrDefault != null)
+                _nextStatusId = firstOrDefault.Id;
+        }
+
+        protected override int PreviousStatusId
+        {
+            get { return 0; }
+        }
+
+        protected override int NextStatusId
+        {
+            get { return _nextStatusId; }
+        }
+
+        protected override IEnumerable<SelectListItem> AssignToList
+        {
+            get
+            {
+                return Db.Users
+                    .Where(
+                        u =>
+                        u.SystemRoleId == SystemRoleIds.ChannelApprover || u.SystemRoleId == SystemRoleIds.SalesApprover)
+                    .OrderBy(u => u.Name)
+                    .ToList()
+                    .Select(u => new SelectListItem
+                                     {
+                                         Text = u.GetNameRoleString(),
+                                         Value = u.Id.ToString(CultureInfo.InvariantCulture)
+                                     });
+            }
         }
 
         [Authorize]
@@ -32,30 +66,30 @@ namespace COAT.Controllers
             ViewBag.AssignToList = AssignToList;
             ViewBag.Sort = sort;
 
-            var deals = dealMgr.GetChannelAssignerDeals().Search(search);
+            IQueryable<Deal> deals = DealMgr.GetChannelAssignerDeals().Search(search);
             return View(SortAndPagingDeal(deals, sort, page));
         }
 
         public ActionResult Views(string id)
         {
-            return RedirectToAction("Details", "Deals", new { id = id });
+            return RedirectToAction("Details", "Deals", new {id});
         }
 
         [Authorize]
         [HttpPost]
         public RedirectResult MuitiAssign(AssignedDeal[] deals, FormCollection collection)
         {
-            foreach (var ad in deals.Where(a => a.Selected))
+            foreach (AssignedDeal ad in deals.Where(a => a.Selected))
             {
                 Approve(new Deal
-                {
-                    Id = ad.Id,
-                    ProvinceId = ad.ProvinceId,
-                    ChinaRegion = ad.Region,
-                    Industry2Id = ad.Industry2Id,
-                    ApproverId = ad.ApproverId
-                }
-                    , collection);
+                            {
+                                Id = ad.Id,
+                                ProvinceId = ad.ProvinceId,
+                                ChinaRegion = ad.Region,
+                                Industry2Id = ad.Industry2Id,
+                                ApproverId = ad.ApproverId
+                            }
+                        , collection);
             }
 
             return Redirect("Index");
@@ -71,67 +105,50 @@ namespace COAT.Controllers
 
             SetNextStatus(deal.ApproverId);
             deal.AssignerId = GetCurrentMemberShipUser().COATUser.Id;
-            deal.AssignDate = System.DateTime.Now;
-            UpdateDeal(deal, new string[] { "ChinaRegion", "ProvinceId", "Industry2Id", "ApproverId", "AssignerId", "AssignDate" });
+            deal.AssignDate = DateTime.Now;
+            UpdateDeal(deal,
+                       new[] {"ChinaRegion", "ProvinceId", "Industry2Id", "ApproverId", "AssignerId", "AssignDate"});
             base.OnApproving(deal, collection);
         }
 
 
         public void DoSetRegion(FormCollection collection)
         {
-            var VM = new CustomerViewModel();
-            foreach (var key in collection.AllKeys)
+            var vm = new CustomerViewModel();
+            foreach (string key in collection.AllKeys)
             {
-                if (key.IndexOf(VM.RegionDropdownListHeader) == 0)
-                {
-                    var cid = int.Parse(key.Remove(0, VM.RegionDropdownListHeader.Length));
-                    var cus = db.Customers.FirstOrDefault(a => a.Id == cid);
-                    cus.Region = collection[key];
-                    return;
-                }
+                if (key.IndexOf(vm.RegionDropdownListHeader, StringComparison.Ordinal) != 0) continue;
+                int cid = int.Parse(key.Remove(0, vm.RegionDropdownListHeader.Length));
+                Customer cus = Db.Customers.FirstOrDefault(a => a.Id == cid);
+                if (cus != null) cus.Region = collection[key];
+                return;
             }
 
             throw new HttpRequestValidationException("Customer Region should not be empty !");
         }
 
-        protected override int PreviousStatusId
-        {
-            get { return 0; }
-        }
-
-        protected override int NextStatusId
-        {
-            get { return _NextStatusId; }
-        }
-
-        protected override IEnumerable<SelectListItem> AssignToList
-        {
-            get
-            {
-                return db.Users
-                    .Where(u => u.SystemRoleId == SystemRoleIds.ChannelApprover || u.SystemRoleId == SystemRoleIds.SalesApprover)
-                    .OrderBy(u => u.Name)
-                    .ToList()
-                    .Select(u => new SelectListItem
-                    {
-                        Text = u.GetNameRoleString(),
-                        Value = u.Id.ToString()
-                    });
-            }
-        }
-
         protected void SetNextStatus(int? userId)
         {
             if (userId == null)
-                _NextStatusId = db.Status.FirstOrDefault(a => a.ActionName == "PCA").Id;
+            {
+                Status firstOrDefault = Db.Status.FirstOrDefault(a => a.ActionName == "PCA");
+                if (firstOrDefault != null)
+                    _nextStatusId = firstOrDefault.Id;
+            }
 
-            var user = db.Users.FirstOrDefault(a => a.Id == userId);
-            if (user.SystemRoleId == SystemRoleIds.ChannelApprover)
-                _NextStatusId = db.Status.FirstOrDefault(a => a.ActionName == "PCA").Id;
+            User user = Db.Users.FirstOrDefault(a => a.Id == userId);
+            if (user != null && user.SystemRoleId == SystemRoleIds.ChannelApprover)
+            {
+                Status firstOrDefault = Db.Status.FirstOrDefault(a => a.ActionName == "PCA");
+                if (firstOrDefault != null)
+                    _nextStatusId = firstOrDefault.Id;
+            }
             else
-                _NextStatusId = db.Status.FirstOrDefault(a => a.ActionName == "PSA").Id;
+            {
+                Status orDefault = Db.Status.FirstOrDefault(a => a.ActionName == "PSA");
+                if (orDefault != null)
+                    _nextStatusId = orDefault.Id;
+            }
         }
-
-        private int _NextStatusId = 0;
     }
 }

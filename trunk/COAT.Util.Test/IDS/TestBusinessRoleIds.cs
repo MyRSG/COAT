@@ -1,5 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using COAT.IDS;
+﻿using COAT.Util.IDS;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace COAT.Util.Test.IDS
 {

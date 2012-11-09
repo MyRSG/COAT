@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using COAT.Models;
-using COAT.IDS;
+﻿using COAT.Models;
+using COAT.Util.IDS;
 
 namespace COAT.COATExtension
 {
@@ -11,7 +7,7 @@ namespace COAT.COATExtension
     {
         public static string GetNameRoleString(this User user)
         {
-            var role = user.SystemRoleId == SystemRoleIds.ChannelApprover ? "Channel" : "Sales";
+            string role = user.SystemRoleId == SystemRoleIds.ChannelApprover ? "Channel" : "Sales";
             return string.Format("{0} ({1})", user.Name, role);
         }
     }

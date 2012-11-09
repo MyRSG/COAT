@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Linq.Expressions;
 
-namespace COAT.Extension
+namespace COAT.Util.Extension
 {
-    public static class IOrderedQueryableExtension
+    public static class OrderedQueryableExtension
     {
         public static IOrderedQueryable<TSource> OrderByDirection<TSource, TKey>(
             this IQueryable<TSource> source,
@@ -18,6 +16,5 @@ namespace COAT.Extension
 
             return source.OrderBy(keySelector);
         }
-
     }
 }

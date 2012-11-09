@@ -1,21 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace COAT.ViewModel
+﻿namespace COAT.ViewModel
 {
     public class Counter
     {
+        private int _count;
         public int Time { get; set; }
+
         public int Count
         {
-            get
-            {
-                return _Count++ / Time;
-            }
+            get { return _count++/Time; }
         }
-
-        private int _Count = 0;
     }
 }

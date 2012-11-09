@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using COAT.Models;
 using System.Data;
-using COAT.Extension;
+using System.Linq;
+using COAT.Models;
+using COAT.Util.Extension;
 
 namespace COAT.Data.Generate
 {
@@ -12,17 +10,15 @@ namespace COAT.Data.Generate
     {
         public SpecializationGenerator(DataRow row)
             : base(row)
-        { }
-
-        protected override Extension.ColunmPropertyPair[] ColunmPropertyPairs
         {
-            get
-            {
-                return new ColunmPropertyPair[0];
-            }
         }
 
-        protected override Specialization GetInstance(System.Data.DataRow row)
+        protected override ColunmPropertyPair[] ColunmPropertyPairs
+        {
+            get { return new ColunmPropertyPair[0]; }
+        }
+
+        protected override Specialization GetInstance(DataRow row)
         {
             //string partnerTypeString = row["Partner Type"].ToString() + ",";
 
@@ -35,7 +31,7 @@ namespace COAT.Data.Generate
             return Entity.Specializations.FirstOrDefault(a => a.ORPName == specializationString);
         }
 
-        private static bool IsNotEmpty(System.Data.DataRow row)
+        private static bool IsNotEmpty(DataRow row)
         {
             return !(row["Partner Qualification"] is DBNull) || row["Partner Qualification"] != null;
         }
@@ -49,7 +45,5 @@ namespace COAT.Data.Generate
         {
             return obj;
         }
-
-
     }
 }

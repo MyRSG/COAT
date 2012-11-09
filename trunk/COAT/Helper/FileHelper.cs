@@ -1,22 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.IO;
 using System.Web;
 using System.Web.Hosting;
-using System.IO;
 using COAT.Models;
 
 namespace COAT.Helper
 {
     public class FileHelper
     {
-        public const string _ContractFolderName = "contracts";
-        public const string _RawDataFolderName = "rawdata";
-        public string _FileRootPath = Path.Combine(HostingEnvironment.ApplicationPhysicalPath, "Files");
+        public const string ContractFolderName = "contracts";
+        public const string RawDataFolderName = "rawdata";
+        private readonly COATEntities _db = new COATEntities();
+        public string FileRootPath = Path.Combine(HostingEnvironment.ApplicationPhysicalPath, "Files");
 
         public FileHelper()
         {
             IntialStructure();
+        }
+
+        private string RawDataFolderPath
+        {
+            get { return Path.Combine(FileRootPath, RawDataFolderName); }
+        }
+
+        private string ContractFolderPath
+        {
+            get { return Path.Combine(FileRootPath, ContractFolderName); }
         }
 
         public FileStore SaveRawDateFile(HttpPostedFileBase file)
@@ -31,9 +39,9 @@ namespace COAT.Helper
 
         private void IntialStructure()
         {
-            if (!Directory.Exists(_FileRootPath))
+            if (!Directory.Exists(FileRootPath))
             {
-                Directory.CreateDirectory(_FileRootPath);
+                Directory.CreateDirectory(FileRootPath);
             }
 
             if (!Directory.Exists(RawDataFolderPath))
@@ -45,29 +53,20 @@ namespace COAT.Helper
             {
                 Directory.CreateDirectory(ContractFolderPath);
             }
-
-        }
-
-        private string RawDataFolderPath
-        {
-            get { return Path.Combine(_FileRootPath, _RawDataFolderName); }
-        }
-
-        private string ContractFolderPath
-        {
-            get { return Path.Combine(_FileRootPath, _ContractFolderName); }
         }
 
         private FileStore SaveFile(HttpPostedFileBase file, string folderPath)
         {
             try
             {
-                FileStore fs = new FileStore();
-                fs.Extension = new FileInfo(file.FileName).Extension;
-                fs.MimeType = file.ContentType;
-                fs.Directory = folderPath;
-                fs.ContentLength = file.ContentLength;
-                fs.OriginalName = file.FileName;
+                var fs = new FileStore
+                             {
+                                 Extension = new FileInfo(file.FileName).Extension,
+                                 MimeType = file.ContentType,
+                                 Directory = folderPath,
+                                 ContentLength = file.ContentLength,
+                                 OriginalName = file.FileName
+                             };
                 _db.FileStores.AddObject(fs);
                 _db.SaveChanges();
 
@@ -80,7 +79,5 @@ namespace COAT.Helper
                 return null;
             }
         }
-
-        private COATEntities _db = new COATEntities();
     }
 }

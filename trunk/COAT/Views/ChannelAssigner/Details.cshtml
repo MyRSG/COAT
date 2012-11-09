@@ -15,7 +15,7 @@
 {
     @Html.ValidationSummary(true)
     @Html.Partial("_DealPartial", new DealViewModel { Deal = Model, IsEditable = true })
-    @Html.Partial("_CustomerPartial", new CustomerViewModel { Customer = Model.Customer, isSetRegion = true })
+    @Html.Partial("_CustomerPartial", new CustomerViewModel { Customer = Model.Customer, IsSetRegion = true })
     @Html.Partial("_PartnerPartial", Model.Partner)
     <hr />
     @Html.Partial("_ApproveHistoriesPartial", Model.ApprovalHistories)

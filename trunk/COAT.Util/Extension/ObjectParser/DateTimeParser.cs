@@ -1,29 +1,30 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Globalization;
 
 namespace COAT.Util.Extension.ObjectParser
 {
-    class DateTimeParser : IValueParser
+    internal class DateTimeParser : IValueParser
     {
+        #region IValueParser Members
+
         public object Parse(object value)
         {
-            var dataString = value.ToString();
+            string dataString = value.ToString();
 
             DateTime rslt;
-            if (DateTime.TryParse(dataString, new CultureInfo("en-GB"), System.Globalization.DateTimeStyles.None, out rslt))
+            if (DateTime.TryParse(dataString, new CultureInfo("en-GB"), DateTimeStyles.None, out rslt))
             {
                 return rslt;
             }
 
-            if (DateTime.TryParse(dataString, new CultureInfo("en-US"), System.Globalization.DateTimeStyles.None, out rslt)
-            )
+            if (DateTime.TryParse(dataString, new CultureInfo("en-US"), DateTimeStyles.None, out rslt)
+                )
             {
                 return rslt;
             }
             return null;
         }
+
+        #endregion
     }
 }

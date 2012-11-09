@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 
 namespace COAT.COATExtension
 {
@@ -14,7 +10,7 @@ namespace COAT.COATExtension
                 return list;
 
             object selVal = null;
-            foreach (var item in list)
+            foreach (SelectListItem item in list)
             {
                 if (item.Value == val)
                 {
@@ -23,7 +19,6 @@ namespace COAT.COATExtension
             }
 
             return new SelectList(list.Items, list.DataValueField, list.DataTextField, selVal);
-
         }
     }
 }

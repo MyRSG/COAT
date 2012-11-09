@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
-namespace COAT.Extension
+namespace COAT.Util.Extension
 {
-    public static class IEmurableExtension
+    public static class EmurableExtension
     {
         public static void ForEach<T>(this IEnumerable<T> enumeration, Action<T> action)
         {

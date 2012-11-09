@@ -1,62 +1,61 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using COAT.Models;
 
 namespace COATDailyTaskRunner
 {
-    class DirectorDealHelper : IDealHelper
+    internal class DirectorDealHelper : IDealHelper
     {
-        const int WarningDays = 7;
-        const int EmergencyDays = 14;
+        private const int WarningDays = 7;
+        private const int EmergencyDays = 14;
 
-        private COATEntities db = new COATEntities();
-        private string _ActionName;
+        private readonly string _actionName;
+        private readonly COATEntities _db = new COATEntities();
 
         public DirectorDealHelper()
         {
-            _ActionName = "PDA";
+            _actionName = "PDA";
         }
 
         public IEnumerable<Deal> Deals
         {
-            get
-            {
-                return db.Deals.Where(d => d.Status.ActionName == _ActionName).ToArray();
-            }
+            get { return _db.Deals.Where(d => d.Status.ActionName == _actionName).ToArray(); }
         }
+
+        #region IDealHelper Members
+
         public Deal[] LessThan7Days
         {
-            get
-            {
-                return Deals.Where(d => DayPassed(d.CreateDate) <= WarningDays).ToArray();
-            }
+            get { return Deals.Where(d => DayPassed(d.CreateDate) <= WarningDays).ToArray(); }
         }
+
         public Deal[] MoreThan7Days
         {
             get
             {
-                return Deals.Where(d => DayPassed(d.CreateDate) > WarningDays && DayPassed(d.CreateDate) <= EmergencyDays).ToArray();
-            }
-        }
-        public Deal[] MoreThan14Days
-        {
-            get
-            {
-                return Deals.Where(d => DayPassed(d.CreateDate) > EmergencyDays).ToArray();
+                return
+                    Deals.Where(d => DayPassed(d.CreateDate) > WarningDays && DayPassed(d.CreateDate) <= EmergencyDays).
+                        ToArray();
             }
         }
 
-        public static int DayPassed(DateTime? date)
+        public Deal[] MoreThan14Days
         {
-            var date2 = date ?? DateTime.Today;
-            return (DateTime.Today - date2).Days;
+            get { return Deals.Where(d => DayPassed(d.CreateDate) > EmergencyDays).ToArray(); }
         }
 
         public int Count
         {
             get { return Deals.Count(); }
+        }
+
+        #endregion
+
+        public static int DayPassed(DateTime? date)
+        {
+            DateTime date2 = date ?? DateTime.Today;
+            return (DateTime.Today - date2).Days;
         }
     }
 }

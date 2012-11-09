@@ -1,24 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using COAT.Models;
 
 namespace COAT.ViewModel.Shared
 {
     public class DealSummaryViewModel : IDealSummary
     {
+        public DealSummaryViewModel(IEnumerable<Deal> deals)
+        {
+            string[] ids = new COATEntities().SalesDealsViews.Select(a => a.Id).ToArray();
+
+            var enumerable = deals as Deal[] ?? deals.ToArray();
+            Enterprise = new SimpleDealSummary(enumerable.Where(d => !ids.Contains(d.Id)));
+            Volume = new SimpleDealSummary(enumerable.Where(d => ids.Contains(d.Id)));
+        }
 
         public IDealSummary Enterprise { get; set; }
         public IDealSummary Volume { get; set; }
 
-        public DealSummaryViewModel(IEnumerable<Deal> deals)
-        {
-            var _Ids = new COATEntities().SalesDealsViews.Select(a => a.Id).ToArray();
-
-            Enterprise = new SimpleDealSummary(deals.Where(d => !_Ids.Contains(d.Id)));
-            Volume = new SimpleDealSummary(deals.Where(d => _Ids.Contains(d.Id)));
-        }
+        #region IDealSummary Members
 
         public int ToBeAssigned
         {
@@ -49,5 +49,7 @@ namespace COAT.ViewModel.Shared
         {
             get { return Enterprise.Total + Volume.Total; }
         }
+
+        #endregion
     }
 }

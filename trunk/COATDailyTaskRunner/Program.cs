@@ -1,23 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using COAT.Models;
-using COAT.Mail;
-using System.IO;
+using COAT.Util.Mail;
 
 namespace COATDailyTaskRunner
 {
-    class Program
+    internal class Program
     {
-        static SenderHelper sHelper = new SenderHelper();
-        static COATMailHelper mHelper = new COATMailHelper();
-        static List<Exception> exList = new List<Exception>();
+        private static readonly SenderHelper SHelper = new SenderHelper();
+        private static readonly COATMailHelper MHelper = new COATMailHelper();
+        private static readonly List<Exception> ExList = new List<Exception>();
 
 
-        static void Main(string[] args)
+        private static void Main()
         {
-            exList.Clear();
+            ExList.Clear();
             SendChannelMail();
             SendSalesMail();
             SendChannelDirectorMail();
@@ -28,15 +29,18 @@ namespace COATDailyTaskRunner
         {
             try
             {
-                mHelper.SendMail(new string[] { "chao_zhou@symantec.com" }, null, "COAT Daily Report Notification", GetErrorMessage());
+                MHelper.SendMail(new[] {"chao_zhou@symantec.com"}, null, "COAT Daily Report Notification",
+                                 GetErrorMessage());
             }
-            catch { }
+            catch
+            {
+            }
         }
 
         private static string GetErrorMessage()
         {
-            StringBuilder sb = new StringBuilder();
-            foreach (var ex in exList)
+            var sb = new StringBuilder();
+            foreach (Exception ex in ExList)
             {
                 sb.Append("Message:");
                 sb.AppendLine(ex.Message);
@@ -50,30 +54,30 @@ namespace COATDailyTaskRunner
 
         private static void SendChannelMail()
         {
-            var users = sHelper.ChannelApprovers;
-            foreach (var user in users)
+            User[] users = SHelper.ChannelApprovers;
+            foreach (User user in users)
             {
                 var adHelper = new ApproverDealHelper(user);
-                SendMail(user.Email, new string[] { }, adHelper);
+                SendMail(user.Email, new string[] {}, adHelper);
             }
         }
 
         private static void SendSalesMail()
         {
-            var users = sHelper.SalesApprovers;
-            foreach (var user in users)
+            User[] users = SHelper.SalesApprovers;
+            foreach (User user in users)
             {
                 var adHelper = new ApproverDealHelper(user);
-                SendMail(user.Email, new string[] { "peiye_wang@symantec.com" }, adHelper);
+                SendMail(user.Email, new[] {"peiye_wang@symantec.com"}, adHelper);
             }
         }
 
         private static void SendChannelDirectorMail()
         {
-            var users = sHelper.ChannelDirectors;
-            var cc = sHelper.ChannelApprovers.Select(a => a.Email).ToArray();
+            User[] users = SHelper.ChannelDirectors;
+            string[] cc = SHelper.ChannelApprovers.Select(a => a.Email).ToArray();
 
-            foreach (var user in users)
+            foreach (User user in users)
             {
                 SendMail(user.Email, cc, new DirectorDealHelper());
             }
@@ -84,39 +88,38 @@ namespace COATDailyTaskRunner
             if (helper.Count <= 0)
                 return;
 
-            if (helper.MoreThan14Days.Count() > 0)
+            if (helper.MoreThan14Days.Any())
             {
-                SendMailByFile(new string[] { email }, cc, "COAT Portal Pending Deal Notification (Urgent! >15days)", "MoreThan14Days.txt");
+                SendMailByFile(new[] {email}, cc, "COAT Portal Pending Deal Notification (Urgent! >15days)",
+                               "MoreThan14Days.txt");
             }
             else
             {
-                SendMailByFile(new string[] { email }, null, "COAT Portal Pending Deal Notification", "Normal.txt");
+                SendMailByFile(new[] {email}, null, "COAT Portal Pending Deal Notification", "Normal.txt");
             }
-
         }
 
         private static void SendMailByFile(string[] to, string[] cc, string subject, string filename)
         {
             try
             {
-                var message = GetFileContent(filename);
-                mHelper.SendMail(to, cc, subject, message);
+                string message = GetFileContent(filename);
+                MHelper.SendMail(to, cc, subject, message);
             }
             catch (Exception ex)
             {
-                exList.Add(ex);
+                ExList.Add(ex);
             }
         }
 
         private static string GetFileContent(string filename)
         {
-            string appDir = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+            string appDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             string path = appDir + @"\MailTemplete\" + filename;
             using (var reader = new StreamReader(path))
             {
                 return reader.ReadToEnd();
             }
         }
-
     }
 }

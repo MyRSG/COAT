@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Reflection;
-using COAT.Models.Util;
-using COAT.Extension;
-
-namespace COAT.Models
+﻿namespace COAT.Models
 {
     public partial class DealProduct
     {
@@ -45,6 +37,5 @@ namespace COAT.Models
         //        Comment = rec.ToString()
         //    };
         //}
-
     }
 }

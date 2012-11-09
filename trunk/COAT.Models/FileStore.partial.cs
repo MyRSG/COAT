@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.IO;
 
 namespace COAT.Models
 {
@@ -9,7 +6,7 @@ namespace COAT.Models
     {
         public string FilePath
         {
-            get { return System.IO.Path.Combine(Directory, FileName); }
+            get { return Path.Combine(Directory, FileName); }
         }
 
         public string FileName
@@ -18,7 +15,6 @@ namespace COAT.Models
             {
                 string patten = Extension.Contains(".") ? "{0}{1}" : "{0}.{1}";
                 return string.Format(patten, Id, Extension);
-
             }
         }
     }

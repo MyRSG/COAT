@@ -22,7 +22,7 @@ namespace COAT.Data.Test
         public void TableFormatHelperConstructorTest1()
         {
             var obj = new object();
-            TableFormatHelper target = new TableFormatHelper(obj);
+            var target = new TableFormatHelper(obj);
             Assert.AreEqual(obj.GetType(), target.ExportType);
         }
 
@@ -30,7 +30,7 @@ namespace COAT.Data.Test
         public void GetTableSchemaTest()
         {
             var obj = new ExportTestObject();
-            TableFormatHelper target = new TableFormatHelper(obj);
+            var target = new TableFormatHelper(obj);
             var expected = new ColunmPropertyPair[]{
                 new ColunmPropertyPair{ PropertyName="OrderValue", ColunmName = "OrderValue", Order=1},
                 new ColunmPropertyPair{ PropertyName="DefaultValue", ColunmName = "DefaultValue", Order=int.MaxValue},

@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Data;
 using System.Data.OleDb;
 using System.IO;
-
+using System.Linq;
 
 namespace COAT.Data.Import
 {
@@ -14,20 +12,24 @@ namespace COAT.Data.Import
         public const string TableNameHeader = "TABLE_NAME";
 
         //HDR=NO and IMEX=1 force all value to string [first row must be a string title]
-        protected const string xlsProvideStrFormat = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source={0};Extended Properties=\"Excel 8.0; HDR=NO; IMEX=1;\"";
-        protected const string xlsxProvideStrFormat = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source={0};Extended Properties=\"Excel 12.0;HDR=NO; IMEX=1;\"";
-        protected string Path { get; set; }
+        protected const string XlsProvideStrFormat =
+            "Provider=Microsoft.Jet.OLEDB.4.0;Data Source={0};Extended Properties=\"Excel 8.0; HDR=NO; IMEX=1;\"";
 
-        private Dictionary<string, int> headerCount = new Dictionary<string, int>();
+        protected const string XlsxProvideStrFormat =
+            "Provider=Microsoft.ACE.OLEDB.12.0;Data Source={0};Extended Properties=\"Excel 12.0;HDR=NO; IMEX=1;\"";
+
+        private readonly Dictionary<string, int> _headerCount = new Dictionary<string, int>();
 
         public ExcelImportHelper(string path)
         {
             Path = path;
         }
 
+        protected string Path { get; set; }
+
         public DataTable GetTable(string query)
         {
-            var dt = GetFilledTable(query);
+            DataTable dt = GetFilledTable(query);
             ReColunmTable(dt);
             return dt;
         }
@@ -36,20 +38,20 @@ namespace COAT.Data.Import
         {
             string[] rslt = null;
             SaveOpenConnection(conn =>
-            {
-                rslt = conn
-                    .GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null)
-                    .AsEnumerable()
-                    .Select(r => r[TableNameHeader].ToString())
-                    .ToArray();
-            });
+                                   {
+                                           rslt = conn
+                                               .GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null)
+                                               .AsEnumerable()
+                                               .Select(r => r[TableNameHeader].ToString())
+                                               .ToArray();
+                                   });
 
             return rslt;
         }
 
         private OleDbConnection GetConnection()
         {
-            var connString = GetConnectionString();
+            string connString = GetConnectionString();
             return new OleDbConnection(connString);
         }
 
@@ -57,9 +59,9 @@ namespace COAT.Data.Import
         {
             var info = new FileInfo(Path);
             if (info.Extension == ".xls")
-                return String.Format(xlsProvideStrFormat, Path);
-            else if (info.Extension == ".xlsx")
-                return String.Format(xlsxProvideStrFormat, Path);
+                return String.Format(XlsProvideStrFormat, Path);
+            if (info.Extension == ".xlsx")
+                return String.Format(XlsxProvideStrFormat, Path);
 
             return null;
         }
@@ -68,25 +70,22 @@ namespace COAT.Data.Import
         {
             var dt = new DataTable();
             SaveOpenConnection(conn =>
-            {
-                using (OleDbCommand cmd = new OleDbCommand(query, conn))
-                {
-                    OleDbDataAdapter ad = new OleDbDataAdapter(cmd);
-                    var ds = new DataSet();
-                    ad.Fill(dt);
-                }
-            });
+                                   {
+                                       using (var cmd = new OleDbCommand(query, conn))
+                                       {
+                                           var ad = new OleDbDataAdapter(cmd);
+                                           ad.Fill(dt);
+                                       }
+                                   });
             return dt;
         }
 
         private void ReColunmTable(DataTable dt)
         {
-
-
             //Rename columns and delete first row
             if (dt.Rows.Count > 0)
             {
-                var dr = dt.Rows[0];
+                DataRow dr = dt.Rows[0];
                 for (int col = 0; col < dt.Columns.Count; col++)
                 {
                     if (!string.IsNullOrWhiteSpace(dr[col].ToString()))
@@ -100,19 +99,19 @@ namespace COAT.Data.Import
 
         private string GetColunmName(string headerString)
         {
-            if (headerCount.ContainsKey(headerString))
+            if (_headerCount.ContainsKey(headerString))
             {
-                headerCount[headerString]++;
-                return string.Format("{0}{1}", headerString, headerCount[headerString]);
+                _headerCount[headerString]++;
+                return string.Format("{0}{1}", headerString, _headerCount[headerString]);
             }
 
-            headerCount.Add(headerString, 0);
+            _headerCount.Add(headerString, 0);
             return headerString;
         }
 
         private void SaveOpenConnection(Action<OleDbConnection> action)
         {
-            var conn = GetConnection();
+            OleDbConnection conn = GetConnection();
             try
             {
                 conn.Open();

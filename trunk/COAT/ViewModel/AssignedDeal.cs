@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace COAT.ViewModel
+﻿namespace COAT.ViewModel
 {
     public class AssignedDeal
     {

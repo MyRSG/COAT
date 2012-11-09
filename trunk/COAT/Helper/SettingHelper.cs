@@ -1,19 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Linq;
 using COAT.Models;
 
 namespace COAT.Helper
 {
     public class SettingHelper
     {
-        COATEntities db = new COATEntities();
+        private readonly COATEntities db = new COATEntities();
+
         public string this[string index]
         {
             get
             {
-                return db.Settings.FirstOrDefault(a => a.Name == index).Name;
+                var firstOrDefault = db.Settings.FirstOrDefault(a => a.Name == index);
+                if (firstOrDefault != null)
+                    return firstOrDefault.Name;
+                return null;
             }
         }
     }

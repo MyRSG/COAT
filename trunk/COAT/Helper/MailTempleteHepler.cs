@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.IO;
 using System.Web.Hosting;
-using System.IO;
 
 namespace COAT.Helper
 {
@@ -18,8 +14,8 @@ namespace COAT.Helper
         {
             try
             {
-                var dir = Path.Combine(HostingEnvironment.ApplicationPhysicalPath, "MailTemplete");
-                var filePath = Path.Combine(dir, filename);
+                string dir = Path.Combine(HostingEnvironment.ApplicationPhysicalPath, "MailTemplete");
+                string filePath = Path.Combine(dir, filename);
                 using (var reader = new StreamReader(filePath))
                 {
                     return reader.ReadToEnd();

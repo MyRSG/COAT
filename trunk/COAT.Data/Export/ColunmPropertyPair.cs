@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace COAT.Data.Export
+﻿namespace COAT.Data.Export
 {
     public class ColunmPropertyPair
     {
@@ -17,17 +12,17 @@ namespace COAT.Data.Export
             if (pairB == null)
                 return false;
 
-            return pairB.GetHashCode() == this.GetHashCode();
+            return pairB.GetHashCode() == GetHashCode();
         }
 
         public override string ToString()
         {
-            return string.Format("{0}{1}{2}", new object[] { this.PropertyName, this.ColunmName, this.Order });
+            return string.Format("{0}{1}{2}", new object[] {PropertyName, ColunmName, Order});
         }
 
         public override int GetHashCode()
         {
-            return this.ToString().GetHashCode();
+            return ToString().GetHashCode();
         }
     }
 }

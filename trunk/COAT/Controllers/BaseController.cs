@@ -1,25 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
+using COAT.Database;
 using COAT.Models;
 using COAT.Security;
-using System.Web.Security;
-using COAT.Extension;
-using COAT.Database;
+using COAT.Util.Extension;
+using COAT.Util.Mail;
 
 namespace COAT.Controllers
 {
     public abstract class BaseController : Controller
     {
-        protected DealEntityManager dealMgr = new DealEntityManager();
-        protected COATEntities db = new COATEntities();
-        protected Mail.COATMailHelper mHelper = new Mail.COATMailHelper();
+        protected COATEntities Db = new COATEntities();
+        protected DealEntityManager DealMgr = new DealEntityManager();
+        protected COATMailHelper MHelper = new COATMailHelper();
 
         protected Deal GetDeal(string id)
         {
-            return db.Deals.FirstOrDefault(a => a.Id == id);
+            return Db.Deals.FirstOrDefault(a => a.Id == id);
         }
 
         protected COATMemebershipUser GetCurrentMemberShipUser()
@@ -32,7 +32,7 @@ namespace COAT.Controllers
 
         protected void UpdateDeal(Deal deal, string[] properties)
         {
-            var dbDeal = db.Deals.FirstOrDefault(a => a.Id == deal.Id);
+            Deal dbDeal = Db.Deals.FirstOrDefault(a => a.Id == deal.Id);
             if (dbDeal == null)
                 return;
 
@@ -43,34 +43,32 @@ namespace COAT.Controllers
         {
             foreach (var pair in productActive)
             {
-                var product = db.DealProducts.FirstOrDefault(a => a.Id == pair.Key);
-                product.IsActive = pair.Value;
+                DealProduct product = Db.DealProducts.FirstOrDefault(a => a.Id == pair.Key);
+                if (product != null) product.IsActive = pair.Value;
             }
 
             if (saveChange)
             {
-                db.SaveChanges();
+                Db.SaveChanges();
             }
         }
 
         protected void SaveApproveHistory(string dealId, string type, string comment, bool saveChange = false)
         {
             var rec = new ApprovalHistory
-            {
-                DealId = dealId,
-                Type = type,
-                DateTime = DateTime.Now,
-                Comment = comment,
-                UserId = GetCurrentMemberShipUser().COATUser.Id
-            };
+                          {
+                              DealId = dealId,
+                              Type = type,
+                              DateTime = DateTime.Now,
+                              Comment = comment,
+                              UserId = GetCurrentMemberShipUser().COATUser.Id
+                          };
 
-            db.ApprovalHistories.AddObject(rec);
+            Db.ApprovalHistories.AddObject(rec);
             if (saveChange)
             {
-                db.SaveChanges();
+                Db.SaveChanges();
             }
         }
-
-
     }
 }

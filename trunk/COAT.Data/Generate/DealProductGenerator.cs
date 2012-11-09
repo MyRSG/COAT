@@ -1,38 +1,35 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using COAT.Models;
-using COAT.Extension;
+﻿using System.Collections.Generic;
 using System.Data;
-using System.Diagnostics;
+using System.Linq;
+using COAT.Models;
+using COAT.Util.Extension;
 
 namespace COAT.Data.Generate
 {
     public class DealProductGenerator : BaseGenerator<DealProduct>
     {
-
-        Dictionary<string, double> _NamePricePair = new Dictionary<string, double>();
-
         public DealProductGenerator(DataRow row)
             : base(row)
-        { }
-        protected override Extension.ColunmPropertyPair[] ColunmPropertyPairs
+        {
+        }
+
+        protected override ColunmPropertyPair[] ColunmPropertyPairs
         {
             get
             {
-                return new ColunmPropertyPair[]{
-                   new ColunmPropertyPair("Deal ID","DealId"),
-                   new ColunmPropertyPair("Product Name","ProductName"),
-                   new ColunmPropertyPair("Total Price (converted)","Price")
-                 };
+                return new[]
+                           {
+                               new ColunmPropertyPair("Deal ID", "DealId"),
+                               new ColunmPropertyPair("Product Name", "ProductName"),
+                               new ColunmPropertyPair("Total Price (converted)", "Price")
+                           };
             }
         }
 
-        protected override DealProduct GetInstance(System.Data.DataRow row)
+        protected override DealProduct GetInstance(DataRow row)
         {
-            var deal = new DealGenerator(row).Generate();
-            return new DealProduct { DealId = deal.Id, IsActive = true };
+            Deal deal = new DealGenerator(row).Generate();
+            return new DealProduct {DealId = deal.Id, IsActive = true};
         }
 
         protected override bool Validate(DealProduct obj)
@@ -42,12 +39,13 @@ namespace COAT.Data.Generate
 
         protected override DealProduct SychronizeDB(DealProduct obj)
         {
-            var dbDP = Entity.DealProducts.FirstOrDefault(dp => dp.DealId == obj.DealId && dp.ProductName == obj.ProductName);
-            if (dbDP != null)
+            DealProduct dbDp =
+                Entity.DealProducts.FirstOrDefault(dp => dp.DealId == obj.DealId && dp.ProductName == obj.ProductName);
+            if (dbDp != null)
             {
-                dbDP.Update(obj, new string[] { "Id", "DealId", "ProductName" });
+                dbDp.Update(obj, new[] {"Id", "DealId", "ProductName"});
                 Entity.SaveChanges();
-                return dbDP;
+                return dbDp;
             }
 
             Entity.DealProducts.AddObject(obj);
@@ -57,32 +55,30 @@ namespace COAT.Data.Generate
 
         public new DealProduct[] Generate()
         {
-            List<DealProduct> dpList = new List<DealProduct>();
-            var spliter = '\n';
-            var productName = Row["Product Name"].ToString();
-            var priceString = Row["Total Price (converted)"].ToString();
+            var dpList = new List<DealProduct>();
+            const char spliter = '\n';
+            string productName = Row["Product Name"].ToString();
+            string priceString = Row["Total Price (converted)"].ToString();
 
-            var nameArray = productName.Split(spliter);
-            var priceArray = priceString.Split(spliter);
+            string[] nameArray = productName.Split(spliter);
+            string[] priceArray = priceString.Split(spliter);
 
 
-            for (var index = 0; index < nameArray.Length; index++)
+            for (int index = 0; index < nameArray.Length; index++)
             {
                 try
                 {
-                    var dp = GetInstance(Row);
+                    DealProduct dp = GetInstance(Row);
                     dp.ProductName = nameArray[index];
                     dp.Price = double.Parse(priceArray[index]);
                     dpList.Add(SychronizeDB(dp));
                 }
-                catch (Exception ex)
+                catch
                 {
-
                 }
             }
 
             return dpList.ToArray();
-
         }
     }
 }

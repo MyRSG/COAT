@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Reflection;
-using COAT.Util.Extension;
 using COAT.Util.Extension.ObjectParser;
 
-namespace COAT.Extension
+namespace COAT.Util.Extension
 {
     public static class ObjectExtension
     {
@@ -19,16 +16,16 @@ namespace COAT.Extension
         {
             try
             {
-                var prop = obj.GetType().GetProperty(property);
+                PropertyInfo prop = obj.GetType().GetProperty(property);
                 IValueParser parser = new ValueParserFactory().GetValueParser(prop);
 
                 if (parser == null)
                     return;
 
-                var val = parser.Parse(value);
+                object val = parser.Parse(value);
                 prop.SetValue(obj, val, null);
             }
-            catch (Exception ex)
+            catch
             {
                 //throw;
             }
@@ -41,12 +38,12 @@ namespace COAT.Extension
 
         public static void UpdateExcept(this object thisObj, object obj, string[] excepts)
         {
-            var isEntiryObj = thisObj.GetType().BaseType.Name.Contains("EntityObject");
+            bool isEntiryObj = IsEntityObject(thisObj);
 
-            var propInfosA = thisObj.GetType().GetProperties();
-            var propInfosB = obj.GetType().GetProperties();
+            PropertyInfo[] propInfosA = thisObj.GetType().GetProperties();
+            PropertyInfo[] propInfosB = obj.GetType().GetProperties();
 
-            foreach (var prop in propInfosA)
+            foreach (PropertyInfo prop in propInfosA)
             {
                 if (isEntiryObj && !IsEntityScalarProperty(prop))
                     continue;
@@ -56,21 +53,21 @@ namespace COAT.Extension
 
                 if (propInfosB.Count(p => p.Name == prop.Name) > 0)
                 {
-                    var val = obj.GetPropertyValue(prop.Name);
+                    object val = obj.GetPropertyValue(prop.Name);
                     thisObj.SetPropertyValue(prop.Name, val);
                 }
             }
-
         }
+
 
         public static void UpdateInclude(this object thisObj, object obj, string[] includes)
         {
-            var isEntiryObj = thisObj.GetType().BaseType.Name.Contains("EntityObject");
+            bool isEntiryObj = IsEntityObject(thisObj);
 
-            var propInfosA = thisObj.GetType().GetProperties();
-            var propInfosB = obj.GetType().GetProperties();
+            PropertyInfo[] propInfosA = thisObj.GetType().GetProperties();
+            PropertyInfo[] propInfosB = obj.GetType().GetProperties();
 
-            foreach (var prop in propInfosA)
+            foreach (PropertyInfo prop in propInfosA)
             {
                 if (isEntiryObj && !IsEntityScalarProperty(prop))
                     continue;
@@ -80,27 +77,21 @@ namespace COAT.Extension
 
                 if (propInfosB.Count(p => p.Name == prop.Name) > 0)
                 {
-                    var val = obj.GetPropertyValue(prop.Name);
+                    object val = obj.GetPropertyValue(prop.Name);
                     thisObj.SetPropertyValue(prop.Name, val);
                 }
             }
         }
 
-        public static bool IsEntityScalarProperty(PropertyInfo prop)
-        {
-            var attrName = "EdmScalarPropertyAttribute";
-            var rslt = prop.GetCustomAttributes(false).Any(p => p.ToString().Contains(attrName));
-            return rslt;
-        }
 
         public static bool IsSimilarEqual(this object thisObj, object obj, string[] excepts = null)
         {
-            var isEntiryObj = thisObj.GetType().BaseType.Name.Contains("EntityObject");
+            bool isEntiryObj = IsEntityObject(thisObj);
 
-            var propInfosA = thisObj.GetType().GetProperties();
-            var propInfosB = obj.GetType().GetProperties();
+            PropertyInfo[] propInfosA = thisObj.GetType().GetProperties();
+            PropertyInfo[] propInfosB = obj.GetType().GetProperties();
 
-            foreach (var prop in propInfosA)
+            foreach (PropertyInfo prop in propInfosA)
             {
                 if (isEntiryObj && !IsEntityScalarProperty(prop))
                     continue;
@@ -108,18 +99,30 @@ namespace COAT.Extension
                 if (excepts != null && excepts.Contains(prop.Name))
                     continue;
 
-                if (propInfosB.Count(p => p.Name == prop.Name) > 0)
-                {
-                    var val = obj.GetPropertyValue(prop.Name);
-                    var val2 = thisObj.GetPropertyValue(prop.Name);
+                if (propInfosB.Count(p => p.Name == prop.Name) <= 0)
+                    continue;
 
-                    if (val != val2)
-                        return false;
-                }
+                object val = obj.GetPropertyValue(prop.Name);
+                object val2 = thisObj.GetPropertyValue(prop.Name);
+
+                if (val != val2)
+                    return false;
             }
 
             return true;
+        }
 
+
+        public static bool IsEntityScalarProperty(PropertyInfo prop)
+        {
+            const string attrName = "EdmScalarPropertyAttribute";
+            return prop.GetCustomAttributes(false).Any(p => p.ToString().Contains(attrName));
+        }
+
+        public static bool IsEntityObject(object thisObj)
+        {
+            Type baseType = thisObj.GetType().BaseType;
+            return baseType != null && baseType.Name.Contains("EntityObject");
         }
     }
 }

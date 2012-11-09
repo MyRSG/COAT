@@ -1,36 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Linq;
 using COAT.Database;
+using COAT.Models;
 
 namespace COAT.Security
 {
     public class RoleRepository
     {
-        UserEntityManager userMgr = new UserEntityManager();
-        RoleEntityManager roleMgr = new RoleEntityManager();
+        private readonly RoleEntityManager _roleMgr = new RoleEntityManager();
+        private readonly UserEntityManager _userMgr = new UserEntityManager();
 
         public string[] FindUsersInRole(string roleName, string usernameToMatch)
         {
-            var role = roleMgr.GetRole(roleName);
+            SystemRole role = _roleMgr.GetRole(roleName);
 
-            if (usernameToMatch != null)
-            {
-                return role.Users.Where(u => u.Name == usernameToMatch).Select(u => u.Name).ToArray(); ;
-            }
-
-            return role.Users.Select(u => u.Name).ToArray();
+            return usernameToMatch != null
+                       ? role.Users.Where(u => u.Name == usernameToMatch).Select(u => u.Name).ToArray()
+                       : role.Users.Select(u => u.Name).ToArray();
         }
 
         public string[] GetAllRoles()
         {
-            return roleMgr.GetAllRoles().Select(r => r.Name).ToArray();
+            return _roleMgr.GetAllRoles().Select(r => r.Name).ToArray();
         }
 
         public string[] GetRolesForUser(string username)
         {
-            return new string[] { userMgr.FindUserByName(username).SystemRole.Name };
+            return new[] {_userMgr.FindUserByName(username).SystemRole.Name};
         }
 
         public string[] GetUsersInRole(string roleName)
@@ -40,20 +35,19 @@ namespace COAT.Security
 
         public bool IsUserInRole(string username, string roleName)
         {
-            return userMgr.FindUserByName(username).SystemRole.Name == roleName;
+            return _userMgr.FindUserByName(username).SystemRole.Name == roleName;
         }
 
         public bool RoleExists(string roleName)
         {
             try
             {
-                return roleMgr.GetRole(roleName) != null;
+                return _roleMgr.GetRole(roleName) != null;
             }
             catch
             {
                 return false;
             }
-
         }
     }
 }

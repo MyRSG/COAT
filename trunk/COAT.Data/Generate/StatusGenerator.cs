@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using COAT.Models;
 using System.Data;
+using COAT.Models;
+using COAT.Util.Extension;
 
 namespace COAT.Data.Generate
 {
@@ -11,25 +9,20 @@ namespace COAT.Data.Generate
     {
         public StatusGenerator(DataRow row)
             : base(row)
-        { }
+        {
+        }
 
 
-        protected override Extension.ColunmPropertyPair[] ColunmPropertyPairs
+        protected override ColunmPropertyPair[] ColunmPropertyPairs
         {
             get { throw new NotImplementedException(); }
         }
 
-        protected override Status GetInstance(System.Data.DataRow row)
+        protected override Status GetInstance(DataRow row)
         {
             throw new NotImplementedException();
         }
 
-
-        public override Status Generate()
-        {
-            string rawStatus = Row["Registration Status"].ToString();
-            return base.Generate();
-        }
 
         protected override bool Validate(Status obj)
         {

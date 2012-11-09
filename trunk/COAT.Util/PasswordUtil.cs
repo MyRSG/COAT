@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 
@@ -7,19 +7,19 @@ namespace COAT.Util
 {
     public class PasswordUtil
     {
-        public static string NEW_PASSWORD_HEAD = "NW";
+        public static string NewPasswordHead = "NW";
 
         public static string CreatePassword()
         {
-            byte[] bytes = Encoding.UTF8.GetBytes(DateTime.UtcNow.ToFileTimeUtc().ToString());
-            string longPWD = new string(Convert.ToBase64String(bytes).Reverse().Take(6).ToArray());
+            byte[] bytes = Encoding.UTF8.GetBytes(DateTime.UtcNow.ToFileTimeUtc().ToString(CultureInfo.InvariantCulture));
+            var longPwd = new string(Convert.ToBase64String(bytes).Reverse().Take(6).ToArray());
 
-            if (longPWD.Length < 6)
-            {
-                return string.Format("{0}{1}", NEW_PASSWORD_HEAD, longPWD);
-            }
+            return string.Format("{0}{1}", NewPasswordHead, Get6LengthPassword(longPwd));
+        }
 
-            return string.Format("{0}{1}", NEW_PASSWORD_HEAD, longPWD.Substring(0, 6));
+        private static string Get6LengthPassword(string longPwd)
+        {
+            return longPwd.Length < 6 ? longPwd : longPwd.Substring(0, 6);
         }
     }
 }

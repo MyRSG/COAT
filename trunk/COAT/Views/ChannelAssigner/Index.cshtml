@@ -16,7 +16,7 @@
 <hr />
 <br />
 @using (Html.BeginForm("MuitiAssign", "ChannelAssigner", FormMethod.Post))
-{   @Html.Partial("_DealCheckListPartial", new COAT.ViewModel.Shared.DealListViewModel { Deals = Model, ActionName = "Views", LinkText = "View" })
+{   @Html.Partial("_DealCheckListPartial", new DealListViewModel { Deals = Model, ActionName = "Views", LinkText = "View" })
     <div>
         <input id="btnApprove" class="submit" type="submit" value="Assign Selected" />
     </div>

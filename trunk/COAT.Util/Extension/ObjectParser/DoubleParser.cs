@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace COAT.Util.Extension.ObjectParser
+﻿namespace COAT.Util.Extension.ObjectParser
 {
-    class DoubleParser : IValueParser
+    internal class DoubleParser : IValueParser
     {
+        #region IValueParser Members
+
         public object Parse(object value)
         {
             double rslt;
@@ -16,5 +13,7 @@ namespace COAT.Util.Extension.ObjectParser
             }
             return null;
         }
+
+        #endregion
     }
 }

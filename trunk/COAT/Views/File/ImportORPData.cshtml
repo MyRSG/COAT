@@ -24,9 +24,9 @@
 </div>
 <script type="text/javascript">
     function check_file(elm) {
-        str = elm.value.toUpperCase();
-        suffix = ".XLS";
-        suffix2 = ".XLSX";
+        var str = elm.value.toUpperCase();
+        var suffix = ".XLS";
+        var suffix2 = ".XLSX";
         if (!(str.indexOf(suffix, str.length - suffix.length) !== -1 ||
               str.indexOf(suffix2, str.length - suffix2.length) !== -1)) {
             alert('File type not allowed,\nAllowed file: *.xls,*.xlsx');
@@ -35,7 +35,6 @@
     }
 
     $(document).ready(function () {
-        var result = false;
         var form = $('form');
         var option = {
             width:600,

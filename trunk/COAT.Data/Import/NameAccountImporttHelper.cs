@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Data;
-using COAT.Extension;
+﻿using System.Data;
 using COAT.Data.Generate;
+using COAT.Util.Extension;
 
 namespace COAT.Data.Import
 {
@@ -12,19 +8,19 @@ namespace COAT.Data.Import
     {
         public NameAccountImporttHelper(string path)
             : base(path)
-        { }
+        {
+        }
 
         public void ImportRawData()
         {
-            DataTable table = new DataTable();
             string[] tabNames = GetTableList();
 
-            foreach (var name in tabNames)
+            foreach (string name in tabNames)
             {
                 try
                 {
-                    table = GetTableByName(name);
-                    for (var index = 0; index < table.Rows.Count; index++)
+                    DataTable table = GetTableByName(name);
+                    for (int index = 0; index < table.Rows.Count; index++)
                     {
                         if (table.Rows[index].IsEmptyRow())
                             continue;
@@ -33,7 +29,8 @@ namespace COAT.Data.Import
                     }
                 }
                 catch
-                { }
+                {
+                }
             }
         }
 
@@ -44,7 +41,7 @@ namespace COAT.Data.Import
 
         private DataTable GetTableByName(string tableName)
         {
-            var query = Query(tableName);
+            string query = Query(tableName);
             return GetTable(query);
         }
 

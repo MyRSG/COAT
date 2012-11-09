@@ -1,33 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Threading;
+using System.Timers;
 using COAT.Models;
+using Timer = System.Timers.Timer;
 
 namespace COAT.Schedule
 {
     public class ScheduleTaskRunner
     {
-        const int MAX_THREAD = 5;
-        const double DURATION = 2 * 60 * 1000;
+        private const double Duration = 2*60*1000;
+        private readonly COATEntities _db = new COATEntities();
 
 
-        System.Timers.Timer timer = null;
-        object locker = new object();
+        private readonly object _locker = new object();
 
-        COATEntities db = new COATEntities();
-        ScheduleThreadPool threadPool = new ScheduleThreadPool();
-        Queue<IScheduleTask> tasks = new Queue<IScheduleTask>();
+        private readonly Queue<IScheduleTask> _tasks = new Queue<IScheduleTask>();
+        private readonly ScheduleThreadPool _threadPool = new ScheduleThreadPool();
+        private readonly Timer _timer;
 
         public ScheduleTaskRunner()
         {
-            timer = new System.Timers.Timer(DURATION);
-            timer.AutoReset = true;
-            timer.Elapsed += new System.Timers.ElapsedEventHandler(timer_Elapsed);
+            _timer = new Timer(Duration) {AutoReset = true};
+            _timer.Elapsed += TimerElapsed;
         }
 
-        void timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        private void TimerElapsed(object sender, ElapsedEventArgs e)
         {
             GetUnEnqueueTask();
             TryStart();
@@ -35,25 +34,27 @@ namespace COAT.Schedule
 
         private void GetUnEnqueueTask()
         {
-            var ids = tasks.Select(t => t.Id).ToList();
-            var names = tasks.Select(t => t.Name).ToList();
-            foreach (var task in db.ImportTasks.Where(t => !ids.Contains(t.Id)).Select(i => new COATImportTask(i)))
+            List<int> ids = _tasks.Select(t => t.Id).ToList();
+            foreach (
+                COATImportTask task in
+                    _db.ImportTasks.Where(t => !ids.Contains(t.Id)).Select(i => new COATImportTask(i))
+                )
             {
-                tasks.Enqueue(task);
+                _tasks.Enqueue(task);
             }
         }
 
         public void AddTask(IScheduleTask task)
         {
-            lock (locker)
+            lock (_locker)
             {
                 if (task.Name == COATImportTask.ImportTaskName)
                 {
-                    db.ImportTasks.AddObject((ImportTask)task);
-                    db.SaveChanges();
+                    _db.ImportTasks.AddObject((ImportTask) task);
+                    _db.SaveChanges();
                 }
 
-                tasks.Enqueue(task);
+                _tasks.Enqueue(task);
             }
 
             TryStart();
@@ -61,16 +62,16 @@ namespace COAT.Schedule
 
         public void TryStart()
         {
-            lock (locker)
+            lock (_locker)
             {
-                if (tasks.Count == 0)
+                if (_tasks.Count == 0)
                     return;
 
-                var th = threadPool.GetThread(RunTask);
+                Thread th = _threadPool.GetThread(RunTask);
                 if (th == null)
                     return;
 
-                var task = tasks.Dequeue();
+                IScheduleTask task = _tasks.Dequeue();
                 th.Start(task);
             }
         }
@@ -85,22 +86,19 @@ namespace COAT.Schedule
             {
                 task.Run(null);
                 task.Success();
-                db.SaveChanges();
+                _db.SaveChanges();
             }
             catch (Exception ex)
             {
                 task.Error(ex.Message);
-                db.SaveChanges();
+                _db.SaveChanges();
 
                 if (task.RunTimes < 3)
                 {
                     task.RunTimes++;
-                    tasks.Enqueue(task);
+                    _tasks.Enqueue(task);
                 }
             }
-
         }
-
-
     }
 }

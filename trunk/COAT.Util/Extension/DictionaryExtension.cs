@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 
-namespace COAT.Extension
+namespace COAT.Util.Extension
 {
     public static class DictionaryExtension
     {
-        public static void Update<Tkey, TValue>(this Dictionary<Tkey, TValue> dic, Tkey key, TValue value)
+        public static void Update<TKey, TValue>(this Dictionary<TKey, TValue> dic, TKey key, TValue value)
         {
             if (dic.ContainsKey(key))
             {
@@ -19,13 +16,12 @@ namespace COAT.Extension
             }
         }
 
-        public static TValue SafeGet<Tkey, TValue>(this Dictionary<Tkey, TValue> dic, Tkey key, TValue defaultValue)
+        public static TValue SafeGet<TKey, TValue>(this Dictionary<TKey, TValue> dic, TKey key, TValue defaultValue)
         {
             if (!dic.ContainsKey(key))
                 return defaultValue;
 
             return dic[key];
         }
-
     }
 }

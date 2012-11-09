@@ -1,59 +1,59 @@
-﻿(function ($) {
-    $.fn.MvcSubmit = function (targetAction, currrentAction, common, form) {
+﻿(function($) {
+    $.fn.MvcSubmit = function(targetAction, currrentAction, common, form) {
         var _form = form || $('form');
-        var _comm = common || $('#comment');
-        var _currAct = currrentAction || 'Details';
-        var _targAct = targetAction || '';
+        var comm = common || $('#comment');
+        var currAct = currrentAction || 'Details';
+        var targAct = targetAction || '';
 
-        $(this).click(function () {
+        $(this).click(function() {
             if ($('#assignToId option:selected').val() == '') {
-                alert("You should select a person before submit !")
+                alert("You should select a person before submit !");
                 $('#assignToId').focus();
                 return;
             }
 
-            if (_comm.val() == '') {
-                alert("Comment should not be empty!")
-                _comm.focus();
+            if (comm.val() == '') {
+                alert("Comment should not be empty!");
+                comm.focus();
                 return;
             }
 
-            var _act = _form.attr('action').replace(_currAct, _targAct);
-            _form.attr('action', _act).submit();
+            var act = _form.attr('action').replace(currAct, targAct);
+            _form.attr('action', act).submit();
         });
     };
 
-    $.fn.RejectSubmite = function (targetAction, currentAction, form) {
-        var _comm = $('#comment');
+    $.fn.RejectSubmite = function(targetAction, currentAction, form) {
+        var comm = $('#comment');
         var _form = form || $('form');
-        var _currAct = currentAction || 'Details';
-        var _targAct = targetAction || '';
-        var _dialogComment = $('#rejectComment');
+        var currAct = currentAction || 'Details';
+        var targAct = targetAction || '';
+        var dialogComment = $('#rejectComment');
 
         var option = {
-            width: _dialogComment.width() + 45,
+            width: dialogComment.width() + 45,
             autoOpen: false,
             modal: true,
             buttons: [
                 {
                     text: 'Save',
-                    click: function () {
-                        _comm.val(GetRejectComment());
+                    click: function() {
+                        comm.val(getRejectComment());
 
-                        if (_comm.val() == '') {
-                            alert("Comment should not be empty!")
-                            _dialogComment.focus();
+                        if (comm.val() == '') {
+                            alert("Comment should not be empty!");
+                            dialogComment.focus();
                             return;
                         }
 
                         $(this).dialog('option', 'disable', true);
 
-                        var _act = _form.attr('action').replace(_currAct, _targAct);
-                        _form.attr('action', _act).submit();
+                        var act = _form.attr('action').replace(currAct, targAct);
+                        _form.attr('action', act).submit();
                     }
                 }, {
                     text: 'Cancel',
-                    click: function () { $(this).dialog("close"); }
+                    click: function() { $(this).dialog("close"); }
                 }]
         };
 
@@ -61,43 +61,43 @@
 
 
         var regUser = $('#rejectOption');
-        regUser.change(function () {
+        regUser.change(function() {
             var val = $('#rejectOption option:selected').val();
             if (val == 0) {
-                dialog.dialog('option', 'width', _dialogComment.width() + 45);
-                _dialogComment.show('blind');
+                dialog.dialog('option', 'width', dialogComment.width() + 45);
+                dialogComment.show('blind');
             } else {
-                _dialogComment.hide('blind');
+                dialogComment.hide('blind');
                 dialog.dialog('option', 'width', 300);
             }
         });
         $("#rejectOption option:first-child").attr("selected", "selected");
 
-        $(this).click(function () {
+        $(this).click(function() {
             dialog.dialog('open');
         });
     };
 
-    $.fn.RollBackSubmit = function (targetAction, currentAction, form) {
-        var _comm = $('#comment');
+    $.fn.RollBackSubmit = function(targetAction, currentAction, form) {
+        var comm = $('#comment');
         var _form = form || $('form');
-        var _currAct = currentAction || 'Details';
-        var _targAct = targetAction || '';
-        var _dialogComment = $('#reAssignComment');
+        var currAct = currentAction || 'Details';
+        var targAct = targetAction || '';
+        var dialogComment = $('#reAssignComment');
 
         var option = {
-            width: _dialogComment.width() + 45,
+            width: dialogComment.width() + 45,
             autoOpen: false,
             modal: true,
             buttons: [
                 {
                     text: 'Save',
-                    click: function () {
-                        _comm.val(GetReAssignComment());
+                    click: function() {
+                        comm.val(getReAssignComment());
 
-                        if (_comm.val() == '') {
-                            alert("Comment should not be empty!")
-                            _dialogComment.focus();
+                        if (comm.val() == '') {
+                            alert("Comment should not be empty!");
+                            dialogComment.focus();
                             return;
                         }
 
@@ -108,38 +108,38 @@
 
                         $(this).dialog('option', 'disable', true);
 
-                        var _act = _form.attr('action').replace(_currAct, _targAct);
-                       _form.attr('action', _act).submit();
+                        var act = _form.attr('action').replace(currAct, targAct);
+                        _form.attr('action', act).submit();
                     }
                 }, {
                     text: 'Cancel',
-                    click: function () { $(this).dialog("close"); }
+                    click: function() { $(this).dialog("close"); }
                 }]
         };
         var dialog = $('#reAssign').dialog(option);
 
 
         var regUser = $('#reAssignUser');
-        regUser.prepend($('<option value="0">Write Custom Comment</option>'))
-        regUser.change(function () {
+        regUser.prepend($('<option value="0">Write Custom Comment</option>'));
+        regUser.change(function() {
             var val = $('#reAssignUser option:selected').val();
             if (val == 0) {
-                dialog.dialog('option', 'width', _dialogComment.width() + 45);
-                _dialogComment.show('blind');
+                dialog.dialog('option', 'width', dialogComment.width() + 45);
+                dialogComment.show('blind');
             } else {
-                _dialogComment.hide('blind');
+                dialogComment.hide('blind');
                 dialog.dialog('option', 'width', 300);
             }
         });
         $("#reAssignUser option:first-child").attr("selected", "selected");
 
 
-        $(this).click(function () {
+        $(this).click(function() {
             dialog.dialog('open');
         });
     };
 
-    function GetRejectComment() {
+    function getRejectComment() {
         var val = $('#rejectOption option:selected').val();
         if (val == 0) {
             return $('#rejectComment').val();
@@ -149,7 +149,7 @@
         return 'This Deal is rejeccted, because ' + user;
     }
 
-    function GetReAssignComment() {
+    function getReAssignComment() {
         var val = $('#reAssignUser option:selected').val();
         if (val == 0) {
             return $('#reAssignComment').val();

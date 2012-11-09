@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Linq;
 using COAT.Models;
 
 namespace COAT.Database
@@ -30,31 +27,31 @@ namespace COAT.Database
 
         public User CreateUser(string name, string password, string email, int sysRoleId, int busRoleId)
         {
-            var user = Entities.Users.CreateObject();
+            User user = Entities.Users.CreateObject();
             user.Name = name;
             user.Password = password;
             user.Email = email;
             user.SystemRoleId = sysRoleId;
             user.BusinessRoleId = busRoleId;
 
-            var rslt = base.AddEntityObjectFor(Entities.Users.EntitySet.Name, user);
-            base.Synchronize();
+            User rslt = AddEntityObjectFor(Entities.Users.EntitySet.Name, user);
+            Synchronize();
 
             return rslt;
         }
 
         public User UpdateUser(User user)
         {
-            var rslt = UpdateEntityObjectFor(user);
-            base.Synchronize();
+            User rslt = UpdateEntityObjectFor(user);
+            Synchronize();
 
             return rslt;
         }
 
         public bool DeleteUser(User user)
         {
-            var rslt = DeleteEntityObjectFor(user);
-            base.Synchronize();
+            bool rslt = DeleteEntityObjectFor(user);
+            Synchronize();
 
             return rslt;
         }

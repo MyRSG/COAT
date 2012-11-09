@@ -1,12 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
+
 <edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
   <!-- EF Runtime content -->
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="COATModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+      <Schema Namespace="COATModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008"
+              xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator"
+              xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="COATModelStoreContainer">
-          <EntitySet Name="ApprovalHistory" EntityType="COATModel.Store.ApprovalHistory" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ApprovalHistory" EntityType="COATModel.Store.ApprovalHistory" store:Type="Tables"
+                     Schema="dbo" />
           <EntitySet Name="BusinessRole" EntityType="COATModel.Store.BusinessRole" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Contract" EntityType="COATModel.Store.Contract" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Customer" EntityType="COATModel.Store.Customer" store:Type="Tables" Schema="dbo" />
@@ -18,7 +22,8 @@
           <EntitySet Name="ImportTask" EntityType="COATModel.Store.ImportTask" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Industry" EntityType="COATModel.Store.Industry" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Industry2" EntityType="COATModel.Store.Industry2" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="ModifiedHistory" EntityType="COATModel.Store.ModifiedHistory" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ModifiedHistory" EntityType="COATModel.Store.ModifiedHistory" store:Type="Tables"
+                     Schema="dbo" />
           <EntitySet Name="NameAccount" EntityType="COATModel.Store.NameAccount" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="ORPType" EntityType="COATModel.Store.ORPType" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Partner" EntityType="COATModel.Store.Partner" store:Type="Tables" Schema="dbo" />
@@ -30,110 +35,132 @@
           <EntitySet Name="Status" EntityType="COATModel.Store.Status" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="SystemRole" EntityType="COATModel.Store.SystemRole" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="User" EntityType="COATModel.Store.User" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="DealProductDetailsView" EntityType="COATModel.Store.DealProductDetailsView" store:Type="Views" store:Schema="dbo" store:Name="DealProductDetailsView">
-            <DefiningQuery>SELECT 
-      [DealProductDetailsView].[Id] AS [Id], 
-      [DealProductDetailsView].[Name] AS [Name], 
-      [DealProductDetailsView].[RegistStatus] AS [RegistStatus], 
-      [DealProductDetailsView].[CustomerId] AS [CustomerId], 
-      [DealProductDetailsView].[IndustryId] AS [IndustryId], 
-      [DealProductDetailsView].[PartnerId] AS [PartnerId], 
-      [DealProductDetailsView].[Owner] AS [Owner], 
-      [DealProductDetailsView].[District] AS [District], 
-      [DealProductDetailsView].[RegPromotion] AS [RegPromotion], 
-      [DealProductDetailsView].[RegPromotionOrderId] AS [RegPromotionOrderId], 
-      [DealProductDetailsView].[PAM] AS [PAM], 
-      [DealProductDetailsView].[CreateDate] AS [CreateDate], 
-      [DealProductDetailsView].[ImportDate] AS [ImportDate], 
-      [DealProductDetailsView].[Industry2Id] AS [Industry2Id], 
-      [DealProductDetailsView].[StatusId] AS [StatusId], 
-      [DealProductDetailsView].[ApproverId] AS [ApproverId], 
-      [DealProductDetailsView].[NotifySalesId] AS [NotifySalesId], 
-      [DealProductDetailsView].[SpecializationId] AS [SpecializationId], 
-      [DealProductDetailsView].[ProvinceId] AS [ProvinceId], 
-      [DealProductDetailsView].[ChinaRegion] AS [ChinaRegion], 
-      [DealProductDetailsView].[ProvinceName] AS [ProvinceName], 
-      [DealProductDetailsView].[ProductName] AS [ProductName], 
-      [DealProductDetailsView].[Price] AS [Price], 
-      [DealProductDetailsView].[IsActive] AS [IsActive], 
-      [DealProductDetailsView].[IndustryName] AS [IndustryName], 
-      [DealProductDetailsView].[Industry2Name] AS [Industry2Name], 
-      [DealProductDetailsView].[NameENG] AS [NameENG], 
-      [DealProductDetailsView].[NameCHS] AS [NameCHS], 
-      [DealProductDetailsView].[Street] AS [Street], 
-      [DealProductDetailsView].[City] AS [City], 
-      [DealProductDetailsView].[ORPTypeName] AS [ORPTypeName], 
-      [DealProductDetailsView].[StatusName] AS [StatusName], 
-      [DealProductDetailsView].[ActionName] AS [ActionName], 
-      [DealProductDetailsView].[PartnerName] AS [PartnerName], 
-      [DealProductDetailsView].[Qualification] AS [Qualification], 
-      [DealProductDetailsView].[FullName] AS [FullName], 
-      [DealProductDetailsView].[ShortName] AS [ShortName], 
-      [DealProductDetailsView].[SalesCare] AS [SalesCare]
-      FROM [dbo].[DealProductDetailsView] AS [DealProductDetailsView]</DefiningQuery>
+          <EntitySet Name="DealProductDetailsView" EntityType="COATModel.Store.DealProductDetailsView"
+                     store:Type="Views" store:Schema="dbo" store:Name="DealProductDetailsView">
+            <DefiningQuery>
+              SELECT 
+              [DealProductDetailsView].[Id] AS [Id], 
+              [DealProductDetailsView].[Name] AS [Name], 
+              [DealProductDetailsView].[RegistStatus] AS [RegistStatus], 
+              [DealProductDetailsView].[CustomerId] AS [CustomerId], 
+              [DealProductDetailsView].[IndustryId] AS [IndustryId], 
+              [DealProductDetailsView].[PartnerId] AS [PartnerId], 
+              [DealProductDetailsView].[Owner] AS [Owner], 
+              [DealProductDetailsView].[District] AS [District], 
+              [DealProductDetailsView].[RegPromotion] AS [RegPromotion], 
+              [DealProductDetailsView].[RegPromotionOrderId] AS [RegPromotionOrderId], 
+              [DealProductDetailsView].[PAM] AS [PAM], 
+              [DealProductDetailsView].[CreateDate] AS [CreateDate], 
+              [DealProductDetailsView].[ImportDate] AS [ImportDate], 
+              [DealProductDetailsView].[Industry2Id] AS [Industry2Id], 
+              [DealProductDetailsView].[StatusId] AS [StatusId], 
+              [DealProductDetailsView].[ApproverId] AS [ApproverId], 
+              [DealProductDetailsView].[NotifySalesId] AS [NotifySalesId], 
+              [DealProductDetailsView].[SpecializationId] AS [SpecializationId], 
+              [DealProductDetailsView].[ProvinceId] AS [ProvinceId], 
+              [DealProductDetailsView].[ChinaRegion] AS [ChinaRegion], 
+              [DealProductDetailsView].[ProvinceName] AS [ProvinceName], 
+              [DealProductDetailsView].[ProductName] AS [ProductName], 
+              [DealProductDetailsView].[Price] AS [Price], 
+              [DealProductDetailsView].[IsActive] AS [IsActive], 
+              [DealProductDetailsView].[IndustryName] AS [IndustryName], 
+              [DealProductDetailsView].[Industry2Name] AS [Industry2Name], 
+              [DealProductDetailsView].[NameENG] AS [NameENG], 
+              [DealProductDetailsView].[NameCHS] AS [NameCHS], 
+              [DealProductDetailsView].[Street] AS [Street], 
+              [DealProductDetailsView].[City] AS [City], 
+              [DealProductDetailsView].[ORPTypeName] AS [ORPTypeName], 
+              [DealProductDetailsView].[StatusName] AS [StatusName], 
+              [DealProductDetailsView].[ActionName] AS [ActionName], 
+              [DealProductDetailsView].[PartnerName] AS [PartnerName], 
+              [DealProductDetailsView].[Qualification] AS [Qualification], 
+              [DealProductDetailsView].[FullName] AS [FullName], 
+              [DealProductDetailsView].[ShortName] AS [ShortName], 
+              [DealProductDetailsView].[SalesCare] AS [SalesCare]
+              FROM [dbo].[DealProductDetailsView] AS [DealProductDetailsView]
+            </DefiningQuery>
           </EntitySet>
-          <EntitySet Name="DealSizeView" EntityType="COATModel.Store.DealSizeView" store:Type="Views" store:Schema="dbo" store:Name="DealSizeView">
-            <DefiningQuery>SELECT 
-      [DealSizeView].[DealId] AS [DealId], 
-      [DealSizeView].[TotalPrice] AS [TotalPrice], 
-      [DealSizeView].[IsSalesSize] AS [IsSalesSize]
-      FROM [dbo].[DealSizeView] AS [DealSizeView]</DefiningQuery>
+          <EntitySet Name="DealSizeView" EntityType="COATModel.Store.DealSizeView" store:Type="Views"
+                     store:Schema="dbo" store:Name="DealSizeView">
+            <DefiningQuery>
+              SELECT 
+              [DealSizeView].[DealId] AS [DealId], 
+              [DealSizeView].[TotalPrice] AS [TotalPrice], 
+              [DealSizeView].[IsSalesSize] AS [IsSalesSize]
+              FROM [dbo].[DealSizeView] AS [DealSizeView]
+            </DefiningQuery>
           </EntitySet>
-          <EntitySet Name="PendingSalesApproveDealsView" EntityType="COATModel.Store.PendingSalesApproveDealsView" store:Type="Views" store:Schema="dbo" store:Name="PendingSalesApproveDealsView">
-            <DefiningQuery>SELECT 
-      [PendingSalesApproveDealsView].[Id] AS [Id]
-      FROM [dbo].[PendingSalesApproveDealsView] AS [PendingSalesApproveDealsView]</DefiningQuery>
+          <EntitySet Name="PendingSalesApproveDealsView" EntityType="COATModel.Store.PendingSalesApproveDealsView"
+                     store:Type="Views" store:Schema="dbo" store:Name="PendingSalesApproveDealsView">
+            <DefiningQuery>
+              SELECT 
+              [PendingSalesApproveDealsView].[Id] AS [Id]
+              FROM [dbo].[PendingSalesApproveDealsView] AS [PendingSalesApproveDealsView]
+            </DefiningQuery>
           </EntitySet>
-          <EntitySet Name="PendingSalesAssignDealsView" EntityType="COATModel.Store.PendingSalesAssignDealsView" store:Type="Views" store:Schema="dbo" store:Name="PendingSalesAssignDealsView">
-            <DefiningQuery>SELECT 
-      [PendingSalesAssignDealsView].[Id] AS [Id]
-      FROM [dbo].[PendingSalesAssignDealsView] AS [PendingSalesAssignDealsView]</DefiningQuery>
+          <EntitySet Name="PendingSalesAssignDealsView" EntityType="COATModel.Store.PendingSalesAssignDealsView"
+                     store:Type="Views" store:Schema="dbo" store:Name="PendingSalesAssignDealsView">
+            <DefiningQuery>
+              SELECT 
+              [PendingSalesAssignDealsView].[Id] AS [Id]
+              FROM [dbo].[PendingSalesAssignDealsView] AS [PendingSalesAssignDealsView]
+            </DefiningQuery>
           </EntitySet>
-          <EntitySet Name="SalesApprovedDealsView" EntityType="COATModel.Store.SalesApprovedDealsView" store:Type="Views" store:Schema="dbo" store:Name="SalesApprovedDealsView">
-            <DefiningQuery>SELECT 
-      [SalesApprovedDealsView].[Id] AS [Id]
-      FROM [dbo].[SalesApprovedDealsView] AS [SalesApprovedDealsView]</DefiningQuery>
+          <EntitySet Name="SalesApprovedDealsView" EntityType="COATModel.Store.SalesApprovedDealsView"
+                     store:Type="Views" store:Schema="dbo" store:Name="SalesApprovedDealsView">
+            <DefiningQuery>
+              SELECT 
+              [SalesApprovedDealsView].[Id] AS [Id]
+              FROM [dbo].[SalesApprovedDealsView] AS [SalesApprovedDealsView]
+            </DefiningQuery>
           </EntitySet>
-          <EntitySet Name="SalesDealsView" EntityType="COATModel.Store.SalesDealsView" store:Type="Views" store:Schema="dbo" store:Name="SalesDealsView">
-            <DefiningQuery>SELECT 
-      [SalesDealsView].[Id] AS [Id], 
-      [SalesDealsView].[Name] AS [Name], 
-      [SalesDealsView].[RegistStatus] AS [RegistStatus], 
-      [SalesDealsView].[CustomerId] AS [CustomerId], 
-      [SalesDealsView].[IndustryId] AS [IndustryId], 
-      [SalesDealsView].[PartnerId] AS [PartnerId], 
-      [SalesDealsView].[Owner] AS [Owner], 
-      [SalesDealsView].[District] AS [District], 
-      [SalesDealsView].[RegPromotion] AS [RegPromotion], 
-      [SalesDealsView].[RegPromotionOrderId] AS [RegPromotionOrderId], 
-      [SalesDealsView].[PAM] AS [PAM], 
-      [SalesDealsView].[CreateDate] AS [CreateDate], 
-      [SalesDealsView].[ImportDate] AS [ImportDate], 
-      [SalesDealsView].[Industry2Id] AS [Industry2Id], 
-      [SalesDealsView].[StatusId] AS [StatusId], 
-      [SalesDealsView].[ApproverId] AS [ApproverId], 
-      [SalesDealsView].[NotifySalesId] AS [NotifySalesId], 
-      [SalesDealsView].[SpecializationId] AS [SpecializationId], 
-      [SalesDealsView].[ProvinceId] AS [ProvinceId], 
-      [SalesDealsView].[ChinaRegion] AS [ChinaRegion]
-      FROM [dbo].[SalesDealsView] AS [SalesDealsView]</DefiningQuery>
+          <EntitySet Name="SalesDealsView" EntityType="COATModel.Store.SalesDealsView" store:Type="Views"
+                     store:Schema="dbo" store:Name="SalesDealsView">
+            <DefiningQuery>
+              SELECT 
+              [SalesDealsView].[Id] AS [Id], 
+              [SalesDealsView].[Name] AS [Name], 
+              [SalesDealsView].[RegistStatus] AS [RegistStatus], 
+              [SalesDealsView].[CustomerId] AS [CustomerId], 
+              [SalesDealsView].[IndustryId] AS [IndustryId], 
+              [SalesDealsView].[PartnerId] AS [PartnerId], 
+              [SalesDealsView].[Owner] AS [Owner], 
+              [SalesDealsView].[District] AS [District], 
+              [SalesDealsView].[RegPromotion] AS [RegPromotion], 
+              [SalesDealsView].[RegPromotionOrderId] AS [RegPromotionOrderId], 
+              [SalesDealsView].[PAM] AS [PAM], 
+              [SalesDealsView].[CreateDate] AS [CreateDate], 
+              [SalesDealsView].[ImportDate] AS [ImportDate], 
+              [SalesDealsView].[Industry2Id] AS [Industry2Id], 
+              [SalesDealsView].[StatusId] AS [StatusId], 
+              [SalesDealsView].[ApproverId] AS [ApproverId], 
+              [SalesDealsView].[NotifySalesId] AS [NotifySalesId], 
+              [SalesDealsView].[SpecializationId] AS [SpecializationId], 
+              [SalesDealsView].[ProvinceId] AS [ProvinceId], 
+              [SalesDealsView].[ChinaRegion] AS [ChinaRegion]
+              FROM [dbo].[SalesDealsView] AS [SalesDealsView]
+            </DefiningQuery>
           </EntitySet>
-          <EntitySet Name="UserView" EntityType="COATModel.Store.UserView" store:Type="Views" store:Schema="dbo" store:Name="UserView">
-            <DefiningQuery>SELECT 
-      [UserView].[Id] AS [Id], 
-      [UserView].[Name] AS [Name], 
-      [UserView].[Email] AS [Email], 
-      [UserView].[Password] AS [Password], 
-      [UserView].[IsDelete] AS [IsDelete], 
-      [UserView].[BRole] AS [BRole], 
-      [UserView].[SRole] AS [SRole]
-      FROM [dbo].[UserView] AS [UserView]</DefiningQuery>
+          <EntitySet Name="UserView" EntityType="COATModel.Store.UserView" store:Type="Views" store:Schema="dbo"
+                     store:Name="UserView">
+            <DefiningQuery>
+              SELECT 
+              [UserView].[Id] AS [Id], 
+              [UserView].[Name] AS [Name], 
+              [UserView].[Email] AS [Email], 
+              [UserView].[Password] AS [Password], 
+              [UserView].[IsDelete] AS [IsDelete], 
+              [UserView].[BRole] AS [BRole], 
+              [UserView].[SRole] AS [SRole]
+              FROM [dbo].[UserView] AS [UserView]
+            </DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_ApprovalHistory_Deal" Association="COATModel.Store.FK_ApprovalHistory_Deal">
             <End Role="Deal" EntitySet="Deal" />
             <End Role="ApprovalHistory" EntitySet="ApprovalHistory" />
           </AssociationSet>
-          <AssociationSet Name="FK_ApprovalHistory_DealProduct" Association="COATModel.Store.FK_ApprovalHistory_DealProduct">
+          <AssociationSet Name="FK_ApprovalHistory_DealProduct"
+                          Association="COATModel.Store.FK_ApprovalHistory_DealProduct">
             <End Role="DealProduct" EntitySet="DealProduct" />
             <End Role="ApprovalHistory" EntitySet="ApprovalHistory" />
           </AssociationSet>
@@ -209,7 +236,8 @@
             <End Role="Deal" EntitySet="Deal" />
             <End Role="ModifiedHistory" EntitySet="ModifiedHistory" />
           </AssociationSet>
-          <AssociationSet Name="FK_ModifiedHistory_DealProduct" Association="COATModel.Store.FK_ModifiedHistory_DealProduct">
+          <AssociationSet Name="FK_ModifiedHistory_DealProduct"
+                          Association="COATModel.Store.FK_ModifiedHistory_DealProduct">
             <End Role="DealProduct" EntitySet="DealProduct" />
             <End Role="ModifiedHistory" EntitySet="ModifiedHistory" />
           </AssociationSet>
@@ -926,11 +954,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Function Name="ResetAllDeal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-      </Schema></edmx:StorageModels>
+        <Function Name="ResetAllDeal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false"
+                  ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="COATModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+      <Schema Namespace="COATModel" Alias="Self"
+              xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation"
+              xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
         <EntityContainer Name="COATEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="ApprovalHistories" EntityType="COATModel.ApprovalHistory" />
           <EntitySet Name="BusinessRoles" EntityType="COATModel.BusinessRole" />
@@ -1063,7 +1095,7 @@
             <End Role="User" EntitySet="Users" />
             <End Role="Deal" EntitySet="Deals" />
           </AssociationSet>
-          </EntityContainer>
+        </EntityContainer>
         <EntityType Name="ApprovalHistory">
           <Key>
             <PropertyRef Name="Id" />
@@ -1075,9 +1107,12 @@
           <Property Name="UserId" Nullable="false" Type="Int32" />
           <Property Name="Comment" Nullable="false" MaxLength="400" FixedLength="false" Unicode="false" Type="String" />
           <Property Name="DateTime" Nullable="false" Type="DateTime" />
-          <NavigationProperty Name="DealProduct" Relationship="COATModel.FK_ApprovalHistory_DealProduct" FromRole="ApprovalHistory" ToRole="DealProduct" />
-          <NavigationProperty Name="User" Relationship="COATModel.FK_ApprovalHistory_User" FromRole="ApprovalHistory" ToRole="User" />
-          <NavigationProperty Name="Deal" Relationship="COATModel.FK_ApprovalHistory_Deal" FromRole="ApprovalHistory" ToRole="Deal" />
+          <NavigationProperty Name="DealProduct" Relationship="COATModel.FK_ApprovalHistory_DealProduct"
+                              FromRole="ApprovalHistory" ToRole="DealProduct" />
+          <NavigationProperty Name="User" Relationship="COATModel.FK_ApprovalHistory_User" FromRole="ApprovalHistory"
+                              ToRole="User" />
+          <NavigationProperty Name="Deal" Relationship="COATModel.FK_ApprovalHistory_Deal" FromRole="ApprovalHistory"
+                              ToRole="Deal" />
         </EntityType>
         <EntityType Name="BusinessRole">
           <Key>
@@ -1085,7 +1120,8 @@
           </Key>
           <Property Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
           <Property Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
-          <NavigationProperty Name="Users" Relationship="COATModel.FK_User_BusinessRole" FromRole="BusinessRole" ToRole="User" />
+          <NavigationProperty Name="Users" Relationship="COATModel.FK_User_BusinessRole" FromRole="BusinessRole"
+                              ToRole="User" />
         </EntityType>
         <EntityType Name="Industry">
           <Key>
@@ -1106,9 +1142,12 @@
           <Property Name="Comment" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" Type="String" />
           <Property Name="UserId" Nullable="false" Type="Int32" />
           <Property Name="DateTime" Nullable="false" Type="DateTime" />
-          <NavigationProperty Name="DealProduct" Relationship="COATModel.FK_ModifiedHistory_DealProduct" FromRole="ModifiedHistory" ToRole="DealProduct" />
-          <NavigationProperty Name="User" Relationship="COATModel.FK_ModifiedHistory_User" FromRole="ModifiedHistory" ToRole="User" />
-          <NavigationProperty Name="Deal" Relationship="COATModel.FK_ModifiedHistory_Deal" FromRole="ModifiedHistory" ToRole="Deal" />
+          <NavigationProperty Name="DealProduct" Relationship="COATModel.FK_ModifiedHistory_DealProduct"
+                              FromRole="ModifiedHistory" ToRole="DealProduct" />
+          <NavigationProperty Name="User" Relationship="COATModel.FK_ModifiedHistory_User" FromRole="ModifiedHistory"
+                              ToRole="User" />
+          <NavigationProperty Name="Deal" Relationship="COATModel.FK_ModifiedHistory_Deal" FromRole="ModifiedHistory"
+                              ToRole="Deal" />
         </EntityType>
         <EntityType Name="Partner">
           <Key>
@@ -1116,7 +1155,8 @@
           </Key>
           <Property Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
           <Property Name="Name" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" Type="String" />
-          <Property Name="Qualification" Nullable="true" MaxLength="5000" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="Qualification" Nullable="true" MaxLength="5000" FixedLength="false" Unicode="false"
+                    Type="String" />
           <NavigationProperty Name="Deals" Relationship="COATModel.FK_Deal_Partner" FromRole="Partner" ToRole="Deal" />
         </EntityType>
         <EntityType Name="Status">
@@ -1134,7 +1174,8 @@
           </Key>
           <Property Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
           <Property Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
-          <NavigationProperty Name="Users" Relationship="COATModel.FK_User_SystemRole" FromRole="SystemRole" ToRole="User" />
+          <NavigationProperty Name="Users" Relationship="COATModel.FK_User_SystemRole" FromRole="SystemRole"
+                              ToRole="User" />
         </EntityType>
         <EntityType Name="UserView">
           <Key>
@@ -1172,7 +1213,8 @@
           </Key>
           <Property Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
           <Property Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
-          <NavigationProperty Name="Deals" Relationship="COATModel.FK_Deal_Industry2" FromRole="Industry2" ToRole="Deal" />
+          <NavigationProperty Name="Deals" Relationship="COATModel.FK_Deal_Industry2" FromRole="Industry2"
+                              ToRole="Deal" />
         </EntityType>
         <EntityType Name="DealProduct">
           <Key>
@@ -1180,12 +1222,16 @@
           </Key>
           <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="String" Name="DealId" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="ProductName" Nullable="false" MaxLength="4000" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ProductName" Nullable="false" MaxLength="4000" FixedLength="false"
+                    Unicode="false" />
           <Property Type="Double" Name="Price" Nullable="false" />
           <Property Type="Boolean" Name="IsActive" Nullable="false" />
-          <NavigationProperty Name="ApprovalHistories" Relationship="COATModel.FK_ApprovalHistory_DealProduct" FromRole="DealProduct" ToRole="ApprovalHistory" />
-          <NavigationProperty Name="ModifiedHistories" Relationship="COATModel.FK_ModifiedHistory_DealProduct" FromRole="DealProduct" ToRole="ModifiedHistory" />
-          <NavigationProperty Name="Deal" Relationship="COATModel.FK_Deal_DealProduct" FromRole="DealProduct" ToRole="Deal" />
+          <NavigationProperty Name="ApprovalHistories" Relationship="COATModel.FK_ApprovalHistory_DealProduct"
+                              FromRole="DealProduct" ToRole="ApprovalHistory" />
+          <NavigationProperty Name="ModifiedHistories" Relationship="COATModel.FK_ModifiedHistory_DealProduct"
+                              FromRole="DealProduct" ToRole="ModifiedHistory" />
+          <NavigationProperty Name="Deal" Relationship="COATModel.FK_Deal_DealProduct" FromRole="DealProduct"
+                              ToRole="Deal" />
         </EntityType>
         <Association Name="FK_ApprovalHistory_DealProduct">
           <End Type="COATModel.DealProduct" Role="DealProduct" Multiplicity="0..1" />
@@ -1237,7 +1283,8 @@
           </Key>
           <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="String" Name="Name" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Deals" Relationship="COATModel.FK_Deal_SFDCStatus" FromRole="SFDCStatus" ToRole="Deal" />
+          <NavigationProperty Name="Deals" Relationship="COATModel.FK_Deal_SFDCStatus" FromRole="SFDCStatus"
+                              ToRole="Deal" />
         </EntityType>
         <EntityType Name="Specialization">
           <Key>
@@ -1248,7 +1295,8 @@
           <Property Type="String" Name="ShortName" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="ORPName" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Type="Boolean" Name="SalesCare" />
-          <NavigationProperty Name="Deals" Relationship="COATModel.FK_Deal_Specialization" FromRole="Specialization" ToRole="Deal" />
+          <NavigationProperty Name="Deals" Relationship="COATModel.FK_Deal_Specialization" FromRole="Specialization"
+                              ToRole="Deal" />
         </EntityType>
         <EntityType Name="NameAccount">
           <Key>
@@ -1336,10 +1384,12 @@
           <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="String" Name="Directory" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="MimeType" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="OriginalName" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="OriginalName" Nullable="false" MaxLength="200" FixedLength="false"
+                    Unicode="false" />
           <Property Type="Int32" Name="ContentLength" Nullable="false" />
           <Property Type="String" Name="Extension" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
-          <NavigationProperty Name="Contracts" Relationship="COATModel.FK_Contract_FileStore" FromRole="FileStore" ToRole="Contract" />
+          <NavigationProperty Name="Contracts" Relationship="COATModel.FK_Contract_FileStore" FromRole="FileStore"
+                              ToRole="Contract" />
         </EntityType>
         <EntityType Name="DealProductDetailsView">
           <Key>
@@ -1371,7 +1421,8 @@
           <Property Type="Int32" Name="ProvinceId" />
           <Property Type="String" Name="ChinaRegion" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="ProvinceName" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="ProductName" Nullable="false" MaxLength="4000" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ProductName" Nullable="false" MaxLength="4000" FixedLength="false"
+                    Unicode="false" />
           <Property Type="Double" Name="Price" Nullable="false" />
           <Property Type="Boolean" Name="IsActive" Nullable="false" />
           <Property Type="String" Name="IndustryName" MaxLength="500" FixedLength="false" Unicode="false" />
@@ -1383,8 +1434,10 @@
           <Property Type="String" Name="ORPTypeName" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="StatusName" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="ActionName" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="PartnerName" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="Qualification" Nullable="false" MaxLength="5000" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="PartnerName" Nullable="false" MaxLength="200" FixedLength="false"
+                    Unicode="false" />
+          <Property Type="String" Name="Qualification" Nullable="false" MaxLength="5000" FixedLength="false"
+                    Unicode="false" />
           <Property Type="String" Name="FullName" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="ShortName" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Type="Boolean" Name="SalesCare" />
@@ -1448,8 +1501,10 @@
           <Property Type="String" Name="Name" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="Description" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Type="Int32" Name="FileStoreId" Nullable="false" />
-          <NavigationProperty Name="FileStore" Relationship="COATModel.FK_Contract_FileStore" FromRole="Contract" ToRole="FileStore" />
-          <NavigationProperty Name="DealContracts" Relationship="COATModel.FK_DealContract_Contract" FromRole="Contract" ToRole="DealContract" />
+          <NavigationProperty Name="FileStore" Relationship="COATModel.FK_Contract_FileStore" FromRole="Contract"
+                              ToRole="FileStore" />
+          <NavigationProperty Name="DealContracts" Relationship="COATModel.FK_DealContract_Contract"
+                              FromRole="Contract" ToRole="DealContract" />
         </EntityType>
         <EntityType Name="DealContract">
           <Key>
@@ -1458,8 +1513,10 @@
           <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="String" Name="DealId" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Type="Int32" Name="ContractId" Nullable="false" />
-          <NavigationProperty Name="Contract" Relationship="COATModel.FK_DealContract_Contract" FromRole="DealContract" ToRole="Contract" />
-          <NavigationProperty Name="Deal" Relationship="COATModel.FK_DealContract_Deal" FromRole="DealContract" ToRole="Deal" />
+          <NavigationProperty Name="Contract" Relationship="COATModel.FK_DealContract_Contract" FromRole="DealContract"
+                              ToRole="Contract" />
+          <NavigationProperty Name="Deal" Relationship="COATModel.FK_DealContract_Deal" FromRole="DealContract"
+                              ToRole="Deal" />
         </EntityType>
         <Association Name="FK_Contract_FileStore">
           <End Type="COATModel.FileStore" Role="FileStore" Multiplicity="1" />
@@ -1496,12 +1553,18 @@
           <Property Type="Int32" Name="BusinessRoleId" Nullable="false" />
           <Property Type="Int32" Name="SystemRoleId" Nullable="false" />
           <Property Type="Boolean" Name="IsDelete" />
-          <NavigationProperty Name="ApprovalHistories" Relationship="COATModel.FK_ApprovalHistory_User" FromRole="User" ToRole="ApprovalHistory" />
-          <NavigationProperty Name="BusinessRole" Relationship="COATModel.FK_User_BusinessRole" FromRole="User" ToRole="BusinessRole" />
-          <NavigationProperty Name="ModifiedHistories" Relationship="COATModel.FK_ModifiedHistory_User" FromRole="User" ToRole="ModifiedHistory" />
-          <NavigationProperty Name="SystemRole" Relationship="COATModel.FK_User_SystemRole" FromRole="User" ToRole="SystemRole" />
-          <NavigationProperty Name="ApproverDeals" Relationship="COATModel.FK_Deal_Approver" FromRole="User" ToRole="Deal" />
-          <NavigationProperty Name="NotifierDeals" Relationship="COATModel.FK_Deal_Notifier" FromRole="User" ToRole="Deal" />
+          <NavigationProperty Name="ApprovalHistories" Relationship="COATModel.FK_ApprovalHistory_User" FromRole="User"
+                              ToRole="ApprovalHistory" />
+          <NavigationProperty Name="BusinessRole" Relationship="COATModel.FK_User_BusinessRole" FromRole="User"
+                              ToRole="BusinessRole" />
+          <NavigationProperty Name="ModifiedHistories" Relationship="COATModel.FK_ModifiedHistory_User" FromRole="User"
+                              ToRole="ModifiedHistory" />
+          <NavigationProperty Name="SystemRole" Relationship="COATModel.FK_User_SystemRole" FromRole="User"
+                              ToRole="SystemRole" />
+          <NavigationProperty Name="ApproverDeals" Relationship="COATModel.FK_Deal_Approver" FromRole="User"
+                              ToRole="Deal" />
+          <NavigationProperty Name="NotifierDeals" Relationship="COATModel.FK_Deal_Notifier" FromRole="User"
+                              ToRole="Deal" />
           <NavigationProperty Name="Deals1" Relationship="COATModel.FK_Deal_Assigner" FromRole="User" ToRole="Deal" />
           <NavigationProperty Name="Deals2" Relationship="COATModel.FK_Deal_Director" FromRole="User" ToRole="Deal" />
         </EntityType>
@@ -1577,20 +1640,30 @@
           <Property Type="Int32" Name="SpecializationId" />
           <Property Type="Int32" Name="ProvinceId" />
           <Property Type="String" Name="ChinaRegion" MaxLength="200" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="ApprovalHistories" Relationship="COATModel.FK_ApprovalHistory_Deal" FromRole="Deal" ToRole="ApprovalHistory" />
-          <NavigationProperty Name="Customer" Relationship="COATModel.FK_Deal_Customer" FromRole="Deal" ToRole="Customer" />
+          <NavigationProperty Name="ApprovalHistories" Relationship="COATModel.FK_ApprovalHistory_Deal" FromRole="Deal"
+                              ToRole="ApprovalHistory" />
+          <NavigationProperty Name="Customer" Relationship="COATModel.FK_Deal_Customer" FromRole="Deal"
+                              ToRole="Customer" />
           <NavigationProperty Name="Approver" Relationship="COATModel.FK_Deal_Approver" FromRole="Deal" ToRole="User" />
-          <NavigationProperty Name="DealProducts" Relationship="COATModel.FK_Deal_DealProduct" FromRole="Deal" ToRole="DealProduct" />
-          <NavigationProperty Name="Industry" Relationship="COATModel.FK_Deal_Industry" FromRole="Deal" ToRole="Industry" />
-          <NavigationProperty Name="Industry2" Relationship="COATModel.FK_Deal_Industry2" FromRole="Deal" ToRole="Industry2" />
+          <NavigationProperty Name="DealProducts" Relationship="COATModel.FK_Deal_DealProduct" FromRole="Deal"
+                              ToRole="DealProduct" />
+          <NavigationProperty Name="Industry" Relationship="COATModel.FK_Deal_Industry" FromRole="Deal"
+                              ToRole="Industry" />
+          <NavigationProperty Name="Industry2" Relationship="COATModel.FK_Deal_Industry2" FromRole="Deal"
+                              ToRole="Industry2" />
           <NavigationProperty Name="Notifier" Relationship="COATModel.FK_Deal_Notifier" FromRole="Deal" ToRole="User" />
           <NavigationProperty Name="Partner" Relationship="COATModel.FK_Deal_Partner" FromRole="Deal" ToRole="Partner" />
-          <NavigationProperty Name="Province" Relationship="COATModel.FK_Deal_Province" FromRole="Deal" ToRole="Province" />
-          <NavigationProperty Name="SFDCStatu" Relationship="COATModel.FK_Deal_SFDCStatus" FromRole="Deal" ToRole="SFDCStatus" />
-          <NavigationProperty Name="Specialization" Relationship="COATModel.FK_Deal_Specialization" FromRole="Deal" ToRole="Specialization" />
+          <NavigationProperty Name="Province" Relationship="COATModel.FK_Deal_Province" FromRole="Deal"
+                              ToRole="Province" />
+          <NavigationProperty Name="SFDCStatu" Relationship="COATModel.FK_Deal_SFDCStatus" FromRole="Deal"
+                              ToRole="SFDCStatus" />
+          <NavigationProperty Name="Specialization" Relationship="COATModel.FK_Deal_Specialization" FromRole="Deal"
+                              ToRole="Specialization" />
           <NavigationProperty Name="Status" Relationship="COATModel.FK_Deal_Status" FromRole="Deal" ToRole="Status" />
-          <NavigationProperty Name="DealContracts" Relationship="COATModel.FK_DealContract_Deal" FromRole="Deal" ToRole="DealContract" />
-          <NavigationProperty Name="ModifiedHistories" Relationship="COATModel.FK_ModifiedHistory_Deal" FromRole="Deal" ToRole="ModifiedHistory" />
+          <NavigationProperty Name="DealContracts" Relationship="COATModel.FK_DealContract_Deal" FromRole="Deal"
+                              ToRole="DealContract" />
+          <NavigationProperty Name="ModifiedHistories" Relationship="COATModel.FK_ModifiedHistory_Deal" FromRole="Deal"
+                              ToRole="ModifiedHistory" />
           <Property Type="Int32" Name="AssignerId" />
           <Property Type="Int32" Name="DirectorId" />
           <Property Type="DateTime" Name="AssignDate" />
@@ -1803,7 +1876,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        </Schema>
+      </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -2221,7 +2294,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          </EntityContainerMapping>
+        </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>
@@ -2242,51 +2315,80 @@
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
       <Diagram Name="COAT" ZoomLevel="82">
-        <EntityTypeShape EntityType="COATModel.ApprovalHistory" PointX="8.25" PointY="3.375" Width="1.5" Height="2.9251310221354174" />
-        <EntityTypeShape EntityType="COATModel.BusinessRole" PointX="0.5" PointY="13" Width="1.5" Height="1.5879931640625031" />
-        <EntityTypeShape EntityType="COATModel.Industry" PointX="0.5" PointY="3.25" Width="1.5" Height="1.5879931640625031" />
-        <EntityTypeShape EntityType="COATModel.ModifiedHistory" PointX="6.125" PointY="8" Width="1.5" Height="2.9251310221354174" />
-        <EntityTypeShape EntityType="COATModel.Partner" PointX="0.5" PointY="10.125" Width="1.5" Height="1.7790128580729174" />
-        <EntityTypeShape EntityType="COATModel.Status" PointX="0.625" PointY="0.5" Width="1.5" Height="1.7790128580729174" />
-        <EntityTypeShape EntityType="COATModel.SystemRole" PointX="0.5" PointY="15" Width="1.5" Height="1.5879931640625031" />
-        <EntityTypeShape EntityType="COATModel.UserView" PointX="10.375" PointY="3.75" Width="1.5" Height="2.3520719401041683" />
-        <EntityTypeShape EntityType="COATModel.Customer" PointX="0.5" PointY="5.25" Width="1.5" Height="2.5430916341145888" />
-        <EntityTypeShape EntityType="COATModel.Industry2" PointX="2.5" PointY="0.5" Width="1.5" Height="1.5879931640625031" />
-        <EntityTypeShape EntityType="COATModel.DealProduct" Width="1.5" PointX="6.125" PointY="4.625" Height="2.5430916341145888" />
-        <AssociationConnector Association="COATModel.FK_ApprovalHistory_DealProduct" >
+        <EntityTypeShape EntityType="COATModel.ApprovalHistory" PointX="8.25" PointY="3.375" Width="1.5"
+                         Height="2.9251310221354174" />
+        <EntityTypeShape EntityType="COATModel.BusinessRole" PointX="0.5" PointY="13" Width="1.5"
+                         Height="1.5879931640625031" />
+        <EntityTypeShape EntityType="COATModel.Industry" PointX="0.5" PointY="3.25" Width="1.5"
+                         Height="1.5879931640625031" />
+        <EntityTypeShape EntityType="COATModel.ModifiedHistory" PointX="6.125" PointY="8" Width="1.5"
+                         Height="2.9251310221354174" />
+        <EntityTypeShape EntityType="COATModel.Partner" PointX="0.5" PointY="10.125" Width="1.5"
+                         Height="1.7790128580729174" />
+        <EntityTypeShape EntityType="COATModel.Status" PointX="0.625" PointY="0.5" Width="1.5"
+                         Height="1.7790128580729174" />
+        <EntityTypeShape EntityType="COATModel.SystemRole" PointX="0.5" PointY="15" Width="1.5"
+                         Height="1.5879931640625031" />
+        <EntityTypeShape EntityType="COATModel.UserView" PointX="10.375" PointY="3.75" Width="1.5"
+                         Height="2.3520719401041683" />
+        <EntityTypeShape EntityType="COATModel.Customer" PointX="0.5" PointY="5.25" Width="1.5"
+                         Height="2.5430916341145888" />
+        <EntityTypeShape EntityType="COATModel.Industry2" PointX="2.5" PointY="0.5" Width="1.5"
+                         Height="1.5879931640625031" />
+        <EntityTypeShape EntityType="COATModel.DealProduct" Width="1.5" PointX="6.125" PointY="4.625"
+                         Height="2.5430916341145888" />
+        <AssociationConnector Association="COATModel.FK_ApprovalHistory_DealProduct">
           <ConnectorPoint PointX="7.625" PointY="5.4625655110677078" />
           <ConnectorPoint PointX="7.791666666666667" PointY="5.4625655110677069" />
           <ConnectorPoint PointX="7.958333333333333" PointY="5.4625655110677078" />
           <ConnectorPoint PointX="8.25" PointY="5.4625655110677078" />
         </AssociationConnector>
-        <AssociationConnector Association="COATModel.FK_ModifiedHistory_DealProduct" >
+        <AssociationConnector Association="COATModel.FK_ModifiedHistory_DealProduct">
           <ConnectorPoint PointX="6.875" PointY="7.1680916341145826" />
           <ConnectorPoint PointX="6.875" PointY="8" />
         </AssociationConnector>
-        <EntityTypeShape EntityType="COATModel.ORPType" Width="1.5" PointX="12.375" PointY="2.125" Height="1.3969734700520888" />
-        <EntityTypeShape EntityType="COATModel.Region" Width="1.5" PointX="12.375" PointY="0.625" Height="1.2059537760416674" />
-        <EntityTypeShape EntityType="COATModel.Setting" Width="1.5" PointX="10.5" PointY="0.625" Height="1.3969734700520888" />
-        <EntityTypeShape EntityType="COATModel.SFDCStatus" Width="1.5" PointX="4.625" PointY="0.5" Height="1.5879931640625" />
-        <EntityTypeShape EntityType="COATModel.Specialization" Width="1.5" PointX="8.375" PointY="0.5" Height="2.16105224609375" />
-        <EntityTypeShape EntityType="COATModel.NameAccount" Width="1.5" PointX="12.5" PointY="10.625" Height="5.2173673502604174" />
-        <EntityTypeShape EntityType="COATModel.ExcutivedDeal" Width="1.5" PointX="12.375" PointY="3.75" Height="6.1724658203125067" />
-        <EntityTypeShape EntityType="COATModel.Province" Width="1.5" PointX="0.5" PointY="8.25" Height="1.587993164062496" />
-        <EntityTypeShape EntityType="COATModel.ImportTask" Width="1.5" PointX="10.375" PointY="6.75" Height="2.1610522460937602" />
-        <EntityTypeShape EntityType="COATModel.FileStore" Width="1.5" PointX="10.375" PointY="9.625" Height="2.1610522460937602" />
-        <EntityTypeShape EntityType="COATModel.DealProductDetailsView" Width="1.5" PointX="5.375" PointY="13.375" Height="8.2736824544270746" />
-        <EntityTypeShape EntityType="COATModel.DealSizeView" Width="1.5" PointX="7.375" PointY="11.75" Height="1.5879931640625102" />
-        <EntityTypeShape EntityType="COATModel.PendingSalesApproveDealsView" Width="1.5" PointX="9.375" PointY="12.75" Height="1.2059537760416674" />
-        <EntityTypeShape EntityType="COATModel.PendingSalesAssignDealsView" Width="1.5" PointX="14.375" PointY="0.75" Height="1.2059537760416674" />
-        <EntityTypeShape EntityType="COATModel.SalesApprovedDealsView" Width="1.5" PointX="14.375" PointY="2.75" Height="1.2059537760416674" />
-        <EntityTypeShape EntityType="COATModel.SalesDealsView" Width="1.5" PointX="14.375" PointY="4.75" Height="4.8353279622395746" />
-        <EntityTypeShape EntityType="COATModel.Contract" Width="1.5" PointX="12.375" PointY="16.625" Height="2.1610522460937602" />
-        <EntityTypeShape EntityType="COATModel.DealContract" Width="1.5" PointX="6.5" PointY="1.75" Height="1.9700325520833388" />
-        <AssociationConnector Association="COATModel.FK_Contract_FileStore" >
+        <EntityTypeShape EntityType="COATModel.ORPType" Width="1.5" PointX="12.375" PointY="2.125"
+                         Height="1.3969734700520888" />
+        <EntityTypeShape EntityType="COATModel.Region" Width="1.5" PointX="12.375" PointY="0.625"
+                         Height="1.2059537760416674" />
+        <EntityTypeShape EntityType="COATModel.Setting" Width="1.5" PointX="10.5" PointY="0.625"
+                         Height="1.3969734700520888" />
+        <EntityTypeShape EntityType="COATModel.SFDCStatus" Width="1.5" PointX="4.625" PointY="0.5"
+                         Height="1.5879931640625" />
+        <EntityTypeShape EntityType="COATModel.Specialization" Width="1.5" PointX="8.375" PointY="0.5"
+                         Height="2.16105224609375" />
+        <EntityTypeShape EntityType="COATModel.NameAccount" Width="1.5" PointX="12.5" PointY="10.625"
+                         Height="5.2173673502604174" />
+        <EntityTypeShape EntityType="COATModel.ExcutivedDeal" Width="1.5" PointX="12.375" PointY="3.75"
+                         Height="6.1724658203125067" />
+        <EntityTypeShape EntityType="COATModel.Province" Width="1.5" PointX="0.5" PointY="8.25"
+                         Height="1.587993164062496" />
+        <EntityTypeShape EntityType="COATModel.ImportTask" Width="1.5" PointX="10.375" PointY="6.75"
+                         Height="2.1610522460937602" />
+        <EntityTypeShape EntityType="COATModel.FileStore" Width="1.5" PointX="10.375" PointY="9.625"
+                         Height="2.1610522460937602" />
+        <EntityTypeShape EntityType="COATModel.DealProductDetailsView" Width="1.5" PointX="5.375" PointY="13.375"
+                         Height="8.2736824544270746" />
+        <EntityTypeShape EntityType="COATModel.DealSizeView" Width="1.5" PointX="7.375" PointY="11.75"
+                         Height="1.5879931640625102" />
+        <EntityTypeShape EntityType="COATModel.PendingSalesApproveDealsView" Width="1.5" PointX="9.375" PointY="12.75"
+                         Height="1.2059537760416674" />
+        <EntityTypeShape EntityType="COATModel.PendingSalesAssignDealsView" Width="1.5" PointX="14.375" PointY="0.75"
+                         Height="1.2059537760416674" />
+        <EntityTypeShape EntityType="COATModel.SalesApprovedDealsView" Width="1.5" PointX="14.375" PointY="2.75"
+                         Height="1.2059537760416674" />
+        <EntityTypeShape EntityType="COATModel.SalesDealsView" Width="1.5" PointX="14.375" PointY="4.75"
+                         Height="4.8353279622395746" />
+        <EntityTypeShape EntityType="COATModel.Contract" Width="1.5" PointX="12.375" PointY="16.625"
+                         Height="2.1610522460937602" />
+        <EntityTypeShape EntityType="COATModel.DealContract" Width="1.5" PointX="6.5" PointY="1.75"
+                         Height="1.9700325520833388" />
+        <AssociationConnector Association="COATModel.FK_Contract_FileStore">
           <ConnectorPoint PointX="11.40625" PointY="11.977071940104166" />
           <ConnectorPoint PointX="11.40625" PointY="17.70552612304688" />
           <ConnectorPoint PointX="12.375" PointY="17.70552612304688" />
         </AssociationConnector>
-        <AssociationConnector Association="COATModel.FK_DealContract_Contract" >
+        <AssociationConnector Association="COATModel.FK_DealContract_Contract">
           <ConnectorPoint PointX="12.375" PointY="17.134011061523445" />
           <ConnectorPoint PointX="11.489583333333334" PointY="17.134011061523445" />
           <ConnectorPoint PointX="11.322916666666666" PointY="17.134011061523445" />
@@ -2298,7 +2400,7 @@
           <ConnectorPoint PointX="7.25" PointY="3.7200325520833331" />
         </AssociationConnector>
         <EntityTypeShape EntityType="COATModel.User" Width="1.5" PointX="2.75" PointY="13" Height="3.4981901041666674" />
-        <AssociationConnector Association="COATModel.FK_ApprovalHistory_User" >
+        <AssociationConnector Association="COATModel.FK_ApprovalHistory_User">
           <ConnectorPoint PointX="4.25" PointY="14.971943169170666" />
           <ConnectorPoint PointX="5.125" PointY="14.971943169170666" />
           <ConnectorPoint PointX="5.125" PointY="11.5" />
@@ -2309,11 +2411,11 @@
           <ConnectorPoint PointX="9" PointY="11.5" />
           <ConnectorPoint PointX="9" PointY="6.3001310221354174" />
         </AssociationConnector>
-        <AssociationConnector Association="COATModel.FK_User_BusinessRole" >
+        <AssociationConnector Association="COATModel.FK_User_BusinessRole">
           <ConnectorPoint PointX="2" PointY="13.793996582031252" />
           <ConnectorPoint PointX="2.75" PointY="13.793996582031252" />
         </AssociationConnector>
-        <AssociationConnector Association="COATModel.FK_ModifiedHistory_User" >
+        <AssociationConnector Association="COATModel.FK_ModifiedHistory_User">
           <ConnectorPoint PointX="4.25" PointY="13.001152846153847" />
           <ConnectorPoint PointX="4.6261528461538468" PointY="12.625" />
           <ConnectorPoint PointX="5.041666666666667" PointY="12.625" />
@@ -2321,12 +2423,13 @@
           <ConnectorPoint PointX="6.6250005000000005" PointY="12.625" />
           <ConnectorPoint PointX="6.6250005000000005" PointY="10.925131022135417" />
         </AssociationConnector>
-        <AssociationConnector Association="COATModel.FK_User_SystemRole" >
+        <AssociationConnector Association="COATModel.FK_User_SystemRole">
           <ConnectorPoint PointX="2" PointY="15.793996582031252" />
           <ConnectorPoint PointX="2.75" PointY="15.793996582031252" />
         </AssociationConnector>
-        <EntityTypeShape EntityType="COATModel.Deal" Width="1.5" PointX="3.375" PointY="2.875" Height="8.8467415364583317" />
-        <AssociationConnector Association="COATModel.FK_ApprovalHistory_Deal" >
+        <EntityTypeShape EntityType="COATModel.Deal" Width="1.5" PointX="3.375" PointY="2.875"
+                         Height="8.8467415364583317" />
+        <AssociationConnector Association="COATModel.FK_ApprovalHistory_Deal">
           <ConnectorPoint PointX="4.875" PointY="4.3912662760416667" />
           <ConnectorPoint PointX="5.510416666666667" PointY="4.3912662760416659" />
           <ConnectorPoint PointX="5.677083333333333" PointY="4.3912662760416667" />
@@ -2334,46 +2437,46 @@
           <ConnectorPoint PointX="7.958333333333333" PointY="4.3912662760416667" />
           <ConnectorPoint PointX="8.25" PointY="4.3912662760416667" />
         </AssociationConnector>
-        <AssociationConnector Association="COATModel.FK_Deal_Customer" >
+        <AssociationConnector Association="COATModel.FK_Deal_Customer">
           <ConnectorPoint PointX="2" PointY="6.5215458170572944" />
           <ConnectorPoint PointX="3.375" PointY="6.5215458170572944" />
         </AssociationConnector>
-        <AssociationConnector Association="COATModel.FK_Deal_Approver" >
+        <AssociationConnector Association="COATModel.FK_Deal_Approver">
           <ConnectorPoint PointX="3.6714212740384617" PointY="13" />
           <ConnectorPoint PointX="3.6714212740384617" PointY="11.721741536458332" />
         </AssociationConnector>
-        <AssociationConnector Association="COATModel.FK_Deal_DealProduct" >
+        <AssociationConnector Association="COATModel.FK_Deal_DealProduct">
           <ConnectorPoint PointX="4.875" PointY="5.8965458170572944" />
           <ConnectorPoint PointX="5.510416666666667" PointY="5.8965458170572935" />
           <ConnectorPoint PointX="5.677083333333333" PointY="5.8965458170572944" />
           <ConnectorPoint PointX="6.125" PointY="5.8965458170572944" />
         </AssociationConnector>
-        <AssociationConnector Association="COATModel.FK_Deal_Industry" >
+        <AssociationConnector Association="COATModel.FK_Deal_Industry">
           <ConnectorPoint PointX="2" PointY="4.0439965820312516" />
           <ConnectorPoint PointX="3.375" PointY="4.0439965820312516" />
         </AssociationConnector>
-        <AssociationConnector Association="COATModel.FK_Deal_Industry2" >
+        <AssociationConnector Association="COATModel.FK_Deal_Industry2">
           <ConnectorPoint PointX="3.5784615384615384" PointY="2.0879931640625031" />
           <ConnectorPoint PointX="3.5784615384615384" PointY="2.875" />
         </AssociationConnector>
-        <AssociationConnector Association="COATModel.FK_Deal_Notifier" >
+        <AssociationConnector Association="COATModel.FK_Deal_Notifier">
           <ConnectorPoint PointX="4.1239633413461538" PointY="13" />
           <ConnectorPoint PointX="4.1239633413461538" PointY="11.721741536458332" />
         </AssociationConnector>
-        <AssociationConnector Association="COATModel.FK_Deal_Partner" >
+        <AssociationConnector Association="COATModel.FK_Deal_Partner">
           <ConnectorPoint PointX="2" PointY="10.923370768229166" />
           <ConnectorPoint PointX="3.375" PointY="10.923370768229166" />
         </AssociationConnector>
-        <AssociationConnector Association="COATModel.FK_Deal_Province" >
+        <AssociationConnector Association="COATModel.FK_Deal_Province">
           <ConnectorPoint PointX="2" PointY="9.043996582031248" />
           <ConnectorPoint PointX="3.375" PointY="9.043996582031248" />
         </AssociationConnector>
-        <AssociationConnector Association="COATModel.FK_Deal_SFDCStatus" >
+        <AssociationConnector Association="COATModel.FK_Deal_SFDCStatus">
           <ConnectorPoint PointX="5.59375" PointY="2.0879931640625" />
           <ConnectorPoint PointX="5.59375" PointY="10.378136313883465" />
           <ConnectorPoint PointX="4.875" PointY="10.378136313883465" />
         </AssociationConnector>
-        <AssociationConnector Association="COATModel.FK_Deal_Specialization" >
+        <AssociationConnector Association="COATModel.FK_Deal_Specialization">
           <ConnectorPoint PointX="9.84375" PointY="2.66105224609375" />
           <ConnectorPoint PointX="9.84375" PointY="7.5840458170572944" />
           <ConnectorPoint PointX="9.0833333333333339" PointY="7.5840458170572935" />
@@ -2386,26 +2489,26 @@
           <ConnectorPoint PointX="5.510416666666667" PointY="7.5840458170572944" />
           <ConnectorPoint PointX="4.875" PointY="7.5840458170572944" />
         </AssociationConnector>
-        <AssociationConnector Association="COATModel.FK_Deal_Status" >
+        <AssociationConnector Association="COATModel.FK_Deal_Status">
           <ConnectorPoint PointX="2.125" PointY="2.2147530110677103" />
           <ConnectorPoint PointX="3.4951282051282049" PointY="2.21475301106771" />
           <ConnectorPoint PointX="3.6617948717948718" PointY="2.2147530110677103" />
           <ConnectorPoint PointX="4.2702884615384615" PointY="2.2147530110677103" />
           <ConnectorPoint PointX="4.2702884615384615" PointY="2.875" />
         </AssociationConnector>
-        <AssociationConnector Association="COATModel.FK_DealContract_Deal" >
+        <AssociationConnector Association="COATModel.FK_DealContract_Deal">
           <ConnectorPoint PointX="4.875" PointY="3.2975162760416694" />
           <ConnectorPoint PointX="5.510416666666667" PointY="3.297516276041669" />
           <ConnectorPoint PointX="5.677083333333333" PointY="3.2975162760416694" />
           <ConnectorPoint PointX="6.5" PointY="3.2975162760416694" />
         </AssociationConnector>
-        <AssociationConnector Association="COATModel.FK_ModifiedHistory_Deal" >
+        <AssociationConnector Association="COATModel.FK_ModifiedHistory_Deal">
           <ConnectorPoint PointX="4.875" PointY="9.1265681569417332" />
           <ConnectorPoint PointX="5.510416666666667" PointY="9.1265681569417332" />
           <ConnectorPoint PointX="5.677083333333333" PointY="9.1265681569417332" />
           <ConnectorPoint PointX="6.125" PointY="9.1265681569417332" />
         </AssociationConnector>
-        <AssociationConnector Association="COATModel.FK_Deal_Deal" >
+        <AssociationConnector Association="COATModel.FK_Deal_Deal">
           <ConnectorPoint PointX="3.9069230769230767" PointY="2.875" />
           <ConnectorPoint PointX="3.9069230769230767" PointY="2.625" />
           <ConnectorPoint PointX="4.1869551282051285" PointY="2.6249999999999996" />
@@ -2413,15 +2516,15 @@
           <ConnectorPoint PointX="4.4780769230769231" PointY="2.625" />
           <ConnectorPoint PointX="4.4780769230769231" PointY="2.875" />
         </AssociationConnector>
-        <AssociationConnector Association="COATModel.FK_Deal_Assigner" >
+        <AssociationConnector Association="COATModel.FK_Deal_Assigner">
           <ConnectorPoint PointX="3.4607106370192309" PointY="13" />
           <ConnectorPoint PointX="3.4607106370192309" PointY="11.721741536458332" />
         </AssociationConnector>
-        <AssociationConnector Association="COATModel.FK_Deal_Director" >
+        <AssociationConnector Association="COATModel.FK_Deal_Director">
           <ConnectorPoint PointX="3.8976923076923078" PointY="13" />
           <ConnectorPoint PointX="3.8976923076923078" PointY="11.721741536458332" />
         </AssociationConnector>
-        </Diagram>
+      </Diagram>
     </Diagrams>
   </Designer>
 </edmx:Edmx>

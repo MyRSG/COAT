@@ -9,8 +9,8 @@
 /*global window: false, jQuery: false */
 
 (function ($) {
-    var data_click = "unobtrusiveAjaxClick",
-        data_validation = "unobtrusiveValidation";
+    var dataClick = "unobtrusiveAjaxClick",
+        dataValidation = "unobtrusiveValidation";
 
     function getFunction(code, argNames) {
         var fn = window, parts = (code || "").split(".");
@@ -110,7 +110,7 @@
     }
 
     function validate(form) {
-        var validationInfo = $(form).data(data_validation);
+        var validationInfo = $(form).data(dataValidation);
         return !validationInfo || !validationInfo.validate || validationInfo.validate();
     }
 
@@ -129,13 +129,13 @@
             form = $target.parents("form")[0],
             offset = $target.offset();
 
-        $(form).data(data_click, [
+        $(form).data(dataClick, [
             { name: name + ".x", value: Math.round(evt.pageX - offset.left) },
             { name: name + ".y", value: Math.round(evt.pageY - offset.top) }
         ]);
 
         setTimeout(function () {
-            $(form).removeData(data_click);
+            $(form).removeData(dataClick);
         }, 0);
     });
 
@@ -143,15 +143,15 @@
         var name = evt.target.name,
             form = $(evt.target).parents("form")[0];
 
-        $(form).data(data_click, name ? [{ name: name, value: evt.target.value }] : []);
+        $(form).data(dataClick, name ? [{ name: name, value: evt.target.value }] : []);
 
         setTimeout(function () {
-            $(form).removeData(data_click);
+            $(form).removeData(dataClick);
         }, 0);
     });
 
     $("form[data-ajax=true]").live("submit", function (evt) {
-        var clickInfo = $(this).data(data_click) || [];
+        var clickInfo = $(this).data(dataClick) || [];
         evt.preventDefault();
         if (!validate(this)) {
             return;

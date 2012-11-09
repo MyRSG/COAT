@@ -1,6 +1,6 @@
 ﻿using System.Data;
-using COAT.Extension;
 using COAT.Data.Generate;
+using COAT.Util.Extension;
 
 namespace COAT.Data.Import
 {
@@ -12,14 +12,13 @@ namespace COAT.Data.Import
 
         public void ImportRawData()
         {
-            DataTable table = new DataTable();
             string[] tabNames = GetTableList();
 
             foreach (var name in tabNames)
             {
                 try
                 {
-                    table = GetTableByName(name);
+                    DataTable table = GetTableByName(name);
                     for (var index = 0; index < table.Rows.Count; index++)
                     {
                         if (table.Rows[index].IsEmptyRow())

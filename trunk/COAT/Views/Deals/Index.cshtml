@@ -17,7 +17,7 @@
 <h3>List</h3>
 <hr />
 @Html.ActionLink("Export Result", "Export", (DealSearchViewModel)ViewBag.SearchModel, new { @class = "exportExcel"})
-@Html.Partial("_DealListPartial", new COAT.ViewModel.Shared.DealListViewModel { Deals = Model, ActionName = "Details", LinkText = "View" })
+@Html.Partial("_DealListPartial", new DealListViewModel { Deals = Model, ActionName = "Details", LinkText = "View" })
 <script type="text/javascript">
 
 </script>

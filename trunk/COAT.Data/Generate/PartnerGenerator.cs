@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Data;
 using System.Linq;
-using System.Web;
 using COAT.Models;
-using COAT.Extension;
-using System.Data;
+using COAT.Util.Extension;
 
 namespace COAT.Data.Generate
 {
@@ -12,20 +9,22 @@ namespace COAT.Data.Generate
     {
         public PartnerGenerator(DataRow row)
             : base(row)
-        { }
+        {
+        }
 
-        protected override Extension.ColunmPropertyPair[] ColunmPropertyPairs
+        protected override ColunmPropertyPair[] ColunmPropertyPairs
         {
             get
             {
-                return new ColunmPropertyPair[]{
-                   new ColunmPropertyPair("Partner Account","Name"),
-                   new ColunmPropertyPair("Partner Qualification","Qualification")
-                };
+                return new[]
+                           {
+                               new ColunmPropertyPair("Partner Account", "Name"),
+                               new ColunmPropertyPair("Partner Qualification", "Qualification")
+                           };
             }
         }
 
-        protected override Partner GetInstance(System.Data.DataRow row)
+        protected override Partner GetInstance(DataRow row)
         {
             return new Partner();
         }
@@ -37,7 +36,7 @@ namespace COAT.Data.Generate
 
         protected override Partner SychronizeDB(Partner obj)
         {
-            var dbPartner = Entity.Partners.FirstOrDefault(p => p.Name == obj.Name);
+            Partner dbPartner = Entity.Partners.FirstOrDefault(p => p.Name == obj.Name);
             if (dbPartner != null)
                 return dbPartner;
 

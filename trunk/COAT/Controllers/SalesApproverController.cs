@@ -1,19 +1,80 @@
 ﻿using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web.Mvc;
-using COAT.Models;
-using MvcContrib.UI.Grid;
-using COAT.IDS;
-using COAT.ViewModel.Shared;
 using COAT.COATExtension;
-using COAT.Extension;
-using COAT.Helper;
+using COAT.Models;
+using COAT.Security;
+using COAT.Util.IDS;
+using COAT.ViewModel.Shared;
+using MvcContrib.UI.Grid;
 
 namespace COAT.Controllers
 {
     [Authorize(Roles = "Admin,SalesApprover")]
     public class SalesApproverController : COATApproverController
     {
+        protected override int PreviousStatusId
+        {
+            get
+            {
+                var firstOrDefault = Db.Status.FirstOrDefault(a => a.ActionName == "PA");
+                if (firstOrDefault != null)
+                    return firstOrDefault.Id;
+                return 0;
+            }
+        }
+
+        protected override int NextStatusId
+        {
+            get
+            {
+                var firstOrDefault = Db.Status.FirstOrDefault(a => a.ActionName == "A");
+                if (firstOrDefault != null)
+                    return firstOrDefault.Id;
+                return 0;
+            }
+        }
+
+        protected override int PendingSalesStatusId
+        {
+            get
+            {
+                var firstOrDefault = Db.Status.FirstOrDefault(a => a.ActionName == "PSCV");
+                if (firstOrDefault != null)
+                    return firstOrDefault.Id;
+                return 0;
+            }
+        }
+
+        protected override IEnumerable<SelectListItem> AssignToList
+        {
+            get
+            {
+                return Db.Users
+                    .Where(u => u.BusinessRoleId == BusinessRoleIds.InsideSales
+                                || u.BusinessRoleId == BusinessRoleIds.NameAccountSales
+                                || u.BusinessRoleId == BusinessRoleIds.VolumeSales)
+                    .OrderBy(a => a.Name)
+                    .ToList()
+                    .Select(u => new SelectListItem {Text = u.Name, Value = u.Id.ToString(CultureInfo.InvariantCulture)});
+            }
+        }
+
+        protected override IEnumerable<SelectListItem> RollbackToList
+        {
+            get
+            {
+                return Db.Users
+                    .Where(
+                        u =>
+                        u.SystemRoleId == SystemRoleIds.ChannelApprover || u.SystemRoleId == SystemRoleIds.SalesApprover)
+                    .OrderBy(a => a.Name)
+                    .ToList()
+                    .Select(u => new SelectListItem {Text = u.GetNameRoleString(), Value = u.Id.ToString(CultureInfo.InvariantCulture)});
+            }
+        }
+
         [Authorize]
         public ActionResult Index(DealSearchViewModel search, GridSortOptions sort, int? page)
         {
@@ -22,8 +83,8 @@ namespace COAT.Controllers
             ViewBag.SearchModel = search;
             ViewBag.Sort = sort;
 
-            var user = GetCurrentMemberShipUser();
-            var deals = dealMgr.GetSalesApproverDeals(user.Id).Search(search);
+            COATMemebershipUser user = GetCurrentMemberShipUser();
+            IQueryable<Deal> deals = DealMgr.GetSalesApproverDeals(user.Id).Search(search);
 
 
             return View(SortAndPagingDeal(deals, sort, page));
@@ -34,53 +95,6 @@ namespace COAT.Controllers
             base.OnApproved(deal, collection);
 
             SendApprovedMail(deal, collection);
-        }
-
-        protected override int PreviousStatusId
-        {
-            get { return db.Status.FirstOrDefault(a => a.ActionName == "PA").Id; }
-        }
-
-        protected override int NextStatusId
-        {
-            get { return db.Status.FirstOrDefault(a => a.ActionName == "A").Id; }
-        }
-
-        protected override int PendingSalesStatusId
-        {
-            get { return db.Status.FirstOrDefault(a => a.ActionName == "PSCV").Id; }
-        }
-
-        protected override IEnumerable<SelectListItem> AssignToList
-        {
-            get
-            {
-                return db.Users
-                    .Where(u => u.BusinessRoleId == BusinessRoleIds.InsideSales
-                        || u.BusinessRoleId == BusinessRoleIds.NameAccountSales
-                        || u.BusinessRoleId == BusinessRoleIds.VolumeSales)
-                    .OrderBy(a => a.Name)
-                    .ToList()
-                    .Select(u => new SelectListItem { Text = u.Name, Value = u.Id.ToString() });
-            }
-        }
-
-        protected override IEnumerable<SelectListItem> RollbackToList
-        {
-            get
-            {
-                return db.Users
-                  .Where(u => u.SystemRoleId == SystemRoleIds.ChannelApprover || u.SystemRoleId == SystemRoleIds.SalesApprover)
-                  .OrderBy(a => a.Name)
-                  .ToList()
-                  .Select(u => new SelectListItem { Text = u.GetNameRoleString(), Value = u.Id.ToString() });
-            }
-        }
-
-        private void UpdateIndustry2(Deal deal)
-        {
-            var d = db.Deals.FirstOrDefault(a => a.Id == deal.Id);
-            d.Industry2Id = deal.Industry2Id;
         }
     }
 }

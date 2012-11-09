@@ -1,34 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Objects.DataClasses;
 using System.Linq;
 using System.Web.Mvc;
 using COAT.Models;
+using COAT.Util.Extension;
 using COAT.ViewModel.Shared;
-using COAT.Extension;
 using MvcContrib.Pagination;
 using MvcContrib.Sorting;
 using MvcContrib.UI.Grid;
-using COAT.Helper;
 
 namespace COAT.Controllers
 {
     public abstract class COATController : BaseController
     {
-        #region "Abstract Members"
-
+        protected string ApproveActionName = "Approve";
         protected abstract int PreviousStatusId { get; }
         protected abstract int NextStatusId { get; }
         protected abstract IEnumerable<SelectListItem> AssignToList { get; }
 
-        #endregion
-
         #region "Vitual Methods"
 
         #region "Http Methods"
+
         [Authorize]
         public virtual ActionResult Details(string id)
         {
-            Deal deal = db.Deals.Single(d => d.Id == id);
+            Deal deal = Db.Deals.Single(d => d.Id == id);
             ViewBag.AssignToList = AssignToList;
             return View(deal);
         }
@@ -39,13 +37,13 @@ namespace COAT.Controllers
         {
             OnApproving(deal, collection);
 
-            var dbDeal = GetDeal(deal.Id);
+            Deal dbDeal = GetDeal(deal.Id);
             dbDeal.StatusId = NextStatusId;
 
             UpdateProducts(collection);
-            SaveApproveHistory(dbDeal.Id, _ApproveActionName, GetComment(collection));
+            SaveApproveHistory(dbDeal.Id, ApproveActionName, GetComment(collection));
 
-            db.SaveChanges();
+            Db.SaveChanges();
 
             OnApproved(dbDeal, collection);
             return Redirect("../Index");
@@ -55,8 +53,7 @@ namespace COAT.Controllers
         [HttpPost]
         public virtual ActionResult Reject(Deal deal, FormCollection collection)
         {
-
-            var dbDeal = GetDeal(deal.Id);
+            Deal dbDeal = GetDeal(deal.Id);
             //var products = dbDeal.DealProducts;
             //var productActive = new Dictionary<int, bool>();
             //foreach (var p in products)
@@ -64,9 +61,11 @@ namespace COAT.Controllers
             //    productActive.Add(p.Id, false);
             //}
             //UpdateProducts(productActive);
-            dbDeal.StatusId = db.Status.FirstOrDefault(a => a.ActionName == "R").Id;
+            Status firstOrDefault = Db.Status.FirstOrDefault(a => a.ActionName == "R");
+            if (firstOrDefault != null)
+                dbDeal.StatusId = firstOrDefault.Id;
             SaveApproveHistory(dbDeal.Id, "Reject", GetComment(collection));
-            db.SaveChanges();
+            Db.SaveChanges();
 
             return Redirect("../Index");
         }
@@ -75,47 +74,47 @@ namespace COAT.Controllers
         [HttpPost]
         public virtual ActionResult Wrong(Deal deal, FormCollection collection)
         {
-            var dbDeal = GetDeal(deal.Id);
-            var products = dbDeal.DealProducts;
-            var productActive = new Dictionary<int, bool>();
-            foreach (var p in products)
-            {
-                productActive.Add(p.Id, true);
-            }
+            Deal dbDeal = GetDeal(deal.Id);
+            EntityCollection<DealProduct> products = dbDeal.DealProducts;
+            Dictionary<int, bool> productActive = products.ToDictionary(p => p.Id, p => true);
             UpdateProducts(productActive);
             dbDeal.StatusId = PreviousStatusId;
             dbDeal.ApproveDate = null;
             SaveApproveHistory(dbDeal.Id, "Assign Wrong", GetComment(collection));
-            db.SaveChanges();
+            Db.SaveChanges();
 
             return Redirect("../Index");
         }
+
         #endregion
 
         protected virtual void OnApproving(Deal deal, FormCollection collection)
-        { }
+        {
+        }
 
         protected virtual void OnApproved(Deal deal, FormCollection collection)
-        { }
+        {
+        }
 
         protected virtual string GetComment(FormCollection collection)
         {
             try
             {
-                return collection["comment"].ToString();
+                return collection["comment"];
             }
             catch
             {
                 return string.Empty;
             }
         }
+
         #endregion
 
         #region "Protected Methods"
 
         protected IPagination<Deal> SortAndPagingDeal(IQueryable<Deal> deals, GridSortOptions sort, int? page)
         {
-            var descending = sort.Direction == SortDirection.Descending;
+            bool descending = sort.Direction == SortDirection.Descending;
             var orderMethodDic = new Dictionary<string, Func<IQueryable<Deal>, IOrderedQueryable<Deal>>>();
 
             InitialOrderMethodDic(descending, orderMethodDic);
@@ -126,22 +125,21 @@ namespace COAT.Controllers
             }
 
             return deals.OrderBy(a => a.Id).AsPagination(page ?? 1, 20);
-
         }
 
         protected void UpdateProducts(FormCollection collection)
         {
-            var productActive = GetProductsActive(collection);
+            Dictionary<int, bool> productActive = GetProductsActive(collection);
             UpdateProducts(productActive);
         }
 
         protected Dictionary<int, bool> GetProductsActive(FormCollection collection)
         {
             var rslt = new Dictionary<int, bool>();
-            var header = new DealProductViewModel().ActionInputHead;
-            foreach (var key in collection.AllKeys)
+            string header = new DealProductViewModel().ActionInputHead;
+            foreach (string key in collection.AllKeys)
             {
-                if (key.IndexOf(header) != 0)
+                if (key == null || key.IndexOf(header, StringComparison.Ordinal) == 0)
                     continue;
 
                 int id = int.Parse(key.Remove(0, header.Length));
@@ -159,13 +157,15 @@ namespace COAT.Controllers
 
         protected User GetAssignUser(FormCollection collection)
         {
-            var userId = GetAssignToId(collection);
-            return db.Users.FirstOrDefault(a => a.Id == userId);
+            int userId = GetAssignToId(collection);
+            return Db.Users.FirstOrDefault(a => a.Id == userId);
         }
 
         #endregion
 
-        private static void InitialOrderMethodDic(bool descending, Dictionary<string, Func<IQueryable<Deal>, IOrderedQueryable<Deal>>> orderMethodDic)
+        private static void InitialOrderMethodDic(bool descending,
+                                                  Dictionary<string, Func<IQueryable<Deal>, IOrderedQueryable<Deal>>>
+                                                      orderMethodDic)
         {
             orderMethodDic.Add("Name", d => d.OrderByDirection(dd => dd.Name));
             orderMethodDic.Add("Customer", d => d.OrderByDirection(dd => dd.Customer.NameENG, descending));
@@ -177,10 +177,12 @@ namespace COAT.Controllers
             orderMethodDic.Add("CreateDate", d => d.OrderByDirection(dd => dd.CreateDate, descending));
             orderMethodDic.Add("Industry2", d => d.OrderByDirection(dd => dd.Industry2.Name, descending));
             orderMethodDic.Add("Province", d => d.OrderByDirection(dd => dd.Province.Name, descending));
-            orderMethodDic.Add("Deal$", d => d.OrderByDirection(dd => dd.DealProducts.Where(p => p.IsActive).Sum(p => p.Price), descending));
-            orderMethodDic.Add("City", d => d.OrderByDirection(dd => dd.DirectorDate, descending).ThenBy(dd => dd.ApproveDate));
+            orderMethodDic.Add("Deal$",
+                               d =>
+                               d.OrderByDirection(dd => dd.DealProducts.Where(p => p.IsActive).Sum(p => p.Price),
+                                                  descending));
+            orderMethodDic.Add("City",
+                               d => d.OrderByDirection(dd => dd.DirectorDate, descending).ThenBy(dd => dd.ApproveDate));
         }
-
-        protected string _ApproveActionName = "Approve";
     }
 }

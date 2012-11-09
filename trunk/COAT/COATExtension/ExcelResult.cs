@@ -1,19 +1,13 @@
 ﻿using System;
-using System.Web.Mvc;
-using System.Data.Linq;
-using System.Collections;
-using System.IO;
-using System.Web.UI.WebControls;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Drawing;
 using System.Collections.Generic;
-using System.Text;
 using System.ComponentModel;
+using System.Globalization;
+using System.Linq;
+using System.Text;
+using System.Web.Mvc;
 using COAT.Data.Export;
-using COAT.Extension;
-
+using COAT.Util.Extension;
+using ColunmPropertyPair = COAT.Data.Export.ColunmPropertyPair;
 
 namespace COAT.COATExtension
 {
@@ -25,30 +19,22 @@ namespace COAT.COATExtension
     {
         public ExcelResult(IList<T> entity, string fileName)
         {
-            this.Entity = entity;
-            this.FileName = fileName;
+            Entity = entity;
+            FileName = fileName;
         }
 
         public ExcelResult(IList<T> entity)
         {
-            this.Entity = entity;
+            Entity = entity;
 
             DateTime time = DateTime.Now;
-            this.FileName = string.Format("{0}_{1}_{2}_{3}",
-                time.Month, time.Day, time.Hour, time.Minute);
+            FileName = string.Format("{0}_{1}_{2}_{3}",
+                                     time.Month, time.Day, time.Hour, time.Minute);
         }
 
-        public IList<T> Entity
-        {
-            get;
-            set;
-        }
+        public IList<T> Entity { get; set; }
 
-        public string FileName
-        {
-            get;
-            set;
-        }
+        public string FileName { get; set; }
 
         public override void ExecuteResult(ControllerContext context)
         {
@@ -73,8 +59,8 @@ namespace COAT.COATExtension
         /// <param name="context"></param>
         private void SetResponse(ControllerContext context)
         {
-            var content = GetContent();
-            var encoder = System.Text.Encoding.GetEncoding("gb2312");
+            string content = GetContent();
+            Encoding encoder = Encoding.GetEncoding("gb2312");
             byte[] bytestr = encoder.GetBytes(content);
 
             context.HttpContext.Response.Clear();
@@ -83,7 +69,8 @@ namespace COAT.COATExtension
             context.HttpContext.Response.ContentEncoding = encoder;
             context.HttpContext.Response.ContentType = "application/vnd.ms-excel";
             context.HttpContext.Response.AddHeader("Content-Disposition", "attachment; filename=" + FileName + ".xls");
-            context.HttpContext.Response.AddHeader("Content-Length", bytestr.Length.ToString());
+            context.HttpContext.Response.AddHeader("Content-Length",
+                                                   bytestr.Length.ToString(CultureInfo.InvariantCulture));
             context.HttpContext.Response.Write(content);
             context.HttpContext.Response.End();
         }
@@ -94,18 +81,17 @@ namespace COAT.COATExtension
         /// <returns></returns>
         private StringBuilder ConvertEntity()
         {
-            Type t = typeof(T);
-            StringBuilder sb = new StringBuilder();
+            Type t = typeof (T);
+            var sb = new StringBuilder();
 
             if (!HasProperty() || IsEmpty())
                 return sb;
 
-            if (t == typeof(ExportObject))
+            if (t == typeof (ExportObject))
             {
                 var helper = new TableFormatHelper(t);
                 AddExportTableHead(sb, helper);
                 AddExportTableData(sb, helper);
-
             }
             else
             {
@@ -118,24 +104,25 @@ namespace COAT.COATExtension
 
         private void AddExportTableData(StringBuilder sb, TableFormatHelper helper)
         {
-            var schema = helper.Schema.ToArray();
-            for (int i = 0; i < Entity.Count; i++)
+            ColunmPropertyPair[] schema = helper.Schema.ToArray();
+            foreach (T t in Entity)
             {
-                for (var j = 0; j < schema.Count(); j++)
+                for (int j = 0; j < schema.Count(); j++)
                 {
-                    var sign = GetSign(j, schema.Count());
-                    var obj = Entity[i].GetPropertyValue(schema[j].PropertyName);
-                    var val = obj == null ? string.Empty : obj.ToString();
+                    string sign = GetSign(j, schema.Count());
+                    object obj = t.GetPropertyValue(schema[j].PropertyName);
+                    string val = obj == null ? string.Empty : obj.ToString();
                     sb.Append(val + sign);
                 }
             }
         }
+
         private void AddExportTableHead(StringBuilder sb, TableFormatHelper helper)
         {
-            var schema = helper.Schema.ToArray();
-            for (var index = 0; index < schema.Count(); index++)
+            ColunmPropertyPair[] schema = helper.Schema.ToArray();
+            for (int index = 0; index < schema.Count(); index++)
             {
-                var sign = GetSign(index, schema.Count());
+                string sign = GetSign(index, schema.Count());
                 sb.Append(schema[index].ColunmName + sign);
             }
         }
@@ -147,12 +134,12 @@ namespace COAT.COATExtension
         private void AddTableBody(StringBuilder sb)
         {
             PropertyDescriptorCollection properties = FindProperties();
-            for (int i = 0; i < Entity.Count; i++)
+            foreach (T t in Entity)
             {
                 for (int j = 0; j < properties.Count; j++)
                 {
                     string sign = GetSign(j, properties.Count);
-                    object obj = properties[j].GetValue(Entity[i]);
+                    object obj = properties[j].GetValue(t);
                     obj = obj == null ? string.Empty : obj.ToString();
                     sb.Append(obj + sign);
                 }
@@ -179,19 +166,17 @@ namespace COAT.COATExtension
         /// <returns></returns>
         private static PropertyDescriptorCollection FindProperties()
         {
-            return TypeDescriptor.GetProperties(typeof(T));
+            return TypeDescriptor.GetProperties(typeof (T));
         }
 
         private bool HasProperty()
         {
             return FindProperties().Count > 0;
-
         }
 
         private bool IsEmpty()
         {
             return Entity == null || Entity.Count <= 0;
-
         }
 
         private string GetSign(int colIndex, int colCount)

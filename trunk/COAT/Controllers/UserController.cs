@@ -1,24 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
+﻿using System.Data;
+using System.Data.Objects;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using COAT.Models;
 
 namespace COAT.Controllers
-{ 
+{
     public class UserController : Controller
     {
-        private COATEntities db = new COATEntities();
+        private readonly COATEntities _db = new COATEntities();
 
         //
         // GET: /User/
 
         public ViewResult Index()
         {
-            var users = db.Users.Include("BusinessRole").Include("SystemRole");
+            ObjectQuery<User> users = _db.Users.Include("BusinessRole").Include("SystemRole");
             return View(users.ToList());
         }
 
@@ -27,7 +24,7 @@ namespace COAT.Controllers
 
         public ViewResult Details(int id)
         {
-            User user = db.Users.Single(u => u.Id == id);
+            User user = _db.Users.Single(u => u.Id == id);
             return View(user);
         }
 
@@ -36,10 +33,10 @@ namespace COAT.Controllers
 
         public ActionResult Create()
         {
-            ViewBag.BusinessRoleId = new SelectList(db.BusinessRoles, "Id", "Name");
-            ViewBag.SystemRoleId = new SelectList(db.SystemRoles, "Id", "Name");
+            ViewBag.BusinessRoleId = new SelectList(_db.BusinessRoles, "Id", "Name");
+            ViewBag.SystemRoleId = new SelectList(_db.SystemRoles, "Id", "Name");
             return View();
-        } 
+        }
 
         //
         // POST: /User/Create
@@ -49,24 +46,24 @@ namespace COAT.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Users.AddObject(user);
-                db.SaveChanges();
-                return RedirectToAction("Index");  
+                _db.Users.AddObject(user);
+                _db.SaveChanges();
+                return RedirectToAction("Index");
             }
 
-            ViewBag.BusinessRoleId = new SelectList(db.BusinessRoles, "Id", "Name", user.BusinessRoleId);
-            ViewBag.SystemRoleId = new SelectList(db.SystemRoles, "Id", "Name", user.SystemRoleId);
+            ViewBag.BusinessRoleId = new SelectList(_db.BusinessRoles, "Id", "Name", user.BusinessRoleId);
+            ViewBag.SystemRoleId = new SelectList(_db.SystemRoles, "Id", "Name", user.SystemRoleId);
             return View(user);
         }
-        
+
         //
         // GET: /User/Edit/5
- 
+
         public ActionResult Edit(int id)
         {
-            User user = db.Users.Single(u => u.Id == id);
-            ViewBag.BusinessRoleId = new SelectList(db.BusinessRoles, "Id", "Name", user.BusinessRoleId);
-            ViewBag.SystemRoleId = new SelectList(db.SystemRoles, "Id", "Name", user.SystemRoleId);
+            User user = _db.Users.Single(u => u.Id == id);
+            ViewBag.BusinessRoleId = new SelectList(_db.BusinessRoles, "Id", "Name", user.BusinessRoleId);
+            ViewBag.SystemRoleId = new SelectList(_db.SystemRoles, "Id", "Name", user.SystemRoleId);
             return View(user);
         }
 
@@ -78,22 +75,22 @@ namespace COAT.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Users.Attach(user);
-                db.ObjectStateManager.ChangeObjectState(user, EntityState.Modified);
-                db.SaveChanges();
+                _db.Users.Attach(user);
+                _db.ObjectStateManager.ChangeObjectState(user, EntityState.Modified);
+                _db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.BusinessRoleId = new SelectList(db.BusinessRoles, "Id", "Name", user.BusinessRoleId);
-            ViewBag.SystemRoleId = new SelectList(db.SystemRoles, "Id", "Name", user.SystemRoleId);
+            ViewBag.BusinessRoleId = new SelectList(_db.BusinessRoles, "Id", "Name", user.BusinessRoleId);
+            ViewBag.SystemRoleId = new SelectList(_db.SystemRoles, "Id", "Name", user.SystemRoleId);
             return View(user);
         }
 
         //
         // GET: /User/Delete/5
- 
+
         public ActionResult Delete(int id)
         {
-            User user = db.Users.Single(u => u.Id == id);
+            User user = _db.Users.Single(u => u.Id == id);
             return View(user);
         }
 
@@ -102,16 +99,16 @@ namespace COAT.Controllers
 
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
-        {            
-            User user = db.Users.Single(u => u.Id == id);
-            db.Users.DeleteObject(user);
-            db.SaveChanges();
+        {
+            User user = _db.Users.Single(u => u.Id == id);
+            _db.Users.DeleteObject(user);
+            _db.SaveChanges();
             return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)
         {
-            db.Dispose();
+            _db.Dispose();
             base.Dispose(disposing);
         }
     }

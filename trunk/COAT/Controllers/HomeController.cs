@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
+using COAT.Models;
 
 namespace COAT.Controllers
 {
@@ -23,7 +20,7 @@ namespace COAT.Controllers
             //imp.ImportRawData();
 
             ViewBag.Message = "Welcome to ASP.NET MVC!";
-            ViewBag.Contract = new COAT.Models.COATEntities().FileStores;
+            ViewBag.Contract = new COATEntities().FileStores;
 
 
             return View();

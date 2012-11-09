@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace COAT.Data.Export
+﻿namespace COAT.Data.Export
 {
     public class ExportObject
     {

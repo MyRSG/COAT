@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace COAT.COATExtension.Search
+﻿namespace COAT.COATExtension.Search
 {
     //public class BaseDealSearch : IDealSearch
     //{

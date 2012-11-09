@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace COAT.IDS
+﻿namespace COAT.Util.IDS
 {
     public struct BusinessRoleIds
     {

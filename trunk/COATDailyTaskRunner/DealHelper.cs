@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using COAT.Models;
+﻿using COAT.Models;
 
 namespace COATDailyTaskRunner
 {
-    interface IDealHelper
+    internal interface IDealHelper
     {
         int Count { get; }
         Deal[] LessThan7Days { get; }

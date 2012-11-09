@@ -1,7 +1,7 @@
 ﻿/*
 *   Add JQuery Extend Method "popWindow". Same class href will pop in same window;
 */
-(function ($, document) {
+(function ($) {
     var popWindows = {};
     var windowStyle = "width=850,height=600,scrollbars=yes, toolbar=no, menubar=no, location=no, status=no";
 

@@ -1,14 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using COAT.Models;
 
 namespace COAT.ViewModel.Shared
 {
-    class SimpleDealSummary : IDealSummary
+    internal class SimpleDealSummary : IDealSummary
     {
+        public SimpleDealSummary(IEnumerable<Deal> deals)
+        {
+            Deals = deals;
+        }
+
         public IEnumerable<Deal> Deals { get; protected set; }
+
+        #region IDealSummary Members
 
         public int ToBeAssigned
         {
@@ -40,9 +45,6 @@ namespace COAT.ViewModel.Shared
             get { return Deals.Count(); }
         }
 
-        public SimpleDealSummary(IEnumerable<Deal> deals)
-        {
-            Deals = deals;
-        }
+        #endregion
     }
 }

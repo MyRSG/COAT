@@ -1,24 +1,21 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Data;
+using System.Linq;
 
-namespace COAT.Extension
+namespace COAT.Util.Extension
 {
     public static class DataRowExtension
     {
         public static void FillObject(this DataRow row, object obj, IEnumerable<ColunmPropertyPair> pairCollection)
         {
-            foreach (var pair in pairCollection)
+            foreach (ColunmPropertyPair pair in pairCollection)
             {
-                var val = row.GetTableValueByPair(pair);
+                object val = row.GetTableValueByPair(pair);
                 if (val == null || val == DBNull.Value)
                     continue;
 
                 obj.SetPropertyValue(pair.PropertyName, val);
-
             }
         }
 
@@ -42,7 +39,5 @@ namespace COAT.Extension
         {
             return row.Table.Columns.Contains(colName);
         }
-
     }
-
 }

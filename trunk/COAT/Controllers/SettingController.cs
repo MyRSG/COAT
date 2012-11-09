@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Linq;
 using System.Web.Mvc;
 using COAT.Models;
 
@@ -10,28 +7,30 @@ namespace COAT.Controllers
     [Authorize(Roles = "Admin")]
     public class SettingController : Controller
     {
-        COATEntities db = new COATEntities();
+        private readonly COATEntities _db = new COATEntities();
 
         //
         // GET: /Setting/
         [Authorize]
         public ActionResult Index()
         {
-            return View(db.Settings);
+            return View(_db.Settings);
         }
 
         [Authorize]
         [HttpPost]
         public ActionResult Index(Setting[] settings)
         {
-            foreach (var setting in settings)
+            foreach (Setting setting in settings)
             {
-                db.Settings.FirstOrDefault(s => s.Name == setting.Name).Value = setting.Value;
+                var firstOrDefault = _db.Settings.FirstOrDefault(s => s.Name == setting.Name);
+                if (firstOrDefault != null)
+                    firstOrDefault.Value = setting.Value;
             }
 
-            db.SaveChanges();
+            _db.SaveChanges();
 
-            return View(db.Settings);
+            return View(_db.Settings);
         }
     }
 }

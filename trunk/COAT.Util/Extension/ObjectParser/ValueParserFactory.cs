@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Reflection;
-using COAT.Extension;
+﻿using System.Reflection;
 
 namespace COAT.Util.Extension.ObjectParser
 {
-    class ValueParserFactory
+    internal class ValueParserFactory
     {
         public IValueParser GetValueParser(PropertyInfo prop)
         {

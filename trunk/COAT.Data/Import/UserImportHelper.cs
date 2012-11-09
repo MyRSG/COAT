@@ -1,20 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Data;
-using COAT.Extension;
-using COAT.Data.Generate;
+﻿using System.Data;
 using System.Net.Mail;
+using COAT.Data.Generate;
+using COAT.Util.Extension;
 
 namespace COAT.Data.Import
 {
     public class UserImportHelper : ExcelImportHelper
     {
-        public int SystemRoleId { get; set; }
-        public int BusinessRoleId { get; set; }
-        public MailMessage MailMsg { get; set; }
-
         public UserImportHelper(int systemRoleId, int bussinessRoleId, MailMessage mailMsg, string path)
             : base(path)
         {
@@ -23,17 +15,20 @@ namespace COAT.Data.Import
             MailMsg = mailMsg;
         }
 
+        public int SystemRoleId { get; set; }
+        public int BusinessRoleId { get; set; }
+        public MailMessage MailMsg { get; set; }
+
         public void ImportRawData()
         {
-            DataTable table = new DataTable();
             string[] tabNames = GetTableList();
 
-            foreach (var name in tabNames)
+            foreach (string name in tabNames)
             {
                 try
                 {
-                    table = GetTableByName(name);
-                    for (var index = 0; index < table.Rows.Count; index++)
+                    DataTable table = GetTableByName(name);
+                    for (int index = 0; index < table.Rows.Count; index++)
                     {
                         if (table.Rows[index].IsEmptyRow())
                             continue;
@@ -41,7 +36,9 @@ namespace COAT.Data.Import
                         GenerateRowData(table.Rows[index]);
                     }
                 }
-                catch { }
+                catch
+                {
+                }
             }
         }
 
@@ -52,7 +49,7 @@ namespace COAT.Data.Import
 
         private DataTable GetTableByName(string tableName)
         {
-            var query = Query(tableName);
+            string query = Query(tableName);
             return GetTable(query);
         }
 

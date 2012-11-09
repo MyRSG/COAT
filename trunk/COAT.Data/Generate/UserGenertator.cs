@@ -1,21 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Data;
 using System.Linq;
-using System.Web;
-using COAT.Models;
-using COAT.Extension;
-using System.Data;
-using System.Text;
-using COAT.Util;
 using System.Net.Mail;
+using COAT.Models;
+using COAT.Util;
+using COAT.Util.Extension;
+using COAT.Util.Mail;
 
 namespace COAT.Data.Generate
 {
     public class UserGenertator : BaseGenerator<User>
     {
-        public int SystemRoleId { get; set; }
-        public int BusinessRoleId { get; set; }
-        public MailMessage MailMsg { get; set; }
+        private readonly COATMailHelper _mHelper = new COATMailHelper();
 
         public UserGenertator(int systemRoleId, int bussinessRoleId, MailMessage mailMsg, DataRow row)
             : base(row)
@@ -25,20 +20,25 @@ namespace COAT.Data.Generate
             MailMsg = mailMsg;
         }
 
-        protected override Extension.ColunmPropertyPair[] ColunmPropertyPairs
+        public int SystemRoleId { get; set; }
+        public int BusinessRoleId { get; set; }
+        public MailMessage MailMsg { get; set; }
+
+        protected override ColunmPropertyPair[] ColunmPropertyPairs
         {
             get
             {
-                return new ColunmPropertyPair[]{
-                     new ColunmPropertyPair(0,"Name"),
-                     new ColunmPropertyPair(1,"Email")
-                };
+                return new[]
+                           {
+                               new ColunmPropertyPair(0, "Name"),
+                               new ColunmPropertyPair(1, "Email")
+                           };
             }
         }
 
-        protected override User GetInstance(System.Data.DataRow row)
+        protected override User GetInstance(DataRow row)
         {
-            return new User { BusinessRoleId = BusinessRoleId, SystemRoleId = SystemRoleId, IsDelete = false };
+            return new User {BusinessRoleId = BusinessRoleId, SystemRoleId = SystemRoleId, IsDelete = false};
         }
 
         protected override bool Validate(User obj)
@@ -48,11 +48,15 @@ namespace COAT.Data.Generate
 
         protected override User SychronizeDB(User obj)
         {
-            if (Entity.Users.Count(a => a.Email.ToLower() == obj.Email.ToLower() || a.Name.ToLower() == obj.Name.ToLower()) > 0)
+            if (
+                Entity.Users.Count(
+                    a => a.Email.ToLower() == obj.Email.ToLower() || a.Name.ToLower() == obj.Name.ToLower()) > 0)
             {
-                var user = Entity.Users.FirstOrDefault(a => a.Email.ToLower() == obj.Email.ToLower() || a.Name.ToLower() == obj.Name.ToLower());
+                User user =
+                    Entity.Users.FirstOrDefault(
+                        a => a.Email.ToLower() == obj.Email.ToLower() || a.Name.ToLower() == obj.Name.ToLower());
                 //user.Password = PasswordUtil.CreatePassword();
-                user.UpdateExcept(obj, new string[] { "Id", "Password" });
+                user.UpdateExcept(obj, new[] {"Id", "Password"});
                 Entity.SaveChanges();
                 //try
                 //{
@@ -72,12 +76,14 @@ namespace COAT.Data.Generate
             Entity.SaveChanges();
             try
             {
-                mHelper.SendMail(new string[] { obj.Email },
-                null,
-                MailMsg.Subject,
-                string.Format(MailMsg.Body, obj.Name, obj.Password));
+                _mHelper.SendMail(new[] {obj.Email},
+                                 null,
+                                 MailMsg.Subject,
+                                 string.Format(MailMsg.Body, obj.Name, obj.Password));
             }
-            catch { }
+            catch
+            {
+            }
 
             return obj;
         }
@@ -87,7 +93,5 @@ namespace COAT.Data.Generate
         //    string pattern = "[^@]*@";
 
         //}
-
-        private COAT.Mail.COATMailHelper mHelper = new Mail.COATMailHelper();
     }
 }

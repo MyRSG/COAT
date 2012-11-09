@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
-using System.Text;
 using COAT.Models;
 using COAT.Util.Values;
 
@@ -9,17 +8,17 @@ namespace COAT.Data.Export
 {
     public class ExportGenerator
     {
-        public IEnumerable<Deal> Deals { get; protected set; }
-
         public ExportGenerator(IEnumerable<Deal> deals)
         {
             Deals = deals;
         }
 
+        public IEnumerable<Deal> Deals { get; protected set; }
+
         public ExportObject[] Generate()
         {
-            List<ExportObject> rslt = new List<ExportObject>();
-            foreach (var d in Deals)
+            var rslt = new List<ExportObject>();
+            foreach (Deal d in Deals)
             {
                 rslt.AddRange(GenerateExportObject(d));
             }
@@ -27,10 +26,10 @@ namespace COAT.Data.Export
             return rslt.ToArray();
         }
 
-        private ExportObject[] GenerateExportObject(Deal d)
+        private IEnumerable<ExportObject> GenerateExportObject(Deal d)
         {
             var rslt = new List<ExportObject>();
-            foreach (var pd in d.DealProducts)
+            foreach (DealProduct pd in d.DealProducts)
             {
                 var obj = new ExportObject();
                 try
@@ -48,7 +47,7 @@ namespace COAT.Data.Export
                     obj.ProductStatus = GetProductStatus(pd);
                     obj.PartnerName = d.Partner == null ? "" : d.Partner.Name;
                     obj.PartnerType = d.Partner == null ? "" : d.Partner.Qualification;
-                    obj.TotalPrice = d.TotalPrice.ToString();
+                    obj.TotalPrice = d.TotalPrice.ToString(CultureInfo.InvariantCulture);
                     obj.DealSize = d.DealSize;
                     obj.Assigner = d.Assigner == null ? "" : d.Assigner.Name;
                     obj.AssignDate = d.AssignDate.ToString();
@@ -57,27 +56,25 @@ namespace COAT.Data.Export
                     obj.ChannelDirector = d.Director == null ? "" : d.Director.Name;
                     obj.DirectorDate = d.DirectorDate.ToString();
                     obj.Status = d.Status == null ? "" : d.Status.Name;
-                    obj.ContractUploaded = (d.DealContracts.Count() > 0).ToString();
+                    obj.ContractUploaded = (d.DealContracts.Any()).ToString();
                     obj.AssignedSalesName = d.Notifier == null ? "" : d.Notifier.Name;
                     rslt.Add(obj);
                 }
                 catch
                 {
-
                 }
             }
-            return rslt.ToArray(); ;
+            return rslt.ToArray();
         }
 
 
         private string GetProductStatus(DealProduct dealProduct)
         {
-            var deal = dealProduct.Deal;
+            Deal deal = dealProduct.Deal;
             if (deal.Status.ActionName != COATStatusValue.Approved)
                 return deal.Status.Name;
 
             return dealProduct.IsActive ? "Approve" : "Reject";
-
         }
     }
 }

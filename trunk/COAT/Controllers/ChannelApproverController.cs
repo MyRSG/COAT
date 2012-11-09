@@ -1,20 +1,21 @@
 ﻿using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web.Mvc;
-using MvcContrib.UI.Grid;
-using COAT.Models;
-using COAT.IDS;
-using COAT.ViewModel.Shared;
 using COAT.COATExtension;
-using COAT.Extension;
-using COAT.Helper;
-
+using COAT.Models;
+using COAT.Security;
+using COAT.Util.IDS;
+using COAT.ViewModel.Shared;
+using MvcContrib.UI.Grid;
 
 namespace COAT.Controllers
 {
     [Authorize(Roles = "Admin,ChannelApprover")]
     public class ChannelApproverController : COATApproverController
     {
+        private const double DirectorSize = 40*1000;
+        private int _nextStatusId;
 
         [Authorize]
         public ActionResult Index(DealSearchViewModel search, GridSortOptions sort, int? page)
@@ -24,8 +25,8 @@ namespace COAT.Controllers
             ViewBag.SearchModel = search;
             ViewBag.Sort = sort;
 
-            var user = GetCurrentMemberShipUser();
-            var deals = dealMgr.GetChannelApproverDeals(user.Id).Search(search);
+            COATMemebershipUser user = GetCurrentMemberShipUser();
+            IQueryable<Deal> deals = DealMgr.GetChannelApproverDeals(user.Id).Search(search);
             return View(SortAndPagingDeal(deals, sort, page));
         }
 
@@ -50,7 +51,6 @@ namespace COAT.Controllers
         //        string.Format("Name:{0}\r\nURL:{1}\r\n{2}", dbDeal.Name, url, addtion));
 
 
-
         //    return Redirect("../Index");
         //}
 
@@ -63,72 +63,28 @@ namespace COAT.Controllers
         protected override void OnApproved(Deal deal, FormCollection collection)
         {
             base.OnApproved(deal, collection);
-            var dbDeal = GetDeal(deal.Id);
+            Deal dbDeal = GetDeal(deal.Id);
 
             if (dbDeal.Status.ActionName == "PDA")
                 return;
 
             SendApprovedMail(deal, collection);
-
         }
-
-        #region "Abstract Implemention"
-
-        protected override int PreviousStatusId
-        {
-            get { return db.Status.FirstOrDefault(a => a.ActionName == "PA").Id; }
-        }
-
-        protected override int NextStatusId
-        {
-            get { return _NextStatusId; }
-        }
-
-        protected override int PendingSalesStatusId
-        {
-            get { return db.Status.FirstOrDefault(a => a.ActionName == "PSC").Id; }
-        }
-
-        protected override IEnumerable<SelectListItem> AssignToList
-        {
-            get
-            {
-                var list = db.Users
-                       .Where(u => u.BusinessRoleId == BusinessRoleIds.InsideSales
-                         || u.BusinessRoleId == BusinessRoleIds.NameAccountSales
-                         || u.BusinessRoleId == BusinessRoleIds.VolumeSales)
-                     .OrderBy(a => a.Name)
-                     .ToList();
-                return list.Select(u => new SelectListItem { Text = u.Name, Value = u.Id.ToString() });
-            }
-        }
-
-        protected override IEnumerable<SelectListItem> RollbackToList
-        {
-            get
-            {
-                return db.Users
-                    .Where(u => u.SystemRoleId == SystemRoleIds.ChannelApprover || u.SystemRoleId == SystemRoleIds.SalesApprover)
-                    .OrderBy(a => a.Name)
-                    .ToList()
-                    .Select(u => new SelectListItem { Text = u.GetNameRoleString(), Value = u.Id.ToString() });
-            }
-        }
-
-
-        #endregion
-
 
         private void SetNextStatus(FormCollection collection)
         {
-            var total = GetTotalSize(collection);
-            if (total >= _DirectorSize)
+            double total = GetTotalSize(collection);
+            if (total >= DirectorSize)
             {
-                _NextStatusId = db.Status.FirstOrDefault(a => a.ActionName == "PDA").Id;
+                Status firstOrDefault = Db.Status.FirstOrDefault(a => a.ActionName == "PDA");
+                if (firstOrDefault != null)
+                    _nextStatusId = firstOrDefault.Id;
                 return;
             }
 
-            _NextStatusId = db.Status.FirstOrDefault(a => a.ActionName == "A").Id;
+            Status orDefault = Db.Status.FirstOrDefault(a => a.ActionName == "A");
+            if (orDefault != null)
+                _nextStatusId = orDefault.Id;
         }
 
         private double GetTotalSize(FormCollection collection)
@@ -136,20 +92,76 @@ namespace COAT.Controllers
             double total = 0.0;
             foreach (var pair in GetProductsActive(collection))
             {
-                if (pair.Value)
-                    total += db.DealProducts.FirstOrDefault(a => a.Id == pair.Key).Price;
+                if (!pair.Value) continue;
+                DealProduct firstOrDefault = Db.DealProducts.FirstOrDefault(a => a.Id == pair.Key);
+                if (firstOrDefault != null)
+                    total += firstOrDefault.Price;
             }
             return total;
         }
 
-        private void UpdateIndustry2(Deal deal)
+        #region "Abstract Implemention"
+
+        protected override int PreviousStatusId
         {
-            var d = db.Deals.FirstOrDefault(a => a.Id == deal.Id);
-            d.Industry2Id = deal.Industry2Id;
+            get
+            {
+                Status firstOrDefault = Db.Status.FirstOrDefault(a => a.ActionName == "PA");
+                if (firstOrDefault != null)
+                    return firstOrDefault.Id;
+                return 0;
+            }
         }
 
+        protected override int NextStatusId
+        {
+            get { return _nextStatusId; }
+        }
 
-        private double _DirectorSize = 40 * 1000;
-        private int _NextStatusId = 0;
+        protected override int PendingSalesStatusId
+        {
+            get
+            {
+                Status firstOrDefault = Db.Status.FirstOrDefault(a => a.ActionName == "PSC");
+                if (firstOrDefault != null)
+                    return firstOrDefault.Id;
+                return 0;
+            }
+        }
+
+        protected override IEnumerable<SelectListItem> AssignToList
+        {
+            get
+            {
+                List<User> list = Db.Users
+                    .Where(u => u.BusinessRoleId == BusinessRoleIds.InsideSales
+                                || u.BusinessRoleId == BusinessRoleIds.NameAccountSales
+                                || u.BusinessRoleId == BusinessRoleIds.VolumeSales)
+                    .OrderBy(a => a.Name)
+                    .ToList();
+                return
+                    list.Select(
+                        u => new SelectListItem {Text = u.Name, Value = u.Id.ToString(CultureInfo.InvariantCulture)});
+            }
+        }
+
+        protected override IEnumerable<SelectListItem> RollbackToList
+        {
+            get
+            {
+                return Db.Users
+                    .Where(
+                        u =>
+                        u.SystemRoleId == SystemRoleIds.ChannelApprover || u.SystemRoleId == SystemRoleIds.SalesApprover)
+                    .OrderBy(a => a.Name)
+                    .ToList()
+                    .Select(
+                        u =>
+                        new SelectListItem
+                            {Text = u.GetNameRoleString(), Value = u.Id.ToString(CultureInfo.InvariantCulture)});
+            }
+        }
+
+        #endregion
     }
 }

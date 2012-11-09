@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace COAT.Models.Util
 {
@@ -14,7 +11,8 @@ namespace COAT.Models.Util
 
         public override string ToString()
         {
-            return String.Format("'{0}' was modified from '{1}' to '{2}'", new object[] { PropertyName, OrignalValue, CurrentValue });
+            return String.Format("'{0}' was modified from '{1}' to '{2}'",
+                                 new[] {PropertyName, OrignalValue, CurrentValue});
         }
     }
 }

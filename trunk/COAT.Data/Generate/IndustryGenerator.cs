@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Data;
 using System.Linq;
-using System.Web;
 using COAT.Models;
-using COAT.Extension;
-using System.Data;
+using COAT.Util.Extension;
 
 namespace COAT.Data.Generate
 {
@@ -12,18 +9,21 @@ namespace COAT.Data.Generate
     {
         public IndustryGenerator(DataRow row)
             : base(row)
-        { }
+        {
+        }
 
-        protected override Extension.ColunmPropertyPair[] ColunmPropertyPairs
+        protected override ColunmPropertyPair[] ColunmPropertyPairs
         {
             get
             {
-                return new ColunmPropertyPair[]{
-                   new ColunmPropertyPair("Industry","Name")};
+                return new[]
+                           {
+                               new ColunmPropertyPair("Industry", "Name")
+                           };
             }
         }
 
-        protected override Industry GetInstance(System.Data.DataRow row)
+        protected override Industry GetInstance(DataRow row)
         {
             return new Industry();
         }
@@ -35,7 +35,7 @@ namespace COAT.Data.Generate
 
         protected override Industry SychronizeDB(Industry obj)
         {
-            var dbIndustry = Entity.Industries.FirstOrDefault(i => i.Name == obj.Name);
+            Industry dbIndustry = Entity.Industries.FirstOrDefault(i => i.Name == obj.Name);
             if (dbIndustry != null)
                 return dbIndustry;
 

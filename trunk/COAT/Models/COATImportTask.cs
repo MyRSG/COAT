@@ -1,29 +1,13 @@
-﻿using COAT.Schedule;
+﻿using System.Net.Mail;
 using COAT.Data.Import;
-using COAT.IDS;
-using System.Net.Mail;
 using COAT.Helper;
+using COAT.Schedule;
+using COAT.Util.IDS;
 
 namespace COAT.Models
 {
-    public partial class COATImportTask : IScheduleTask
+    public class COATImportTask : IScheduleTask
     {
-        public struct TaskType
-        {
-            public const string ImportORPDeal = "ImpotORPDeal";
-            public const string ImportExcutiveDeal = "ImportExcutiveDeal";
-            public const string ImportNameAccountList = "ImportNameAccountList";
-            public const string ImportChannelAssigner = "ImportChannelAssigner";
-            public const string ImportChannelApprover = "ImportChannelApprover";
-            public const string ImportChannelDirector = "ImportChannelDirector";
-            public const string ImportSalesAssigner = "ImportSalesAssigner";
-            public const string ImportSalesApprover = "ImportSalesApprover";
-            public const string ImportSalesDirector = "ImportSalesDirector";
-            public const string ImportVisitor = "ImportVisitor";
-            public const string ImportNameAccountSales = "ImportNameAccountSales";
-            public const string ImportVolumeSales = "ImportVolumeSales";
-        }
-
         public const string ImportTaskName = "ImportTask";
 
         public COATImportTask()
@@ -40,12 +24,19 @@ namespace COAT.Models
 
         public ImportTask ImportTask { get; private set; }
 
-        public int RunTimes
-        { get; set; }
+        public string FilePath
+        {
+            get { return ImportTask.FilePath; }
+            set { ImportTask.FilePath = value; }
+        }
+
+        #region IScheduleTask Members
+
+        public int RunTimes { get; set; }
 
         public void Run(object obj)
         {
-            if (string.IsNullOrWhiteSpace(this.Type))
+            if (string.IsNullOrWhiteSpace(Type))
                 return;
 
             switch (Type)
@@ -60,13 +51,16 @@ namespace COAT.Models
                     new NameAccountImporttHelper(FilePath).ImportRawData();
                     break;
                 case TaskType.ImportChannelAssigner:
-                    GetImportHelper(SystemRoleIds.ChannelAssigner, BusinessRoleIds.ChannelManager, FilePath).ImportRawData();
+                    GetImportHelper(SystemRoleIds.ChannelAssigner, BusinessRoleIds.ChannelManager, FilePath).
+                        ImportRawData();
                     break;
                 case TaskType.ImportChannelApprover:
-                    GetImportHelper(SystemRoleIds.ChannelApprover, BusinessRoleIds.ChannelManager, FilePath).ImportRawData();
+                    GetImportHelper(SystemRoleIds.ChannelApprover, BusinessRoleIds.ChannelManager, FilePath).
+                        ImportRawData();
                     break;
                 case TaskType.ImportChannelDirector:
-                    GetImportHelper(SystemRoleIds.ChannelDirector, BusinessRoleIds.ChannelDirector, FilePath).ImportRawData();
+                    GetImportHelper(SystemRoleIds.ChannelDirector, BusinessRoleIds.ChannelDirector, FilePath).
+                        ImportRawData();
                     break;
                 case TaskType.ImportSalesAssigner:
                     GetImportHelper(SystemRoleIds.SalesAssigner, BusinessRoleIds.InsideSales, FilePath).ImportRawData();
@@ -96,23 +90,17 @@ namespace COAT.Models
 
         public void Error(string msg)
         {
-            if (this.RunTimes > 3)
+            if (RunTimes > 3)
                 ImportTask.IsComplete = true;
 
-            this.ErrorMessage = msg;
+            ErrorMessage = msg;
         }
 
 
         public int Id
         {
-            get
-            {
-                return ImportTask.Id;
-            }
-            set
-            {
-                ImportTask.Id = value;
-            }
+            get { return ImportTask.Id; }
+            set { ImportTask.Id = value; }
         }
 
         public string Name { get; set; }
@@ -120,43 +108,52 @@ namespace COAT.Models
 
         public string Type
         {
-            get
-            {
-                return ImportTask.Type;
-            }
-            set
-            {
-                ImportTask.Type = value;
-            }
+            get { return ImportTask.Type; }
+            set { ImportTask.Type = value; }
         }
 
         public string ErrorMessage
         {
-            get
-            {
-                return ImportTask.ErrorMessage;
-            }
-            set
-            {
-                ImportTask.ErrorMessage = value;
-            }
+            get { return ImportTask.ErrorMessage; }
+            set { ImportTask.ErrorMessage = value; }
         }
 
-        public string FilePath { get { return ImportTask.FilePath; } set { ImportTask.FilePath = value; } }
+        #endregion
 
         private UserImportHelper GetImportHelper(int sysRoleId, int busRoleId, string path)
         {
-            var msg = GetMailMessage();
+            GetMailMessage();
             return new UserImportHelper(sysRoleId, busRoleId, null, path);
         }
 
         private MailMessage GetMailMessage()
         {
-            MailMessage msg = new MailMessage();
-            msg.Subject = "COAT Portal Account Notification Email";
-            msg.Body = new MailTempleteHepler().GetTemplete(MailTempleteHepler.NewAccount, "{0}/{1}");
+            var msg = new MailMessage
+                          {
+                              Subject = "COAT Portal Account Notification Email",
+                              Body = new MailTempleteHepler().GetTemplete(MailTempleteHepler.NewAccount, "{0}/{1}")
+                          };
             return msg;
         }
 
+        #region Nested type: TaskType
+
+        public struct TaskType
+        {
+            public const string ImportORPDeal = "ImpotORPDeal";
+            public const string ImportExcutiveDeal = "ImportExcutiveDeal";
+            public const string ImportNameAccountList = "ImportNameAccountList";
+            public const string ImportChannelAssigner = "ImportChannelAssigner";
+            public const string ImportChannelApprover = "ImportChannelApprover";
+            public const string ImportChannelDirector = "ImportChannelDirector";
+            public const string ImportSalesAssigner = "ImportSalesAssigner";
+            public const string ImportSalesApprover = "ImportSalesApprover";
+            public const string ImportSalesDirector = "ImportSalesDirector";
+            public const string ImportVisitor = "ImportVisitor";
+            public const string ImportNameAccountSales = "ImportNameAccountSales";
+            public const string ImportVolumeSales = "ImportVolumeSales";
+        }
+
+        #endregion
     }
 }

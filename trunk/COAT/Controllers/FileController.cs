@@ -1,25 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using COAT.Models;
 using COAT.Helper;
-using COAT.Schedule;
-using System.Diagnostics;
+using COAT.Models;
 
 namespace COAT.Controllers
 {
     public class FileController : Controller
     {
-        public class InputNameListItem
-        {
-            public string Text { get; set; }
-            public string Name { get; set; }
-        }
-
-        FileHelper fHelper = new FileHelper();
-        ScheduleTaskRunner stRunner = new ScheduleTaskRunner();
+        private readonly FileHelper _fHelper = new FileHelper();
 
         public ActionResult Index()
         {
@@ -71,7 +61,8 @@ namespace COAT.Controllers
 
         [Authorize(Roles = "Admin")]
         [HttpPost]
-        public ActionResult ImportORPData(HttpPostedFileBase orpDeal, HttpPostedFileBase excDeal, HttpPostedFileBase ncList)
+        public ActionResult ImportORPData(HttpPostedFileBase orpDeal, HttpPostedFileBase excDeal,
+                                          HttpPostedFileBase ncList)
         {
             ViewBag.InputNameList = GetORPDataImportNameList();
 
@@ -82,18 +73,16 @@ namespace COAT.Controllers
         }
 
 
-
         [Authorize]
         [HttpPost]
         public ActionResult UploadContract(IEnumerable<HttpPostedFileBase> files)
         {
-            foreach (var file in files)
+            foreach (HttpPostedFileBase file in files)
             {
                 if (file == null || file.ContentLength == 0)
                     continue;
 
-                fHelper.SaveContractFile(file);
-
+                _fHelper.SaveContractFile(file);
             }
 
             return View();
@@ -104,42 +93,52 @@ namespace COAT.Controllers
             if (file == null || file.ContentLength == 0)
                 return;
 
-            var fs = fHelper.SaveRawDateFile(file);
+            FileStore fs = _fHelper.SaveRawDateFile(file);
             //stRunner.AddTask(new ImportTask { Type = taskType, FilePath = fs.FilePath });
 
-            var task = new COATImportTask { Type = taskType, FilePath = fs.FilePath };
+            var task = new COATImportTask {Type = taskType, FilePath = fs.FilePath};
             var db = new COATEntities();
             db.ImportTasks.AddObject(task.ImportTask);
             db.SaveChanges();
             task.Run(null);
             task.Success();
             db.SaveChanges();
-
-
         }
 
         private dynamic[] GetORPDataImportNameList()
         {
-            return new dynamic[] { 
-                new InputNameListItem{ Text="ORP Deal Raw Data", Name="orpDeal" },
-                new InputNameListItem{ Text="Name Account List", Name="ncList" },
-                new InputNameListItem{ Text="Excutived ORP Raw Data", Name="excDeal"}
-            };
+            return new dynamic[]
+                       {
+                           new InputNameListItem {Text = "ORP Deal Raw Data", Name = "orpDeal"},
+                           new InputNameListItem {Text = "Name Account List", Name = "ncList"},
+                           new InputNameListItem {Text = "Excutived ORP Raw Data", Name = "excDeal"}
+                       };
         }
 
         private dynamic[] GetUsersImportNameList()
         {
-            return new dynamic[] { 
-                new InputNameListItem{ Text="Channel Assigner", Name="chAss" },
-                new InputNameListItem{ Text="Channel Approver", Name="chApp"}, 
-                new InputNameListItem{ Text="Channel Director", Name="chDir"}, 
-                new InputNameListItem{ Text="Sales Assigner", Name="saAss"}, 
-                new InputNameListItem{ Text="Sales Approver", Name="saApp"}, 
-                new InputNameListItem{ Text="Sales Director", Name="saDir"}, 
-                new InputNameListItem{ Text="Visitor", Name="visitor"},
-                new InputNameListItem{ Text="Name Account Sales", Name="ncSales"}, 
-                new InputNameListItem{ Text="Volume Sales", Name="volSales" }
-            };
+            return new dynamic[]
+                       {
+                           new InputNameListItem {Text = "Channel Assigner", Name = "chAss"},
+                           new InputNameListItem {Text = "Channel Approver", Name = "chApp"},
+                           new InputNameListItem {Text = "Channel Director", Name = "chDir"},
+                           new InputNameListItem {Text = "Sales Assigner", Name = "saAss"},
+                           new InputNameListItem {Text = "Sales Approver", Name = "saApp"},
+                           new InputNameListItem {Text = "Sales Director", Name = "saDir"},
+                           new InputNameListItem {Text = "Visitor", Name = "visitor"},
+                           new InputNameListItem {Text = "Name Account Sales", Name = "ncSales"},
+                           new InputNameListItem {Text = "Volume Sales", Name = "volSales"}
+                       };
         }
+
+        #region Nested type: InputNameListItem
+
+        public class InputNameListItem
+        {
+            public string Text { get; set; }
+            public string Name { get; set; }
+        }
+
+        #endregion
     }
 }
