@@ -49,9 +49,9 @@ namespace COAT.Controllers
             Db.SaveChanges();
             return base.Reject(deal, collection);
 
-            //var view = base.Reject(deal, collection);
-            //SendRejectMail(deal, collection);
-            //return view;
+           /* var view = base.Reject(deal, collection);
+            SendRejectMail(deal, collection);
+            return view;*/
         }
 
         public override ActionResult Wrong(Deal deal, FormCollection collection)
@@ -91,7 +91,7 @@ namespace COAT.Controllers
             Deal dbDeal = GetDeal(deal.Id);
             string url = Url.AbsoluteAction("Details", "Deals", new {id = deal.Id});
             string tmp = new MailTempleteHepler().GetTemplete(MailTempleteHepler.DealApproved);
-            string msg = string.Format(tmp, dbDeal.Customer.Name, url);
+            string msg = string.Format(tmp, dbDeal.Customer.Name, url,deal.Partner.Name);
             MHelper.SendMail(
                 new[] {GetAssignUser(collection).Email},
                 new[] {GetCurrentMemberShipUser().Email},
@@ -102,21 +102,21 @@ namespace COAT.Controllers
 
         protected void SendRejectMail(Deal deal, FormCollection collection)
         {
-            //try
-            //{
-            //    var dbDeal = GetDeal(deal.Id);
-            //    var url = Url.AbsoluteAction("Details", "Deals", new { id = deal.Id });
-            //    var tmp = new MailTempleteHepler().GetTemplete(MailTempleteHepler.DealRejected);
-            //    var msg = string.Format(tmp, dbDeal.Customer.Name, url);
-            //    mHelper.SendMail(
-            //        new string[] { GetAssignUser(collection).Email },
-            //        new string[] { GetCurrentMemberShipUser().Email },
-            //        new string[] { GetCurrentMemberShipUser().Email },
-            //        "合作伙伴业务机会已经被拒绝",
-            //        msg);
-            //}
-            //catch
-            //{ }
+            try
+            {
+                var dbDeal = GetDeal(deal.Id);
+                var url = Url.AbsoluteAction("Details", "Deals", new { id = deal.Id });
+                var tmp = new MailTempleteHepler().GetTemplete(MailTempleteHepler.DealRejected);
+                var msg = string.Format(tmp, dbDeal.Customer.Name, url,deal.Partner.Name);
+                MHelper.SendMail(
+                    new string[] { GetAssignUser(collection).Email },
+                    new string[] { GetCurrentMemberShipUser().Email },
+                    new string[] { GetCurrentMemberShipUser().Email },
+                    "合作伙伴业务机会已经被拒绝",
+                    msg);
+            }
+            catch
+            { }
         }
     }
 }

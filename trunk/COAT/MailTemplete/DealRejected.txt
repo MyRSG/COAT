@@ -5,6 +5,7 @@ Dear Colleague,
 Kindly please be advised an ORP deal has been declined by Symantec Channel Manager/ Inside Sales. Should you need know the rejection reason, please click link below to access COAT system.
 
 客户名称:{0}
+合作伙伴名称:{2}
 业务机会信息链接:{1}
 
 如有任何问题，请联系渠道经理，渠道经理信息见cc copy 栏。

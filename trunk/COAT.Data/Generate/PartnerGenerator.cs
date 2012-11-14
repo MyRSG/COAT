@@ -19,7 +19,7 @@ namespace COAT.Data.Generate
                 return new[]
                            {
                                new ColunmPropertyPair("Partner Account", "Name"),
-                               new ColunmPropertyPair("Partner Qualification", "Qualification")
+                               new ColunmPropertyPair("Partner Qualification", "Qualification",true)
                            };
             }
         }
