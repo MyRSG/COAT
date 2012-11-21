@@ -22,20 +22,22 @@ namespace COATDailyTaskRunner
             SendChannelMail();
             SendSalesMail();
             SendChannelDirectorMail();
-            SendToMe();
+            SendToAdmin();
         }
 
-        private static void SendToMe()
+        private static void SendToAdmin()
         {
+            string[] mailList = SHelper.Admins.Select(u => u.Email).ToArray();
             try
             {
-                MHelper.SendMail(new[] {"chao_zhou@symantec.com"}, null, "COAT Daily Report Notification",
+                MHelper.SendMail(mailList, null, "COAT Daily Report Notification",
                                  GetErrorMessage());
             }
             catch
             {
             }
         }
+
 
         private static string GetErrorMessage()
         {

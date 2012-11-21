@@ -22,5 +22,10 @@ namespace COATDailyTaskRunner
         {
             get { return _db.Users.Where(a => a.SystemRoleId == SystemRoleIds.SalesApprover).ToArray(); }
         }
+
+        public User[] Admins
+        {
+            get { return _db.Users.Where(a => a.SystemRoleId == SystemRoleIds.Admin).ToArray(); }
+        }
     }
 }
