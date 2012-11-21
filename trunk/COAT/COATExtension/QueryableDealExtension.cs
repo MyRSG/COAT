@@ -22,7 +22,8 @@ namespace COAT.COATExtension
                 .SearchBeginDate(model)
                 .SearchEndDate(model)
                 .SearchBeginActDate(model)
-                .SearchEndActDate(model);
+                .SearchEndActDate(model)
+                .SearchSpecialization(model);
         }
 
         public static IQueryable<Deal> SearchBeginActDate(this IQueryable<Deal> deals, DealSearchViewModel model)
@@ -151,6 +152,14 @@ namespace COAT.COATExtension
                 return deals;
 
             return deals.Where(d => d.CreateDate <= model.EndDate);
+        }
+
+        public static IQueryable<Deal> SearchSpecialization(this IQueryable<Deal> deals, DealSearchViewModel model)
+        {
+            if (model.SpecializationsName == "")
+                return deals;
+
+            return deals.Where(d => d.Specialization.FullName == model.SpecializationsName);
         }
     }
 }

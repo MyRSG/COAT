@@ -17,6 +17,7 @@ namespace COAT.ViewModel.Shared
         public int ProvinceId { get; set; }
         public int Industry2Id { get; set; }
         public int ORPTypeId { get; set; }
+        public string SpecializationsName { get; set; }
         public string Region { get; set; }
         public string COATStatusActionName { get; set; }
         public int SFDCStatusId { get; set; }
@@ -26,6 +27,7 @@ namespace COAT.ViewModel.Shared
         public DateTime? EndDate { get; set; }
         public DateTime? BeginActDate { get; set; }
         public DateTime? EndActDate { get; set; }
+        
 
         public string ControllerName { get; set; }
         public string ActionName { get; set; }
@@ -146,12 +148,40 @@ namespace COAT.ViewModel.Shared
             }
         }
 
+        public IEnumerable<SelectListItem> SpecializationList
+        {
+            get
+            {
+                return AddSelectListItem(
+                    _db.Specializations.OrderBy(a=>a.FullName)
+                    .ToList().Select(
+                    a=>
+                        new SelectListItem { Text = a.FullName, Value = a.FullName, Selected = a.FullName == SpecializationsName })
+                    .Distinct(new SelectListItemEqualityComparer()),
+              new SelectListItem { Text = "All", Value = "", Selected = string.IsNullOrEmpty(SpecializationsName) });
+            }
+        }
+
         private static IEnumerable<SelectListItem> AddSelectListItem(IEnumerable<SelectListItem> list,
                                                                      SelectListItem item)
         {
             List<SelectListItem> rslt = list.ToList();
             rslt.Add(item);
             return rslt;
+        }
+
+        class SelectListItemEqualityComparer:IEqualityComparer<SelectListItem>
+        {
+            public bool Equals(SelectListItem x, SelectListItem y)
+            {
+                return (x.Text == y.Text) && (x.Value == y.Value);
+            }
+
+            public int GetHashCode(SelectListItem obj)
+            {
+                // This hash code is not right, but I can't find another way is better than this.
+                return string.Format("{0}{1}",obj.Text,obj.Value).GetHashCode();
+            }
         }
     }
 }

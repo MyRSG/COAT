@@ -59,7 +59,6 @@ namespace COAT.Util.Extension
             }
         }
 
-
         public static void UpdateInclude(this object thisObj, object obj, string[] includes)
         {
             bool isEntiryObj = IsEntityObject(thisObj);
@@ -82,7 +81,6 @@ namespace COAT.Util.Extension
                 }
             }
         }
-
 
         public static bool IsSimilarEqual(this object thisObj, object obj, string[] excepts = null)
         {
@@ -111,7 +109,6 @@ namespace COAT.Util.Extension
 
             return true;
         }
-
 
         public static bool IsEntityScalarProperty(PropertyInfo prop)
         {

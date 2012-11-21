@@ -21,6 +21,12 @@
                     @Html.EditorFor(model => model.DealId)
                 </div>
                 <div class="search-field">
+                    Specialization
+                    @Html.DropDownListFor(model => model.SpecializationsName,Model.SpecializationList)
+                </div>
+                <div class="clear">
+                </div>
+                <div class="search-field">
                     Begin Date
                     @Html.TextBoxFor(model => model.BeginDate, new { @class = "datepicker" })
                 </div>
@@ -38,6 +44,7 @@
                 </div>
                 <div class="clear">
                 </div>
+               
             </div>
             <div id="assigned-search-containter">
                 <div class="search-field">
