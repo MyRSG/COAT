@@ -156,7 +156,7 @@ namespace COAT.COATExtension
 
         public static IQueryable<Deal> SearchSpecialization(this IQueryable<Deal> deals, DealSearchViewModel model)
         {
-            if (model.SpecializationsName == "")
+            if (string.IsNullOrEmpty(model.SpecializationsName))
                 return deals;
 
             return deals.Where(d => d.Specialization.FullName == model.SpecializationsName);

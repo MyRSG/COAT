@@ -8,10 +8,13 @@
                     Validation Team
                     @Html.DropDownListFor(model => model.ValidationTeamId, Model.ValidationTeamList)
                 </div>
-                <div class="search-field">
-                    COAT Status
-                    @Html.DropDownListFor(model => model.COATStatusActionName, Model.COATStatusList)
-                </div>
+                @if (!Model.IsHideStatus)
+                {
+                    <div class="search-field">
+                        COAT Status
+                        @Html.DropDownListFor(model => model.COATStatusActionName, Model.COATStatusList)
+                    </div>
+                }
                 <div class="search-field">
                     Customer
                     @Html.EditorFor(model => model.CustomerName)
@@ -22,7 +25,7 @@
                 </div>
                 <div class="search-field">
                     Specialization
-                    @Html.DropDownListFor(model => model.SpecializationsName,Model.SpecializationList)
+                    @Html.DropDownListFor(model => model.SpecializationsName, Model.SpecializationList)
                 </div>
                 <div class="clear">
                 </div>

@@ -27,7 +27,8 @@ namespace COAT.ViewModel.Shared
         public DateTime? EndDate { get; set; }
         public DateTime? BeginActDate { get; set; }
         public DateTime? EndActDate { get; set; }
-        
+
+        public bool IsHideStatus { get; set; }
 
         public string ControllerName { get; set; }
         public string ActionName { get; set; }

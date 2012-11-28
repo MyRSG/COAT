@@ -63,5 +63,12 @@ namespace COAT.Database
 
             return Entities.Deals;
         }
+
+        public IQueryable<Deal> GetEndDeals()
+        {
+            return Entities.Deals.Where(
+                a => a.Status.ActionName == COATStatusValue.Approved 
+                || a.Status.ActionName == COATStatusValue.Rejected);
+        }
     }
 }

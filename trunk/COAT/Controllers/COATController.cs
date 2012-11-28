@@ -87,7 +87,8 @@ namespace COAT.Controllers
         }
 
         #endregion
-
+        
+        #region "Protected Methods"
         protected virtual void OnApproving(Deal deal, FormCollection collection)
         {
         }
@@ -110,7 +111,7 @@ namespace COAT.Controllers
 
         #endregion
 
-        #region "Protected Methods"
+      
 
         protected IPagination<Deal> SortAndPagingDeal(IQueryable<Deal> deals, GridSortOptions sort, int? page)
         {
@@ -139,7 +140,7 @@ namespace COAT.Controllers
             string header = new DealProductViewModel().ActionInputHead;
             foreach (string key in collection.AllKeys)
             {
-                if (key == null || key.IndexOf(header, StringComparison.Ordinal) == 0)
+                if (key == null || key.IndexOf(header, StringComparison.Ordinal) < 0)
                     continue;
 
                 int id = int.Parse(key.Remove(0, header.Length));

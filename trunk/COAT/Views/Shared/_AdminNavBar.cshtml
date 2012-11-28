@@ -1,11 +1,16 @@
 ﻿<div id="adminNav" style="height: 100%;">
+     <h3>
+        <a href="#">Approved Deal Managment</a></h3>
+    <ul>
+        <li>@Html.ActionLink("ReAssign", "Index", "Admin")</li>
+    </ul>
     <h3>
         <a href="#">Import Data From Excel</a></h3>
     <ul>
         <li>@Html.ActionLink("Import ORP Data", "ImportORPData", "File")</li>
         <li>@Html.ActionLink("Import User Data", "ImportUsers", "File")</li>
     </ul>
-      <h3>
+    <h3>
         <a href="#">Settings</a></h3>
     <ul>
         <li>@Html.ActionLink("Modify Settings", "Index", "Setting")</li>

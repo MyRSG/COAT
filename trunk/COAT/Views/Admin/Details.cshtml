@@ -1,0 +1,40 @@
+﻿@model COAT.Models.Deal
+@using COAT.ViewModel.Shared;
+@{
+    ViewBag.Title = "ReAssign Deal";
+    Layout = "~/Views/Shared/_DealManagementLayout.cshtml";
+}
+<h2>@ViewBag.Title</h2>
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+    @Html.Partial("_DealPartial", new DealViewModel { Deal = Model, IsEditable = false })
+    @Html.Partial("_CustomerPartial", new CustomerViewModel { Customer = Model.Customer, IsSetRegion = true })
+    @Html.Partial("_PartnerPartial", Model.Partner)
+    <hr />
+    @Html.Partial("_ApproveHistoriesPartial", Model.ApprovalHistories)
+    <hr />
+    @Html.Partial("_DealProductsPartial", new DealProductsViewModel { DealProducts = Model.DealProducts })
+    <fieldset>
+        <dl>
+            <dt class="editor-label">Comment</dt>
+            <dd class="editor-field ">
+                <textarea id="comment" name="comment"></textarea></dd>
+            <dd class="clear_dd"></dd>
+        </dl>
+        <div>
+            <input id="btnApprove" class="submit" type="button" value="ReAssgin" />
+        </div>
+    </fieldset> 
+}
+
+
+<script type="text/javascript">
+    $('#btnApprove').MvcSubmit('Approve', 'Details');  
+</script>
