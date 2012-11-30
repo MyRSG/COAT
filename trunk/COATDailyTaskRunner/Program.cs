@@ -51,6 +51,11 @@ namespace COATDailyTaskRunner
                 sb.AppendLine();
             }
 
+            if (sb.Length == 0)
+            {
+                sb.Append("There is no error today.");
+            }
+
             return sb.ToString();
         }
 

@@ -37,6 +37,11 @@ namespace COAT.Helper
             return SaveFile(file, ContractFolderPath);
         }
 
+        public string GetPhysicalPath(string path)
+        {
+            return Path.Combine(FileRootPath, path);
+        }
+
         private void IntialStructure()
         {
             if (!Directory.Exists(FileRootPath))

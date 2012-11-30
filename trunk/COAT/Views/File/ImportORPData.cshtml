@@ -3,15 +3,19 @@
     Layout = "~/Views/Shared/_AdminManagmentLayout.cshtml";
 }
 <div>
+    @Html.ActionLink("ORP Template", "Template", new {path="Template\\ORP.xlsx" })&nbsp;
+    @Html.ActionLink("Excutive Template", "Template", new {path="Template\\EX.xlsx" })
+</div>
+<div>
     @using (Html.BeginForm("ImportORPData", "File", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         foreach (dynamic item in ViewBag.InputNameList)
         { 
-        <h3>
-            @item.Text</h3>
-        <hr />
-        <span style="margin-right: 10px; font-weight: bold; color: #804000;">File:</span>
-        <input type="file" name="@item.Name" id="@item.Name"  style="width:80%;" onchange="check_file(this)"/>
+            <h3>
+                @item.Text</h3>
+            <hr />
+            <span style="margin-right: 10px; font-weight: bold; color: #804000;">File:</span>
+            <input type="file" name="@item.Name" id="@item.Name"  style="width:80%;" onchange="check_file(this)"/>
         }
         <br />
         <br />

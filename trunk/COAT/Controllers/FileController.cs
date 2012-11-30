@@ -17,9 +17,14 @@ namespace COAT.Controllers
         }
 
         [Authorize]
-        public FileResult Download(string filename)
+        public FileResult Template(string path)
         {
-            throw new NotImplementedException();
+            var phyPath = new FileHelper().GetPhysicalPath(path);
+            var contentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+            var rslt = new FilePathResult(phyPath, contentType);
+            rslt.FileDownloadName = "template.xlsx";
+            return rslt;
+
         }
 
         [Authorize(Roles = "Admin")]
