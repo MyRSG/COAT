@@ -38,12 +38,16 @@ namespace COAT.Security
 
         public override void AddUsersToRoles(string[] usernames, string[] roleNames)
         {
+// ReSharper disable RedundantJumpStatement
             return;
+// ReSharper restore RedundantJumpStatement
         }
 
         public override void CreateRole(string roleName)
         {
+// ReSharper disable RedundantJumpStatement
             return;
+// ReSharper restore RedundantJumpStatement
         }
 
         public override bool DeleteRole(string roleName, bool throwOnPopulatedRole)
@@ -78,7 +82,9 @@ namespace COAT.Security
 
         public override void RemoveUsersFromRoles(string[] usernames, string[] roleNames)
         {
+// ReSharper disable RedundantJumpStatement
             return;
+// ReSharper restore RedundantJumpStatement
         }
 
         public override bool RoleExists(string roleName)

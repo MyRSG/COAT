@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.OleDb;
 using System.IO;
 using System.Linq;
+using COAT.Util.Log;
 
 namespace COAT.Data.Import
 {
@@ -18,8 +19,9 @@ namespace COAT.Data.Import
         protected const string XlsxProvideStrFormat =
             "Provider=Microsoft.ACE.OLEDB.12.0;Data Source={0};Extended Properties=\"Excel 12.0;HDR=NO; IMEX=1;\"";
 
+        protected  Logger Logger = new Logger();
         private readonly Dictionary<string, int> _headerCount = new Dictionary<string, int>();
-
+        
         public ExcelImportHelper(string path)
         {
             Path = path;
@@ -29,7 +31,7 @@ namespace COAT.Data.Import
 
         public DataTable GetTable(string query)
         {
-            DataTable dt = GetFilledTable(query);
+            var dt = GetFilledTable(query);
             ReColunmTable(dt);
             return dt;
         }
@@ -39,8 +41,10 @@ namespace COAT.Data.Import
             string[] rslt = null;
             SaveOpenConnection(conn =>
                                    {
+// ReSharper disable AssignNullToNotNullAttribute
                                            rslt = conn
                                                .GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null)
+// ReSharper restore AssignNullToNotNullAttribute
                                                .AsEnumerable()
                                                .Select(r => r[TableNameHeader].ToString())
                                                .ToArray();
@@ -51,7 +55,7 @@ namespace COAT.Data.Import
 
         private OleDbConnection GetConnection()
         {
-            string connString = GetConnectionString();
+            var connString = GetConnectionString();
             return new OleDbConnection(connString);
         }
 
@@ -83,18 +87,17 @@ namespace COAT.Data.Import
         private void ReColunmTable(DataTable dt)
         {
             //Rename columns and delete first row
-            if (dt.Rows.Count > 0)
+            if (dt.Rows.Count <= 0) return;
+            var dr = dt.Rows[0];
+            
+            for (var col = 0; col < dt.Columns.Count; col++)
             {
-                DataRow dr = dt.Rows[0];
-                for (int col = 0; col < dt.Columns.Count; col++)
-                {
-                    if (!string.IsNullOrWhiteSpace(dr[col].ToString()))
-                        dt.Columns[col].ColumnName = GetColunmName(dr[col].ToString());
-                }
-
-                dt.Rows[0].Delete();
-                dt.AcceptChanges();
+                if (!string.IsNullOrWhiteSpace(dr[col].ToString()))
+                    dt.Columns[col].ColumnName = GetColunmName(dr[col].ToString());
             }
+
+            dt.Rows[0].Delete();
+            dt.AcceptChanges();
         }
 
         private string GetColunmName(string headerString)
@@ -111,7 +114,7 @@ namespace COAT.Data.Import
 
         private void SaveOpenConnection(Action<OleDbConnection> action)
         {
-            OleDbConnection conn = GetConnection();
+            var conn = GetConnection();
             try
             {
                 conn.Open();

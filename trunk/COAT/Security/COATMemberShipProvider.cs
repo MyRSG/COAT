@@ -127,10 +127,8 @@ namespace COAT.Security
         public override bool ChangePassword(string username, string oldPassword, string newPassword)
         {
             //TODO: Validate Password Strength First
-            if (!ValidateNewPassword(newPassword, oldPassword))
-                return false;
-
-            return _userRespository.ChangePassword(username, oldPassword, newPassword);
+            return ValidateNewPassword(newPassword, oldPassword) 
+                && _userRespository.ChangePassword(username, oldPassword, newPassword);
         }
 
         public override bool ChangePasswordQuestionAndAnswer(string username, string password,
@@ -236,7 +234,9 @@ namespace COAT.Security
             return configValue;
         }
 
+// ReSharper disable UnusedParameter.Local
         private bool ValidateNewPassword(string newPassword, string oldPassword)
+// ReSharper restore UnusedParameter.Local
         {
             return true;
         }

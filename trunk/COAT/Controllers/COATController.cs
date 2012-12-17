@@ -101,7 +101,7 @@ namespace COAT.Controllers
         {
             try
             {
-                return collection["comment"];
+                return collection["comment"]??string.Empty;
             }
             catch
             {

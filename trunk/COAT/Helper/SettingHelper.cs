@@ -5,16 +5,14 @@ namespace COAT.Helper
 {
     public class SettingHelper
     {
-        private readonly COATEntities db = new COATEntities();
+        private readonly COATEntities _db = new COATEntities();
 
         public string this[string index]
         {
             get
             {
-                var firstOrDefault = db.Settings.FirstOrDefault(a => a.Name == index);
-                if (firstOrDefault != null)
-                    return firstOrDefault.Name;
-                return null;
+                var firstOrDefault = _db.Settings.FirstOrDefault(a => a.Name == index);
+                return firstOrDefault != null ? firstOrDefault.Name : null;
             }
         }
     }

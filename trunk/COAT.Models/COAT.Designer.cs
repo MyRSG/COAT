@@ -8,12 +8,13 @@
 //------------------------------------------------------------------------------
 
 using System;
+using System.ComponentModel;
+using System.Data.EntityClient;
 using System.Data.Objects;
 using System.Data.Objects.DataClasses;
-using System.Data.EntityClient;
-using System.ComponentModel;
-using System.Xml.Serialization;
+using System.Linq;
 using System.Runtime.Serialization;
+using System.Xml.Serialization;
 
 [assembly: EdmSchemaAttribute()]
 #region EDM Relationship Metadata
@@ -591,6 +592,7 @@ namespace COAT.Models
         private ObjectSet<Deal> _Deals;
 
         #endregion
+
         #region AddTo Methods
     
         /// <summary>
@@ -842,11 +844,11 @@ namespace COAT.Models
         }
 
         #endregion
+
     }
-    
 
     #endregion
-    
+
     #region Entities
     
     /// <summary>
@@ -879,6 +881,7 @@ namespace COAT.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -1053,6 +1056,7 @@ namespace COAT.Models
         partial void OnDateTimeChanged();
 
         #endregion
+
     
         #region Navigation Properties
     
@@ -1171,6 +1175,7 @@ namespace COAT.Models
         }
 
         #endregion
+
     }
     
     /// <summary>
@@ -1197,6 +1202,7 @@ namespace COAT.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -1251,6 +1257,7 @@ namespace COAT.Models
         partial void OnNameChanged();
 
         #endregion
+
     
         #region Navigation Properties
     
@@ -1277,6 +1284,7 @@ namespace COAT.Models
         }
 
         #endregion
+
     }
     
     /// <summary>
@@ -1303,6 +1311,7 @@ namespace COAT.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -1405,6 +1414,7 @@ namespace COAT.Models
         partial void OnFileStoreIdChanged();
 
         #endregion
+
     
         #region Navigation Properties
     
@@ -1469,6 +1479,7 @@ namespace COAT.Models
         }
 
         #endregion
+
     }
     
     /// <summary>
@@ -1493,6 +1504,7 @@ namespace COAT.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -1667,6 +1679,7 @@ namespace COAT.Models
         partial void OnProvinceChanged();
 
         #endregion
+
     
         #region Navigation Properties
     
@@ -1693,6 +1706,7 @@ namespace COAT.Models
         }
 
         #endregion
+
     }
     
     /// <summary>
@@ -1717,6 +1731,7 @@ namespace COAT.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -2323,6 +2338,7 @@ namespace COAT.Models
         partial void OnDirectorDateChanged();
 
         #endregion
+
     
         #region Navigation Properties
     
@@ -2871,6 +2887,7 @@ namespace COAT.Models
         }
 
         #endregion
+
     }
     
     /// <summary>
@@ -2899,6 +2916,7 @@ namespace COAT.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -2977,6 +2995,7 @@ namespace COAT.Models
         partial void OnContractIdChanged();
 
         #endregion
+
     
         #region Navigation Properties
     
@@ -3057,6 +3076,7 @@ namespace COAT.Models
         }
 
         #endregion
+
     }
     
     /// <summary>
@@ -3089,6 +3109,7 @@ namespace COAT.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -3215,6 +3236,7 @@ namespace COAT.Models
         partial void OnIsActiveChanged();
 
         #endregion
+
     
         #region Navigation Properties
     
@@ -3301,6 +3323,7 @@ namespace COAT.Models
         }
 
         #endregion
+
     }
     
     /// <summary>
@@ -3335,6 +3358,7 @@ namespace COAT.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -4268,6 +4292,7 @@ namespace COAT.Models
         partial void OnSalesCareChanged();
 
         #endregion
+
     
     }
     
@@ -4293,6 +4318,7 @@ namespace COAT.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -4371,6 +4397,7 @@ namespace COAT.Models
         partial void OnIsSalesSizeChanged();
 
         #endregion
+
     
     }
     
@@ -4396,6 +4423,7 @@ namespace COAT.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -5074,6 +5102,7 @@ namespace COAT.Models
         partial void OnEndUserName2Changed();
 
         #endregion
+
     
     }
     
@@ -5109,6 +5138,7 @@ namespace COAT.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -5259,6 +5289,7 @@ namespace COAT.Models
         partial void OnExtensionChanged();
 
         #endregion
+
     
         #region Navigation Properties
     
@@ -5285,6 +5316,7 @@ namespace COAT.Models
         }
 
         #endregion
+
     }
     
     /// <summary>
@@ -5311,6 +5343,7 @@ namespace COAT.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -5461,6 +5494,7 @@ namespace COAT.Models
         partial void OnFilePathChanged();
 
         #endregion
+
     
     }
     
@@ -5486,6 +5520,7 @@ namespace COAT.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -5540,6 +5575,7 @@ namespace COAT.Models
         partial void OnNameChanged();
 
         #endregion
+
     
         #region Navigation Properties
     
@@ -5566,6 +5602,7 @@ namespace COAT.Models
         }
 
         #endregion
+
     }
     
     /// <summary>
@@ -5592,6 +5629,7 @@ namespace COAT.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -5646,6 +5684,7 @@ namespace COAT.Models
         partial void OnNameChanged();
 
         #endregion
+
     
         #region Navigation Properties
     
@@ -5672,6 +5711,7 @@ namespace COAT.Models
         }
 
         #endregion
+
     }
     
     /// <summary>
@@ -5704,6 +5744,7 @@ namespace COAT.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -5878,6 +5919,7 @@ namespace COAT.Models
         partial void OnDateTimeChanged();
 
         #endregion
+
     
         #region Navigation Properties
     
@@ -5996,6 +6038,7 @@ namespace COAT.Models
         }
 
         #endregion
+
     }
     
     /// <summary>
@@ -6020,6 +6063,7 @@ namespace COAT.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -6554,6 +6598,7 @@ namespace COAT.Models
         partial void OnNALIDChanged();
 
         #endregion
+
     
     }
     
@@ -6579,6 +6624,7 @@ namespace COAT.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -6633,6 +6679,7 @@ namespace COAT.Models
         partial void OnNameChanged();
 
         #endregion
+
     
     }
     
@@ -6660,6 +6707,7 @@ namespace COAT.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -6738,6 +6786,7 @@ namespace COAT.Models
         partial void OnQualificationChanged();
 
         #endregion
+
     
         #region Navigation Properties
     
@@ -6764,6 +6813,7 @@ namespace COAT.Models
         }
 
         #endregion
+
     }
     
     /// <summary>
@@ -6788,6 +6838,7 @@ namespace COAT.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -6818,6 +6869,7 @@ namespace COAT.Models
         partial void OnIdChanged();
 
         #endregion
+
     
     }
     
@@ -6843,6 +6895,7 @@ namespace COAT.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -6873,6 +6926,7 @@ namespace COAT.Models
         partial void OnIdChanged();
 
         #endregion
+
     
     }
     
@@ -6900,6 +6954,7 @@ namespace COAT.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -6954,6 +7009,7 @@ namespace COAT.Models
         partial void OnNameChanged();
 
         #endregion
+
     
         #region Navigation Properties
     
@@ -6980,6 +7036,7 @@ namespace COAT.Models
         }
 
         #endregion
+
     }
     
     /// <summary>
@@ -7004,6 +7061,7 @@ namespace COAT.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -7034,6 +7092,7 @@ namespace COAT.Models
         partial void OnNameChanged();
 
         #endregion
+
     
     }
     
@@ -7059,6 +7118,7 @@ namespace COAT.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -7089,6 +7149,7 @@ namespace COAT.Models
         partial void OnIdChanged();
 
         #endregion
+
     
     }
     
@@ -7114,6 +7175,7 @@ namespace COAT.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -7600,6 +7662,7 @@ namespace COAT.Models
         partial void OnChinaRegionChanged();
 
         #endregion
+
     
     }
     
@@ -7625,6 +7688,7 @@ namespace COAT.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -7679,6 +7743,7 @@ namespace COAT.Models
         partial void OnValueChanged();
 
         #endregion
+
     
     }
     
@@ -7706,6 +7771,7 @@ namespace COAT.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -7760,6 +7826,7 @@ namespace COAT.Models
         partial void OnNameChanged();
 
         #endregion
+
     
         #region Navigation Properties
     
@@ -7786,6 +7853,7 @@ namespace COAT.Models
         }
 
         #endregion
+
     }
     
     /// <summary>
@@ -7810,6 +7878,7 @@ namespace COAT.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -7936,6 +8005,7 @@ namespace COAT.Models
         partial void OnSalesCareChanged();
 
         #endregion
+
     
         #region Navigation Properties
     
@@ -7962,6 +8032,7 @@ namespace COAT.Models
         }
 
         #endregion
+
     }
     
     /// <summary>
@@ -7986,6 +8057,7 @@ namespace COAT.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -8064,6 +8136,7 @@ namespace COAT.Models
         partial void OnActionNameChanged();
 
         #endregion
+
     
         #region Navigation Properties
     
@@ -8090,6 +8163,7 @@ namespace COAT.Models
         }
 
         #endregion
+
     }
     
     /// <summary>
@@ -8116,6 +8190,7 @@ namespace COAT.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -8170,6 +8245,7 @@ namespace COAT.Models
         partial void OnNameChanged();
 
         #endregion
+
     
         #region Navigation Properties
     
@@ -8196,6 +8272,7 @@ namespace COAT.Models
         }
 
         #endregion
+
     }
     
     /// <summary>
@@ -8230,6 +8307,7 @@ namespace COAT.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -8404,6 +8482,7 @@ namespace COAT.Models
         partial void OnIsDeleteChanged();
 
         #endregion
+
     
         #region Navigation Properties
     
@@ -8616,6 +8695,7 @@ namespace COAT.Models
         }
 
         #endregion
+
     }
     
     /// <summary>
@@ -8650,6 +8730,7 @@ namespace COAT.Models
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -8839,9 +8920,11 @@ namespace COAT.Models
         partial void OnSRoleChanged();
 
         #endregion
+
     
     }
 
     #endregion
+
     
 }

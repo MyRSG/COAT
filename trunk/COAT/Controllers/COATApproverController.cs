@@ -18,18 +18,6 @@ namespace COAT.Controllers
             return base.Details(id);
         }
 
-        protected override string GetComment(FormCollection collection)
-        {
-            try
-            {
-                return collection["comment"];
-            }
-            catch
-            {
-                return string.Empty;
-            }
-        }
-
         protected override void OnApproving(Deal deal, FormCollection collection)
         {
             deal.ApproverId = GetCurrentMemberShipUser().COATUser.Id;
@@ -67,14 +55,14 @@ namespace COAT.Controllers
             deal.NotifySalesId = GetAssignToId(collection);
             UpdateDeal(deal, new[] {"ChinaRegion", "ProvinceId", "Industry2Id", "NotifySalesId"});
 
-            Deal dbDeal = GetDeal(deal.Id);
+            var dbDeal = GetDeal(deal.Id);
             dbDeal.StatusId = PendingSalesStatusId;
             SaveApproveHistory(dbDeal.Id, "Wait for Sales Confirmation", GetComment(collection));
             Db.SaveChanges();
 
-            string url = Url.AbsoluteAction("Details", "Deals", new {id = deal.Id});
-            string tmp = new MailTempleteHepler().GetTemplete(MailTempleteHepler.SalesCofirm);
-            string msg = string.Format(tmp, dbDeal.Name, url);
+            var url = Url.AbsoluteAction("Details", "Deals", new {id = deal.Id});
+            var tmp = new MailTempleteHepler().GetTemplete(MailTempleteHepler.SalesCofirm);
+            var msg = string.Format(tmp, dbDeal.Name, url);
             MHelper.SendMail(
                 new[] {GetAssignUser(collection).Email},
                 new[] {GetCurrentMemberShipUser().Email},
@@ -88,10 +76,10 @@ namespace COAT.Controllers
 
         protected void SendApprovedMail(Deal deal, FormCollection collection)
         {
-            Deal dbDeal = GetDeal(deal.Id);
-            string url = Url.AbsoluteAction("Details", "Deals", new {id = deal.Id});
-            string tmp = new MailTempleteHepler().GetTemplete(MailTempleteHepler.DealApproved);
-            string msg = string.Format(tmp, dbDeal.Customer.Name, url,deal.Partner.Name);
+            var dbDeal = GetDeal(deal.Id);
+            var url = Url.AbsoluteAction("Details", "Deals", new {id = deal.Id});
+            var tmp = new MailTempleteHepler().GetTemplete(MailTempleteHepler.DealApproved);
+            var msg = string.Format(tmp, dbDeal.Customer.Name, url,deal.Partner.Name);
             MHelper.SendMail(
                 new[] {GetAssignUser(collection).Email},
                 new[] {GetCurrentMemberShipUser().Email},
@@ -105,18 +93,20 @@ namespace COAT.Controllers
             try
             {
                 var dbDeal = GetDeal(deal.Id);
-                var url = Url.AbsoluteAction("Details", "Deals", new { id = deal.Id });
+                var url = Url.AbsoluteAction("Details", "Deals", new {id = deal.Id});
                 var tmp = new MailTempleteHepler().GetTemplete(MailTempleteHepler.DealRejected);
-                var msg = string.Format(tmp, dbDeal.Customer.Name, url,deal.Partner.Name);
+                var msg = string.Format(tmp, dbDeal.Customer.Name, url, deal.Partner.Name);
                 MHelper.SendMail(
-                    new string[] { GetAssignUser(collection).Email },
-                    new string[] { GetCurrentMemberShipUser().Email },
-                    new string[] { GetCurrentMemberShipUser().Email },
+                    new[] {GetAssignUser(collection).Email},
+                    new[] {GetCurrentMemberShipUser().Email},
+                    new[] {GetCurrentMemberShipUser().Email},
                     "合作伙伴业务机会已经被拒绝",
                     msg);
             }
-            catch
-            { }
+            catch (Exception e)
+            {
+                Logger.Error(e.Message);
+            }
         }
     }
 }

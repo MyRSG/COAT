@@ -50,7 +50,9 @@ namespace COAT.Schedule
             {
                 if (task.Name == COATImportTask.ImportTaskName)
                 {
+// ReSharper disable SuspiciousTypeConversion.Global
                     _db.ImportTasks.AddObject((ImportTask) task);
+// ReSharper restore SuspiciousTypeConversion.Global
                     _db.SaveChanges();
                 }
 

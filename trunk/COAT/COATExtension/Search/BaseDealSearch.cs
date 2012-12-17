@@ -1,4 +1,6 @@
-﻿namespace COAT.COATExtension.Search
+﻿// ReSharper disable EmptyNamespace
+namespace COAT.COATExtension.Search
+// ReSharper restore EmptyNamespace
 {
     //public class BaseDealSearch : IDealSearch
     //{

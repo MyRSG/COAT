@@ -58,6 +58,8 @@
     <Compile Include="Extension\UrlExtension.cs" />
     <Compile Include="IDS\BusinessRoleIds.cs" />
     <Compile Include="IDS\SystemRoleIds.cs" />
+    <Compile Include="Log\Logger.cs" />
+    <Compile Include="Log\LogLevel.cs" />
     <Compile Include="Mail\COATMailHelper.cs" />
     <Compile Include="Mail\COATMailMessage.cs" />
     <Compile Include="Mail\COATMailMessageBuilder.cs" />

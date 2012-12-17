@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Web;
 using System.Web.Mvc;
 using COAT.Helper;
@@ -20,9 +19,8 @@ namespace COAT.Controllers
         public FileResult Template(string path)
         {
             var phyPath = new FileHelper().GetPhysicalPath(path);
-            var contentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-            var rslt = new FilePathResult(phyPath, contentType);
-            rslt.FileDownloadName = "template.xlsx";
+            const string contentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+            var rslt = new FilePathResult(phyPath, contentType) {FileDownloadName = "template.xlsx"};
             return rslt;
 
         }

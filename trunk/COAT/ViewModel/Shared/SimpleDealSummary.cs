@@ -22,7 +22,7 @@ namespace COAT.ViewModel.Shared
 
         public int ToBeValidated
         {
-            get { return Deals.Count(a => a.Status.ActionName == "PCA" || a.Status.ActionName == "PSA"); }
+            get { return Deals.Count(a => a.Status.ActionName == "PCA" || a.Status.ActionName == "PSA" || a.Status.ActionName == "PDA"); }
         }
 
         public int Approved

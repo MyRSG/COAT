@@ -28,32 +28,29 @@ namespace COAT.Data.Export
 
         public IEnumerable<ColunmPropertyPair> GetTableSchema()
         {
-            var rslt = new List<ColunmPropertyPair>();
-            IEnumerable<PropertyInfo> props = GetExportProperties();
+            var props = GetExportProperties();
 
-            foreach (PropertyInfo p in props)
-            {
-                var attr = GetExportAttribute(p);
-                rslt.Add(new ColunmPropertyPair
-                             {
-                                 ColunmName = string.IsNullOrEmpty(attr.Name) ? p.Name : attr.Name,
-                                 Order = attr.Order,
-                                 PropertyName = p.Name
-                             });
-            }
+            var rslt = (from p in props
+                        let attr = GetExportAttribute(p)
+                        select new ColunmPropertyPair
+                                   {
+                                       ColunmName = string.IsNullOrEmpty(attr.Name) ? p.Name : attr.Name, 
+                                       Order = attr.Order, 
+                                       PropertyName = p.Name
+                                   }).ToList();
 
             return rslt.OrderBy(a => a.Order);
         }
 
         private IEnumerable<PropertyInfo> GetExportProperties()
         {
-            PropertyInfo[] props = ExportType.GetProperties();
+            var props = ExportType.GetProperties();
             return props.Where(p => GetExportAttribute(p) != null);
         }
 
         private ExportAttribute GetExportAttribute(PropertyInfo p)
         {
-            object[] attrs = p.GetCustomAttributes(typeof (ExportAttribute), false);
+            var attrs = p.GetCustomAttributes(typeof (ExportAttribute), false);
             if (attrs.Length == 0)
                 return null;
 

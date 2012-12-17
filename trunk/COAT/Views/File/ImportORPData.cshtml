@@ -23,9 +23,13 @@
     }
 </div>
 <div id="hint" title="Please check you data before you upload to COAT">
+    <div id="hintText">
         Please make sure all date data in report should be formated like 
         <span style="color:Blue">'Day/Month/Year'</span>, not <span style="color:Red">"Month/Day/Year".</span>
+    </div>
+    <div id="progressbar"></div>
 </div>
+
 <script type="text/javascript">
     function check_file(elm) {
         var str = elm.value.toUpperCase();
@@ -38,6 +42,7 @@
         }
     }
 
+    
     $(document).ready(function () {
         var form = $('form');
         var option = {
@@ -48,6 +53,8 @@
                 {
                     text: "I'm sure'",
                     click: function () {
+                        $(this).dialog('option','title','Processing...');
+                        $("#progressbar").progressbar({value: 100});
                         form.submit();
                     }
                 }, {
@@ -56,12 +63,15 @@
                         $(this).dialog("close");
                     }
                 }]
-        };
+        }; 
         var dialog = $('#hint').dialog(option);
 
-
         $('#upload').click(function () {
-            dialog.dialog('open');
+            dialog.dialog('option', 'title', 'Processing...');
+            dialog.dialog('option', 'buttons', null);
+            $('#hintText').hide();
+            $("#progressbar").progressbar({ value: 100 });
+            dialog.dialog('open');  
         });
     });
 

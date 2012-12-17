@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System;
+using System.Data;
 using System.Net.Mail;
 using COAT.Data.Generate;
 using COAT.Util.Extension;
@@ -21,14 +22,14 @@ namespace COAT.Data.Import
 
         public void ImportRawData()
         {
-            string[] tabNames = GetTableList();
+            var tabNames = GetTableList();
 
-            foreach (string name in tabNames)
+            foreach (var name in tabNames)
             {
                 try
                 {
-                    DataTable table = GetTableByName(name);
-                    for (int index = 0; index < table.Rows.Count; index++)
+                    var table = GetTableByName(name);
+                    for (var index = 0; index < table.Rows.Count; index++)
                     {
                         if (table.Rows[index].IsEmptyRow())
                             continue;
@@ -36,20 +37,21 @@ namespace COAT.Data.Import
                         GenerateRowData(table.Rows[index]);
                     }
                 }
-                catch
+                catch (Exception e)
                 {
+                    Logger.Error(e.Message);
                 }
             }
         }
 
-        private string Query(string tableName)
+        private static string Query(string tableName)
         {
             return string.Format("select * from [{0}]", tableName);
         }
 
         private DataTable GetTableByName(string tableName)
         {
-            string query = Query(tableName);
+            var query = Query(tableName);
             return GetTable(query);
         }
 

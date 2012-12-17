@@ -1,15 +1,19 @@
 ﻿using System.Data;
 using COAT.Models;
 using COAT.Util.Extension;
+using COAT.Util.Log;
 
 namespace COAT.Data.Generate
 {
     public abstract class BaseGenerator<T>
     {
+        protected Logger logger;
+
         protected BaseGenerator(DataRow row)
         {
             Row = row;
             Entity = new COATEntities();
+            logger = new Logger();
         }
 
         protected abstract ColunmPropertyPair[] ColunmPropertyPairs { get; }

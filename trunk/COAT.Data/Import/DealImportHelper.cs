@@ -1,4 +1,6 @@
-﻿using System.Data;
+﻿using System;
+using System.Data;
+using System.Linq;
 using COAT.Data.Generate;
 using COAT.Util.Extension;
 
@@ -12,26 +14,39 @@ namespace COAT.Data.Import
 
         public void ImportRawData()
         {
-            string[] tabNames = GetTableList();
-
-            foreach (var name in tabNames)
+            var tabNames = GetTableList();
+            foreach (var table in tabNames.Select(SafeGetTable).Where(table => table != null))
             {
-                try
-                {
-                    DataTable table = GetTableByName(name);
-                    for (var index = 0; index < table.Rows.Count; index++)
-                    {
-                        if (table.Rows[index].IsEmptyRow())
-                            continue;
-
-                        GenerateRowData(table.Rows[index]);
-                    }
-                }
-                catch { }
+                GenerateTableData(table);
             }
         }
 
-        private string Query(string tableName)
+        private DataTable SafeGetTable(string name)
+        {
+            try
+            {
+                return GetTableByName(name);
+            }
+            catch (Exception e)
+            {
+                Logger.Error(e.Message);
+            }
+
+            return null;
+        }
+
+        private void GenerateTableData(DataTable table)
+        {
+            for (var index = 0; index < table.Rows.Count; index++)
+            {
+                if (table.Rows[index].IsEmptyRow())
+                    continue;
+
+                GenerateRowData(table.Rows[index]);
+            }
+        }
+
+        private static string Query(string tableName)
         {
             return string.Format("select * from [{0}]", tableName);
         }
@@ -44,7 +59,19 @@ namespace COAT.Data.Import
 
         private void GenerateRowData(DataRow row)
         {
-            new DealProductGenerator(row).Generate();
+            try
+            {
+                new DealProductGenerator(row).Generate();
+            }
+            catch (ArgumentException e)
+            {
+                Logger.Error(e.Message);
+            }
+            catch (Exception exception)
+            {
+                Logger.Error(exception.Message);
+                throw;
+            }
         }
 
 

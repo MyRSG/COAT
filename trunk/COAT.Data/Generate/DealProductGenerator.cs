@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using COAT.Models;
@@ -28,7 +29,7 @@ namespace COAT.Data.Generate
 
         protected override DealProduct GetInstance(DataRow row)
         {
-            Deal deal = new DealGenerator(row).Generate();
+            var deal = new DealGenerator(row).Generate();
             return new DealProduct {DealId = deal.Id, IsActive = true};
         }
 
@@ -39,7 +40,7 @@ namespace COAT.Data.Generate
 
         protected override DealProduct SychronizeDB(DealProduct obj)
         {
-            DealProduct dbDp =
+            var dbDp =
                 Entity.DealProducts.FirstOrDefault(dp => dp.DealId == obj.DealId && dp.ProductName == obj.ProductName);
             if (dbDp != null)
             {
@@ -57,24 +58,25 @@ namespace COAT.Data.Generate
         {
             var dpList = new List<DealProduct>();
             const char spliter = '\n';
-            string productName = Row["Product Name"].ToString();
-            string priceString = Row["Total Price (converted)"].ToString();
+            var productName = Row["Product Name"].ToString();
+            var priceString = Row["Total Price (converted)"].ToString();
 
-            string[] nameArray = productName.Split(spliter);
-            string[] priceArray = priceString.Split(spliter);
+            var nameArray = productName.Split(spliter);
+            var priceArray = priceString.Split(spliter);
 
 
-            for (int index = 0; index < nameArray.Length; index++)
+            for (var index = 0; index < nameArray.Length; index++)
             {
                 try
                 {
-                    DealProduct dp = GetInstance(Row);
+                    var dp = GetInstance(Row);
                     dp.ProductName = nameArray[index];
                     dp.Price = double.Parse(priceArray[index]);
                     dpList.Add(SychronizeDB(dp));
                 }
-                catch
+                catch (Exception e)
                 {
+                    logger.Error(e.Message);
                 }
             }
 

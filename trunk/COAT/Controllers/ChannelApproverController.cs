@@ -90,10 +90,12 @@ namespace COAT.Controllers
         private double GetTotalSize(FormCollection collection)
         {
             double total = 0.0;
+// ReSharper disable LoopCanBeConvertedToQuery
             foreach (var pair in GetProductsActive(collection))
+// ReSharper restore LoopCanBeConvertedToQuery
             {
                 if (!pair.Value) continue;
-                DealProduct firstOrDefault = Db.DealProducts.FirstOrDefault(a => a.Id == pair.Key);
+                var firstOrDefault = Db.DealProducts.FirstOrDefault(a => a.Id == pair.Key);
                 if (firstOrDefault != null)
                     total += firstOrDefault.Price;
             }

@@ -1,16 +1,21 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using COAT.Models;
 using COAT.Util.Values;
+using COAT.Util.Log;
 
 namespace COAT.Data.Export
 {
     public class ExportGenerator
     {
+        private readonly Logger _logger;
+
         public ExportGenerator(IEnumerable<Deal> deals)
         {
             Deals = deals;
+            _logger = new Logger();
         }
 
         public IEnumerable<Deal> Deals { get; protected set; }
@@ -18,7 +23,7 @@ namespace COAT.Data.Export
         public ExportObject[] Generate()
         {
             var rslt = new List<ExportObject>();
-            foreach (Deal d in Deals)
+            foreach (var d in Deals)
             {
                 rslt.AddRange(GenerateExportObject(d));
             }
@@ -29,7 +34,7 @@ namespace COAT.Data.Export
         private IEnumerable<ExportObject> GenerateExportObject(Deal d)
         {
             var rslt = new List<ExportObject>();
-            foreach (DealProduct pd in d.DealProducts)
+            foreach (var pd in d.DealProducts)
             {
                 var obj = new ExportObject();
                 try
@@ -60,17 +65,18 @@ namespace COAT.Data.Export
                     obj.AssignedSalesName = d.Notifier == null ? "" : d.Notifier.Name;
                     rslt.Add(obj);
                 }
-                catch
+                catch (Exception e)
                 {
+                    _logger.Error(e.Message);
                 }
             }
             return rslt.ToArray();
         }
 
 
-        private string GetProductStatus(DealProduct dealProduct)
+        private static string GetProductStatus(DealProduct dealProduct)
         {
-            Deal deal = dealProduct.Deal;
+            var deal = dealProduct.Deal;
             if (deal.Status.ActionName != COATStatusValue.Approved)
                 return deal.Status.Name;
 

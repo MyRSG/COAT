@@ -52,7 +52,9 @@ namespace COAT.Data.Generate
 
         private Customer UpdateDB(Customer dbObj, Customer memoObj)
         {
-            if (dbObj == null)
+            if (dbObj == null ||
+                dbObj.Province != memoObj.Province || 
+                dbObj.Street != memoObj.Street)
             {
                 Entity.Customers.AddObject(memoObj);
                 Entity.SaveChanges();

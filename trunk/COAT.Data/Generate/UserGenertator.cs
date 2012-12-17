@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System;
+using System.Data;
 using System.Linq;
 using System.Net.Mail;
 using COAT.Models;
@@ -52,7 +53,7 @@ namespace COAT.Data.Generate
                 Entity.Users.Count(
                     a => a.Email.ToLower() == obj.Email.ToLower() || a.Name.ToLower() == obj.Name.ToLower()) > 0)
             {
-                User user =
+                var user =
                     Entity.Users.FirstOrDefault(
                         a => a.Email.ToLower() == obj.Email.ToLower() || a.Name.ToLower() == obj.Name.ToLower());
                 //user.Password = PasswordUtil.CreatePassword();
@@ -81,8 +82,9 @@ namespace COAT.Data.Generate
                                  MailMsg.Subject,
                                  string.Format(MailMsg.Body, obj.Name, obj.Password));
             }
-            catch
+            catch (Exception e)
             {
+                logger.Error(e.Message);
             }
 
             return obj;

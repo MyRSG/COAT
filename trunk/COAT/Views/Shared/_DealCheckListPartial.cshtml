@@ -41,11 +41,11 @@
 <script type="text/javascript">
     $(document).ready(function () {
         $('#chk_all').change(function () {
-            var checked = $(this).attr('checked');
+            var checked = $(this).is(':checked');
             $('input[type="checkbox"]').each(function () {
-                if ($(this).attr('checked') != checked) {
+                if ($(this).is(':checked') != checked) {
                     $(this).attr('checked', checked);
-                }
+                } 
             });
         });
     });

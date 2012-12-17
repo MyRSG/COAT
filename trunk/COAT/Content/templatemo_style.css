@@ -287,7 +287,7 @@ h1 {
 	width: 100%;
 	color: #AAA;
 	font-size: 11px;
-	background: url(image/templatemo_footer.jpg);
+	/*background: url(image/templatemo_footer.jpg);*/
 	margin: 10px 0 0 0;
 	padding: 0;
 	text-align: center;
@@ -312,8 +312,8 @@ h1 {
 .templatemo_list li {
 	font-size: 11px;
 	list-style: disc;
-	padding: 0px;
-	margin: 5px 0px;
+	padding: 0;
+	margin: 5px 0;
 }
 
 .templatemo_list a {

@@ -28,8 +28,8 @@ namespace COAT.Util.Extension
 
         private static bool ContainTypeName(PropertyInfo prop, IEnumerable<string> types)
         {
-            string fullname = prop.PropertyType.FullName;
-            return types.Any(t => fullname != null && fullname.Contains(t));
+            var fullname = prop.PropertyType.FullName;
+            return types.Any(fullname.Contains);
         }
     }
 }

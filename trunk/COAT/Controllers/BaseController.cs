@@ -7,6 +7,7 @@ using COAT.Database;
 using COAT.Models;
 using COAT.Security;
 using COAT.Util.Extension;
+using COAT.Util.Log;
 using COAT.Util.Mail;
 
 namespace COAT.Controllers
@@ -15,7 +16,8 @@ namespace COAT.Controllers
     {
         protected COATEntities Db = new COATEntities();
         protected DealEntityManager DealMgr = new DealEntityManager();
-        protected COATMailHelper MHelper = new COATMailHelper();
+        protected COATMailHelper MHelper = new COATMailHelper(true);
+        protected Logger Logger = new Logger();
 
         protected Deal GetDeal(string id)
         {

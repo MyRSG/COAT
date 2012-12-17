@@ -1,6 +1,4 @@
-﻿using System.Net.Mail;
-using COAT.Data.Import;
-using COAT.Helper;
+﻿using COAT.Data.Import;
 using COAT.Schedule;
 using COAT.Util.IDS;
 
@@ -122,18 +120,7 @@ namespace COAT.Models
 
         private UserImportHelper GetImportHelper(int sysRoleId, int busRoleId, string path)
         {
-            GetMailMessage();
             return new UserImportHelper(sysRoleId, busRoleId, null, path);
-        }
-
-        private MailMessage GetMailMessage()
-        {
-            var msg = new MailMessage
-                          {
-                              Subject = "COAT Portal Account Notification Email",
-                              Body = new MailTempleteHepler().GetTemplete(MailTempleteHepler.NewAccount, "{0}/{1}")
-                          };
-            return msg;
         }
 
         #region Nested type: TaskType
