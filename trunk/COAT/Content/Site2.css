@@ -259,6 +259,8 @@ input[type="submit"], input[type="button"].submit
 {
 	color:#FFF;
 	min-width:115px;
+    *min-width: 0; /*For IE7 not support min-width well*/
+
 	height:26px;
 	padding:3px;
 	margin:3px;
