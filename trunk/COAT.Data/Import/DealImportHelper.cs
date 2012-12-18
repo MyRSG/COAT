@@ -8,12 +8,17 @@ namespace COAT.Data.Import
 {
     public class DealImportHelper : ExcelImportHelper
     {
+
+        public int Rows { get; set; }
+
         public DealImportHelper(string path)
             : base(path)
         { }
 
         public void ImportRawData()
         {
+            Rows = 0;
+
             var tabNames = GetTableList();
             foreach (var table in tabNames.Select(SafeGetTable).Where(table => table != null))
             {
@@ -62,6 +67,7 @@ namespace COAT.Data.Import
             try
             {
                 new DealProductGenerator(row).Generate();
+                Rows++;
             }
             catch (ArgumentException e)
             {
@@ -70,7 +76,6 @@ namespace COAT.Data.Import
             catch (Exception exception)
             {
                 Logger.Error(exception.Message);
-                throw;
             }
         }
 

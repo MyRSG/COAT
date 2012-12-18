@@ -53,8 +53,10 @@
                 {
                     text: "I'm sure'",
                     click: function () {
-                        $(this).dialog('option','title','Processing...');
-                        $("#progressbar").progressbar({value: 100});
+                        $(this).dialog('option', 'title', 'Processing...');
+                        $(this).dialog('option', 'buttons', null);
+                        $('#hintText').hide();
+                        $("#progressbar").progressbar({ value: 100 });
                         form.submit();
                     }
                 }, {
@@ -67,10 +69,6 @@
         var dialog = $('#hint').dialog(option);
 
         $('#upload').click(function () {
-            dialog.dialog('option', 'title', 'Processing...');
-            dialog.dialog('option', 'buttons', null);
-            $('#hintText').hide();
-            $("#progressbar").progressbar({ value: 100 });
             dialog.dialog('open');  
         });
     });
